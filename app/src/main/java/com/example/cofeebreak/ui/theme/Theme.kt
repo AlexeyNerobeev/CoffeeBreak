@@ -9,6 +9,10 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -32,6 +36,36 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
+data class Theme1(val color: Color = Color.Unspecified)
+
+private val LocalTheme1Provider = staticCompositionLocalOf<Theme1> { Theme1() }
+
+@Composable
+fun Theme1t(
+    isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+
+    val thene = if (isSystemInDarkTheme) {
+        Theme1()
+    } else {
+        Theme1()
+    }
+
+    CompositionLocalProvider(
+        LocalTheme1Provider provides thene ,
+        content = content
+    )
+}
+
+// MainActiity // Text(color = Theme11.colorSchene.
+
+object Theme11 {
+    val colorScheme: Theme1
+        @Composable
+        get() = LocalTheme1Provider.current
+}
 
 @Composable
 fun CofeeBreakTheme(
