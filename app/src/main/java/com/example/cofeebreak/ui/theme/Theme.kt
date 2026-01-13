@@ -67,12 +67,18 @@ private val LightColorScheme = lightColorScheme(
 
 data class ThemeColors(
     val mainBackgroundColor: Color = Color.White,
-    val mainColor: Color = Color(0x14AC46),
-    val bottomTextAuth: Color = Color(0xAAAAAA),
-    val tfIconsColor: Color = Color(0x147F37),
-    val tfColor: Color = Color(0xC1C7D0),
-    val placeholderColor: Color = Color(0xA1A1A1),
-    val alternativeBlack: Color = Color(0x324A59)
+    val oppositeColor: Color = Color.Black,
+    val mainColor: Color = Color(0xFF14AC46),
+    val bottomTextAuth: Color = Color(0xFFAAAAAA),
+    val tfIconsColor: Color = Color(0xFF147F37),
+    val tfColor: Color = Color(0xFFC1C7D0),
+    val placeholderColor: Color = Color(0xFFA1A1A1),
+    val alternativeBlack: Color = Color(0xFF324A59),
+    val backIconColor: Color = Color.Black,
+    val eyeIconColor: Color = Color.Black,
+    val forgotPasswordColor: Color = Color(0x147F37),
+    val authArrowIconColor: Color = Color.White,
+    val signUpTextColor: Color = Color.Black
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -86,22 +92,34 @@ fun AppTheme(
     val themeColors = if (isDarkTheme) {
         ThemeColors(
             mainBackgroundColor = Color.Black,
-            mainColor = Color(0x14AC46),
-            bottomTextAuth = Color(0xAAAAAA),
-            tfIconsColor = Color(0x4F7993),
-            tfColor = Color(0xC1C7D0),
-            placeholderColor = Color(0xA1A1A1),
-            alternativeBlack = Color(0x324A59)
+            oppositeColor = Color.White,
+            mainColor = Color(0xFF14AC46),
+            bottomTextAuth = Color(0xFFAAAAAA),
+            tfIconsColor = Color(0xFF4F7993),
+            tfColor = Color(0xFFC1C7D0),
+            placeholderColor = Color(0xFFA1A1A1),
+            alternativeBlack = Color(0xFFA1A1A1),
+            backIconColor = Color(0xFF4F7993),
+            eyeIconColor = Color(0xFFA8A8A8),
+            forgotPasswordColor = Color(0xFF324A59),
+            authArrowIconColor = Color.Black,
+            signUpTextColor = Color(0xFF4F7993)
         )
     } else {
         ThemeColors(
             mainBackgroundColor = Color.White,
-            mainColor = Color(0x14AC46),
-            bottomTextAuth = Color(0xAAAAAA),
-            tfIconsColor = Color(0x147F37),
-            tfColor = Color(0xC1C7D0),
-            placeholderColor = Color(0xA1A1A1),
-            alternativeBlack = Color(0x324A59)
+            oppositeColor = Color.Black,
+            mainColor = Color(0xFF14AC46),
+            bottomTextAuth = Color(0xFFAAAAAA),
+            tfIconsColor = Color(0xFF147F37),
+            tfColor = Color(0xFFC1C7D0),
+            placeholderColor = Color(0xFFA1A1A1),
+            alternativeBlack = Color(0xFF324A59),
+            backIconColor = Color.Black,
+            eyeIconColor = Color.Black,
+            forgotPasswordColor = Color(0xFF147F37),
+            authArrowIconColor = Color.White,
+            signUpTextColor = Color.Black
         )
     }
 

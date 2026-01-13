@@ -41,6 +41,7 @@ import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationEvent
+import com.example.cofeebreak.ui.theme.Theme
 import org.koin.androidx.compose.koinViewModel
 
 @Preview(locale = "en-en")
@@ -69,7 +70,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .background(Color.White)
+                .background(Theme.colors.mainBackgroundColor)
         ) {
             IconButton(
                 onClick = {
@@ -79,7 +80,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 Icon(
                     painterResource(R.drawable.back_icon),
                     contentDescription = null,
-                    tint = Color.Unspecified
+                    tint = Theme.colors.backIconColor
                 )
             }
             Column(
@@ -89,17 +90,17 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
             ) {
                 Text(
                     text = stringResource(R.string.SignUp),
-                    color = Color.Black,
+                    color = Theme.colors.signUpTextColor,
                     fontFamily = roboto,
                     fontSize = 22.sp
                 )
                 Text(
                     text = stringResource(R.string.CreateAnAccountHere),
-                    color = colorResource(R.color.AlternativeBlack),
+                    color = Theme.colors.alternativeBlack,
                     fontFamily = roboto,
                     fontSize = 14.sp,
                     modifier = Modifier
-                        .padding(top = 57.dp)
+                        .padding(top = 24.dp)
                 )
                 TextField(
                     value = state.name,
@@ -110,19 +111,19 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         .padding(top = 57.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
-                                painter = painterResource(R.drawable.email_icon),
+                                painter = painterResource(R.drawable.profile_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -152,19 +153,19 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         .padding(top = 36.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
-                                painter = painterResource(R.drawable.email_icon),
+                                painter = painterResource(R.drawable.smartphone_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -194,19 +195,19 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         .padding(top = 36.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(R.drawable.email_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -236,19 +237,19 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         .padding(top = 36.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(R.drawable.password_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -267,7 +268,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                             Icon(
                                 painter = painterResource(R.drawable.eye_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.eyeIconColor
                             )
                         }
                     },
@@ -283,7 +284,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 Text(
                     text = stringResource(R.string.AgreementToTermsOfUse),
-                    color = colorResource(R.color.AlternativeBlack),
+                    color = Theme.colors.alternativeBlack,
                     fontSize = 14.sp,
                     fontFamily = roboto,
                     modifier = Modifier
@@ -305,7 +306,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                     Icon(
                         painter = painterResource(R.drawable.arrow_right),
                         contentDescription = null,
-                        tint = Color.Unspecified
+                        tint = Theme.colors.mainBackgroundColor
                     )
                 }
                 Row(
@@ -316,7 +317,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         text = stringResource(R.string.AlreadyRegistered),
                         fontFamily = roboto,
                         fontSize = 14.sp,
-                        color = colorResource(R.color.AlternativeBlack)
+                        color = colorResource(R.color.Gray)
                     )
                     Text(
                         text = stringResource(R.string.GoToSignIn),

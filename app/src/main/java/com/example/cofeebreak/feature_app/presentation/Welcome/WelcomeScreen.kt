@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,11 @@ fun prevWelcomeScreen(){
 fun WelcomeScreen(navController: NavController) {
     LaunchedEffect(key1 = null) {
         delay(3000)
-        navController.navigate(com.example.cofeebreak.Navigation.AuthorizationScreen)
+        navController.navigate(com.example.cofeebreak.Navigation.AuthorizationScreen){
+            popUpTo(0) {
+                inclusive = true
+            }
+        }
     }
     Scaffold(modifier = Modifier
         .fillMaxSize()) { innerPadding ->
@@ -56,6 +61,7 @@ fun WelcomeScreen(navController: NavController) {
             .background(Theme.colors.mainBackgroundColor),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Box(modifier = Modifier
+                .padding(top = 62.dp)
                 .fillMaxWidth()
                 .background(color = colorResource(R.color.MainColor))){
                 Column(modifier = Modifier
@@ -69,7 +75,7 @@ fun WelcomeScreen(navController: NavController) {
                         tint = Color.Unspecified,
                         modifier = Modifier
                             .size(98.dp))
-                    Text(text = "Coffee break",
+                    Text(text = stringResource(R.string.coffee_break),
                         fontSize = 64.sp,
                         fontFamily = redressed,
                         color = Color.White,
@@ -78,8 +84,8 @@ fun WelcomeScreen(navController: NavController) {
                     )
                 }
             }
-            Text(text = "Почувствуй себя бариста!",
-                color = Color.Black,
+            Text(text = stringResource(R.string.FeelLikeABarista),
+                color = Theme.colors.oppositeColor,
                 fontFamily = poppins,
                 fontSize = 28.sp,
                 textAlign = TextAlign.Center,
@@ -87,27 +93,27 @@ fun WelcomeScreen(navController: NavController) {
                     .padding(top = 25.dp)
                     .padding(horizontal = 68.dp)
             )
-            Text(text = "Любой кофе под ваш заказ",
+            Text(text = stringResource(R.string.any_coffee_to_your_order),
                 fontFamily = poppins,
                 fontSize = 18.sp,
-                color = colorResource(R.color.Gray))
+                color = Theme.colors.bottomTextAuth)
             Row(modifier = Modifier
                 .padding(top = 43.dp)){
                 Box(modifier = Modifier
                     .clip(RoundedCornerShape(50.dp))
                     .height(10.dp)
                     .width(33.dp)
-                    .background(colorResource(R.color.MainColor)))
+                    .background(Theme.colors.mainColor))
                 Box(modifier = Modifier
                     .padding(start = 10.dp)
                     .clip(CircleShape)
                     .size(10.dp)
-                    .background(colorResource(R.color.Gray)))
+                    .background(Theme.colors.bottomTextAuth))
                 Box(modifier = Modifier
                     .padding(start = 10.dp)
                     .clip(CircleShape)
                     .size(10.dp)
-                    .background(colorResource(R.color.Gray)))
+                    .background(Theme.colors.bottomTextAuth))
             }
         }
     }

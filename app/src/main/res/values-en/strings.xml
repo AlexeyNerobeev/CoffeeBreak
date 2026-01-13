@@ -16,4 +16,7 @@
     <string name="UserName">User name</string>
     <string name="AlreadyRegistered">Already registered?</string>
     <string name="GoToSignIn">" Sign in."</string>
+    <string name="coffee_break">Coffee break</string>
+    <string name="FeelLikeABarista">Feel like a barista!</string>
+    <string name="any_coffee_to_your_order">Any coffee to your order</string>
 </resources>

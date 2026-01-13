@@ -34,10 +34,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.alpha
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.roboto
+import com.example.cofeebreak.ui.theme.Theme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -58,7 +60,8 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .background(Color.White)
+                .background(Theme.colors.mainBackgroundColor)
+                .fillMaxSize()
         ) {
             IconButton(
                 onClick = {
@@ -71,7 +74,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                 Icon(
                     painter = painterResource(R.drawable.back_icon),
                     contentDescription = null,
-                    tint = Color.Unspecified
+                    tint = Theme.colors.backIconColor
                 )
             }
             Column(
@@ -85,13 +88,13 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                     text = stringResource(R.string.SignIn),
                     fontSize = 22.sp,
                     fontFamily = roboto,
-                    color = colorResource(R.color.Red),
+                    color = Theme.colors.tfIconsColor,
                     modifier = Modifier
                         .align(Alignment.Start)
                 )
                 Text(
                     text = stringResource(R.string.Welcome),
-                    color = Color.Black,
+                    color = Theme.colors.alternativeBlack,
                     fontFamily = roboto,
                     fontSize = 14.sp,
                     modifier = Modifier
@@ -107,19 +110,19 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                         .padding(top = 57.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(R.drawable.email_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -149,19 +152,19 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                         .padding(top = 36.dp)
                         .fillMaxWidth(),
                     colors = TextFieldDefaults.colors(
-                        focusedLabelColor = colorResource(R.color.TfColor),
-                        unfocusedLabelColor = colorResource(R.color.TfColor),
-                        focusedContainerColor = Color.LightGray,
-                        unfocusedContainerColor = Color.White,
+                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+                        unfocusedContainerColor = Color.Transparent,
                         focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor)
+                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+                        focusedTextColor = Theme.colors.oppositeColor,
+                        unfocusedTextColor = Theme.colors.oppositeColor
                     ),
                     leadingIcon = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(R.drawable.password_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.tfIconsColor
                             )
                             Box(
                                 modifier = Modifier
@@ -180,7 +183,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                             Icon(
                                 painter = painterResource(R.drawable.eye_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified
+                                tint = Theme.colors.eyeIconColor
                             )
                         }
                     },
@@ -218,12 +221,12 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                     Icon(
                         painter = painterResource(R.drawable.arrow_right),
                         contentDescription = null,
-                        tint = Color.Unspecified
+                        tint = Theme.colors.authArrowIconColor
                     )
                 }
                 Text(
                     text = stringResource(R.string.SignInWith),
-                    color = Color.Black,
+                    color = Theme.colors.oppositeColor,
                     fontSize = 14.sp,
                     fontFamily = roboto,
                     modifier = Modifier
@@ -294,7 +297,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                     )
                     Text(
                         text = stringResource(R.string.GoToSignUp),
-                        color = Color.Black,
+                        color = colorResource(R.color.AlternativeBlack),
                         fontFamily = roboto,
                         fontSize = 14.sp,
                         modifier = Modifier
