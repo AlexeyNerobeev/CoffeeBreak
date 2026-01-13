@@ -9,4 +9,11 @@
     <string name="GoToSignUp">" Sign up."</string>
     <string name="Welcome">Welcome</string>
     <string name="SignIn">Sign in</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="CreateAnAccountHere">Create an account here</string>
+    <string name="AgreementToTermsOfUse">By registering, you agree to our terms of use</string>
+    <string name="MobilePhoneNumber">Mobile phone number</string>
+    <string name="UserName">User name</string>
+    <string name="AlreadyRegistered">Already registered?</string>
+    <string name="GoToSignIn">" Sign in."</string>
 </resources>

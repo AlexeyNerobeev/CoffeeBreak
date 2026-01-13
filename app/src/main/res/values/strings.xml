@@ -8,4 +8,11 @@
     <string name="GoToSignUp">" Зарегистрироваться."</string>
     <string name="Welcome">Добро пожаловать</string>
     <string name="SignIn">Войти</string>
+    <string name="SignUp">Зарегистрироваться</string>
+    <string name="CreateAnAccountHere">Создать аккаунт здесь</string>
+    <string name="AgreementToTermsOfUse">Регистрируясь, вы соглашаетесь с нашими условиями использования</string>
+    <string name="MobilePhoneNumber">Номер мобильного телефона</string>
+    <string name="UserName">Имя пользователя</string>
+    <string name="AlreadyRegistered">Уже зарегистрировались?</string>
+    <string name="GoToSignIn">" Войти."</string>
 </resources>

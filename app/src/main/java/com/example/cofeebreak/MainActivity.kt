@@ -9,9 +9,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
-import com.example.cofeebreak.ui.theme.CofeeBreakTheme
+import com.example.cofeebreak.ui.theme.AppTheme
+import com.example.cofeebreak.ui.theme.CoffeeBreakTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,17 +24,20 @@ class MainActivity : ComponentActivity() {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)    
         setContent {
-            CofeeBreakTheme {
+            AppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Navigation.AuthorizationScreen) {
+                NavHost(navController = navController, startDestination = Navigation.WelcomeScreen) {
                     composable<Navigation.WelcomeScreen> {
-                        WelcomeScreen()
+                        WelcomeScreen(navController)
                     }
                     composable<Navigation.StartupScreen> {
-                        StartupScreen()
+                        StartupScreen(navController)
                     }
                     composable<Navigation.AuthorizationScreen> {
                         AuthorizationScreen(navController)
+                    }
+                    composable<Navigation.SignUpScreen> {
+                        SignUpScreen(navController)
                     }
                 }
             }

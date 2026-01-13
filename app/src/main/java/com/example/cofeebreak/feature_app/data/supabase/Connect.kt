@@ -1,4 +1,4 @@
-package com.example.cofeebreak.feature_app.data.Supabase
+package com.example.cofeebreak.feature_app.data.supabase
 
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient

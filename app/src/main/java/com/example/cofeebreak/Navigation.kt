@@ -12,4 +12,7 @@ sealed class Navigation {
 
     @Serializable
     data object AuthorizationScreen: Navigation()
+
+    @Serializable
+    data object SignUpScreen: Navigation()
 }
