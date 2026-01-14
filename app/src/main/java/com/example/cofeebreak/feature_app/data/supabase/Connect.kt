@@ -11,5 +11,6 @@ object Connect {
     ){
         install(Auth)
         install(Postgrest)
+        install(Auth)
     }
 }

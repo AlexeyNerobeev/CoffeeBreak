@@ -7,4 +7,6 @@ sealed class SignUpEvent {
     data class EnteredPassword(val value: String): SignUpEvent()
     data object PasswordVisible: SignUpEvent()
     data object SignUp: SignUpEvent()
+    data object ClearErrors: SignUpEvent()
+    data object ProgressIndicator: SignUpEvent()
 }

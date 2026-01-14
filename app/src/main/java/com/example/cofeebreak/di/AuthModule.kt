@@ -2,6 +2,7 @@ package com.example.cofeebreak.di
 
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepositoryImpl
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
+import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
 import org.koin.dsl.module
@@ -15,5 +16,8 @@ val moduleAuth = module {
     }
     factory<SignUpUseCase> {
         SignUpUseCase(get())
+    }
+    factory<GetCurrentUserIdUseCase>{
+        GetCurrentUserIdUseCase(get())
     }
 }

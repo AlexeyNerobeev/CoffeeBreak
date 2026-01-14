@@ -3,6 +3,7 @@ package com.example.cofeebreak
 import android.app.Application
 import androidx.compose.ui.platform.LocalContext
 import com.example.cofeebreak.di.moduleAuth
+import com.example.cofeebreak.di.moduleCurrentSession
 import com.example.cofeebreak.di.moduleProfile
 import com.example.cofeebreak.di.moduleVM
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +19,7 @@ class App: Application() {
             androidContext(applicationContext)
             androidLogger(level = Level.DEBUG)
             modules(
-                moduleVM, moduleAuth, moduleProfile
+                moduleVM, moduleAuth, moduleProfile, moduleCurrentSession
             )
         }
     }

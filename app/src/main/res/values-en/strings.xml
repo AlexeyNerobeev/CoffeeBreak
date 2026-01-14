@@ -19,4 +19,8 @@
     <string name="coffee_break">Coffee break</string>
     <string name="FeelLikeABarista">Feel like a barista!</string>
     <string name="any_coffee_to_your_order">Any coffee to your order</string>
+    <string name="error_alert">Error</string>
+    <string name="incorrect_email_or_password">Incorrect email or password</string>
+    <string name="all_fields_must_be_filled_in">All fields must be filled in</string>
+    <string name="password_error_text">The password must contain uppercase and lowercase letters, numbers, spaces and special characters.</string>
 </resources>

@@ -18,4 +18,8 @@
     <string name="coffee_break">Coffee break</string>
     <string name="FeelLikeABarista">Почувствуй себя бариста!</string>
     <string name="any_coffee_to_your_order">Любой кофе под ваш заказ</string>
+    <string name="error_alert">Ошибка</string>
+    <string name="incorrect_email_or_password">Неправильные почта или пароль</string>
+    <string name="all_fields_must_be_filled_in">Все поля должны быть заполнены</string>
+    <string name="password_error_text">Пароль должен содержать заглавные и строчные буквы, цифры, пробелы и специальные символы.</string>
 </resources>

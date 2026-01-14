@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -39,8 +41,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
+import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
-import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationEvent
 import com.example.cofeebreak.ui.theme.Theme
 import org.koin.androidx.compose.koinViewModel
 
@@ -60,6 +62,21 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                     inclusive = true
                 }
             }
+        }
+    }
+    if(state.error){
+        ErrorAlertDialog(error = stringResource(R.string.incorrect_email_or_password)) {
+            vm.onEvent(SignUpEvent.ClearErrors)
+        }
+    }
+    if(state.fieldsEmpty){
+        ErrorAlertDialog(error = stringResource(R.string.all_fields_must_be_filled_in)) {
+            vm.onEvent(SignUpEvent.ClearErrors)
+        }
+    }
+    if (state.passwordError){
+        ErrorAlertDialog(error = stringResource(R.string.password_error_text)) {
+            vm.onEvent(SignUpEvent.ClearErrors)
         }
     }
     Scaffold(
@@ -104,6 +121,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 TextField(
                     value = state.name,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(SignUpEvent.EnteredName(it))
                     },
@@ -146,6 +164,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 TextField(
                     value = state.phone,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(SignUpEvent.EnteredPhone(it))
                     },
@@ -188,6 +207,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 TextField(
                     value = state.emailAddress,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(SignUpEvent.EnteredEmailAddress(it))
                     },
@@ -230,6 +250,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 TextField(
                     value = state.password,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(SignUpEvent.EnteredPassword(it))
                     },
@@ -292,6 +313,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                 )
                 Button(
                     onClick = {
+                        vm.onEvent(SignUpEvent.ProgressIndicator)
                         vm.onEvent(SignUpEvent.SignUp)
                     },
                     modifier = Modifier
@@ -301,13 +323,22 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                         .size(64.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(R.color.MainColor)
-                    )
+                    ),
+                    contentPadding = PaddingValues(16.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(R.drawable.arrow_right),
-                        contentDescription = null,
-                        tint = Theme.colors.mainBackgroundColor
-                    )
+                    if(state.progressIndicator){
+                        CircularProgressIndicator(
+                            color = Theme.colors.mainBackgroundColor,
+                            modifier = Modifier
+                                .size(32.dp)
+                        )
+                    } else {
+                        Icon(
+                            painter = painterResource(R.drawable.arrow_right),
+                            contentDescription = null,
+                            tint = Theme.colors.mainBackgroundColor
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier

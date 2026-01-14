@@ -1,5 +1,6 @@
 package com.example.cofeebreak.feature_app.presentation.Welcome
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,13 +30,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.redressed
 import com.example.cofeebreak.ui.theme.Theme
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
@@ -44,12 +46,22 @@ fun prevWelcomeScreen(){
 }
 
 @Composable
-fun WelcomeScreen(navController: NavController) {
-    LaunchedEffect(key1 = null) {
-        delay(3000)
-        navController.navigate(com.example.cofeebreak.Navigation.AuthorizationScreen){
-            popUpTo(0) {
-                inclusive = true
+fun WelcomeScreen(navController: NavController, vm: WelcomeVM = koinViewModel()) {
+    val state = vm.state.value
+    LaunchedEffect(key1 = state.id) {
+        vm.onEvent(WelcomeEvent.LoadCurrentUserId)
+        delay(1500)
+        if(state.id.isNullOrEmpty()){
+            navController.navigate(Navigation.AuthorizationScreen){
+                popUpTo(0){
+                    inclusive = true
+                }
+            }
+        } else {
+            navController.navigate(Navigation.StartupScreen){
+                popUpTo(0){
+                    inclusive = true
+                }
             }
         }
     }

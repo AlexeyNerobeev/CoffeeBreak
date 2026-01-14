@@ -15,4 +15,7 @@ sealed class Navigation {
 
     @Serializable
     data object SignUpScreen: Navigation()
+
+    @Serializable
+    data object MenuScreen: Navigation()
 }

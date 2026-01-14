@@ -12,6 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import com.example.cofeebreak.R
+import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,7 +31,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AuthorizationVM(
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val saveCurrentUserIdUseCase: SaveCurrentUserIdUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(AuthorizationState())
     val state: State<AuthorizationState> = _state
@@ -44,36 +50,85 @@ class AuthorizationVM(
 //    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), false)
 
     fun onEvent(event: AuthorizationEvent) {
-        when(event){
+        when (event) {
             is AuthorizationEvent.EnteredEmail -> {
                 _state.value = state.value.copy(
                     email = event.value
                 )
             }
+
             is AuthorizationEvent.EnteredPassword -> {
                 _state.value = state.value.copy(
                     password = event.value
                 )
             }
+
             is AuthorizationEvent.SignIn -> {
-                viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        signInUseCase.invoke(email = state.value.email,
-                            password = state.value.password)
-                        _state.value = state.value.copy(
-                            isComplete = true
-                        )
-                    } catch (ex: Exception){
-                        Log.e("supabase", ex.message.toString())
+                if (Patterns.EMAIL_ADDRESS.matcher(state.value.email).matches() &&
+                    isStrongPassword(state.value.password)
+                ) {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        try {
+                            signInUseCase.invoke(
+                                email = state.value.email,
+                                password = state.value.password
+                            )
+                            _state.value = state.value.copy(
+                                isComplete = true
+                            )
+                        } catch (ex: Exception) {
+                            _state.value = state.value.copy(
+                                error = true,
+                                progressIndicator = false
+                            )
+                            Log.e("supabase", ex.message.toString())
+                        }
                     }
+                } else{
+                    _state.value = state.value.copy(
+                        error = true,
+                        progressIndicator = false
+                    )
                 }
             }
+
             is AuthorizationEvent.PasswordVisible -> {
                 _state.value = state.value.copy(
                     passwordVisible = !state.value.passwordVisible
                 )
             }
+
+            AuthorizationEvent.ClearError -> {
+                _state.value = state.value.copy(
+                    error = false
+                )
+            }
+
+            AuthorizationEvent.ProgressIndicator -> {
+                _state.value = state.value.copy(
+                    progressIndicator = true
+                )
+            }
+            AuthorizationEvent.SaveCurrentUserId -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val id = getCurrentUserIdUseCase.invoke()
+                        saveCurrentUserIdUseCase.invoke(id)
+                    } catch (ex: Exception){
+                        Log.e("sharedPrefs", ex.message.toString())
+                    }
+                }
+            }
         }
+    }
+
+    fun isStrongPassword(pass: String): Boolean {
+        return pass.length >= 9 &&
+                pass.any { it.isUpperCase() } &&
+                pass.any { it.isLowerCase() } &&
+                pass.any { it.isDigit() } &&
+                pass.any { it.isWhitespace() } &&
+                pass.any { !it.isLetterOrDigit() && !it.isWhitespace() }
     }
 }
 

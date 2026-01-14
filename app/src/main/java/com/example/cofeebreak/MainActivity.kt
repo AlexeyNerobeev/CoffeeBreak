@@ -1,21 +1,26 @@
 package com.example.cofeebreak
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
 import com.example.cofeebreak.ui.theme.AppTheme
-import com.example.cofeebreak.ui.theme.CoffeeBreakTheme
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.context.GlobalContext.get
 
-class MainActivity : ComponentActivity() {
+class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,6 +43,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable<Navigation.SignUpScreen> {
                         SignUpScreen(navController)
+                    }
+                    composable<Navigation.MenuScreen> {
+                        MenuScreen(navController)
                     }
                 }
             }

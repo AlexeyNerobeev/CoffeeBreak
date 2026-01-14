@@ -1,9 +1,11 @@
 package com.example.cofeebreak.feature_app.presentation.Authorization
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -22,6 +25,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.currentCompositionContext
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,6 +43,7 @@ import androidx.core.graphics.alpha
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
+import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.ui.theme.Theme
 import org.koin.androidx.compose.koinViewModel
@@ -51,6 +57,11 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
             popUpTo(0){
                 inclusive = true
             }
+        }
+    }
+    if (state.error) {
+        ErrorAlertDialog(error = stringResource(R.string.incorrect_email_or_password)) {
+            vm.onEvent(AuthorizationEvent.ClearError)
         }
     }
     Scaffold(
@@ -103,6 +114,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                 )
                 TextField(
                     value = state.email,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(AuthorizationEvent.EnteredEmail(it))
                     },
@@ -145,6 +157,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                 )
                 TextField(
                     value = state.password,
+                    singleLine = true,
                     onValueChange = {
                         vm.onEvent(AuthorizationEvent.EnteredPassword(it))
                     },
@@ -207,7 +220,9 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                 )
                 Button(
                     onClick = {
+                        vm.onEvent(AuthorizationEvent.ProgressIndicator)
                         vm.onEvent(AuthorizationEvent.SignIn)
+                        vm.onEvent(AuthorizationEvent.SaveCurrentUserId)
                     },
                     modifier = Modifier
                         .padding(top = 136.dp)
@@ -216,13 +231,22 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                         .size(64.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(R.color.MainColor)
-                    )
+                    ),
+                    contentPadding = PaddingValues(16.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(R.drawable.arrow_right),
-                        contentDescription = null,
-                        tint = Theme.colors.authArrowIconColor
-                    )
+                    if(state.progressIndicator){
+                        CircularProgressIndicator(
+                            color = Theme.colors.mainBackgroundColor,
+                            modifier = Modifier
+                                .size(32.dp)
+                        )
+                    } else {
+                        Icon(
+                            painter = painterResource(R.drawable.arrow_right),
+                            contentDescription = null,
+                            tint = Theme.colors.authArrowIconColor
+                        )
+                    }
                 }
                 Text(
                     text = stringResource(R.string.SignInWith),
