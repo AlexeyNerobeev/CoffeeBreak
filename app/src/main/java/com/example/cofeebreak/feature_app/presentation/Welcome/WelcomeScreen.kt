@@ -35,6 +35,7 @@ import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.redressed
+import com.example.cofeebreak.feature_app.presentation.utils.ObserveActions
 import com.example.cofeebreak.ui.theme.Theme
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
@@ -48,19 +49,14 @@ fun prevWelcomeScreen(){
 @Composable
 fun WelcomeScreen(navController: NavController, vm: WelcomeVM = koinViewModel()) {
     val state = vm.state.value
-    LaunchedEffect(key1 = state.id) {
-        vm.onEvent(WelcomeEvent.LoadCurrentUserId)
-        delay(1500)
-        if(state.id.isNullOrEmpty()){
-            navController.navigate(Navigation.AuthorizationScreen){
-                popUpTo(0){
-                    inclusive = true
-                }
-            }
-        } else {
-            navController.navigate(Navigation.StartupScreen){
-                popUpTo(0){
-                    inclusive = true
+
+    ObserveActions(vm.channel) {
+        when (it) {
+            WelcomeAction.OnSuccessLoadedSession -> {
+                navController.navigate(Navigation.StartupScreen){
+                    popUpTo(0){
+                        inclusive = true
+                    }
                 }
             }
         }

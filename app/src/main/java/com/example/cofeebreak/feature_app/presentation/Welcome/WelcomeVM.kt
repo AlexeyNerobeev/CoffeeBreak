@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class WelcomeVM(
@@ -15,6 +17,17 @@ class WelcomeVM(
 ): ViewModel() {
     private val _state = mutableStateOf(WelcomeState())
     val state: State<WelcomeState> = _state
+
+    private val _channel = Channel<WelcomeAction>()
+    val channel = _channel.receiveAsFlow()
+
+    init {
+        viewModelScope.launch {
+            loadCurrentUserIdUseCase.invoke().id?.let {
+                _channel.send(WelcomeAction.OnSuccessLoadedSession)
+            }
+        }
+    }
 
     fun onEvent(event: WelcomeEvent){
         when(event){
