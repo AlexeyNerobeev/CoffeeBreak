@@ -8,10 +8,17 @@ import org.koin.dsl.module
 
 val moduleVM = module {
     viewModel<AuthorizationVM>{
-        AuthorizationVM(get(), get(), get())
+        AuthorizationVM(get(),
+            get(),
+            get(),
+            get(),
+            get())
     }
     viewModel<SignUpVM> {
-        SignUpVM(get(), get())
+        SignUpVM(get(),
+            get(),
+            get(),
+            get())
     }
     viewModel<WelcomeVM> {
         WelcomeVM(get())

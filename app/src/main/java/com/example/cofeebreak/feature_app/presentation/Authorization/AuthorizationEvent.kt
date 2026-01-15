@@ -8,4 +8,5 @@ sealed class AuthorizationEvent {
     data object ClearError: AuthorizationEvent()
     data object ProgressIndicator: AuthorizationEvent()
     data object SaveCurrentUserId: AuthorizationEvent()
+    data object EmailValid: AuthorizationEvent()
 }

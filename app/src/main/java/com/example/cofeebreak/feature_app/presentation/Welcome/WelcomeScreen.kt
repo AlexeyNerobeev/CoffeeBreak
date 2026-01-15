@@ -1,6 +1,5 @@
 package com.example.cofeebreak.feature_app.presentation.Welcome
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,7 +35,6 @@ import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.redressed
 import com.example.cofeebreak.feature_app.presentation.utils.ObserveActions
 import com.example.cofeebreak.ui.theme.Theme
-import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 @Preview
@@ -54,6 +51,13 @@ fun WelcomeScreen(navController: NavController, vm: WelcomeVM = koinViewModel())
         when (it) {
             WelcomeAction.OnSuccessLoadedSession -> {
                 navController.navigate(Navigation.StartupScreen){
+                    popUpTo(0){
+                        inclusive = true
+                    }
+                }
+            }
+            WelcomeAction.UnsuccessLoadedSession -> {
+                navController.navigate(Navigation.AuthorizationScreen){
                     popUpTo(0){
                         inclusive = true
                     }

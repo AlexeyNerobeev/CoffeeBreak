@@ -9,4 +9,5 @@ sealed class SignUpEvent {
     data object SignUp: SignUpEvent()
     data object ClearErrors: SignUpEvent()
     data object ProgressIndicator: SignUpEvent()
+    data object IsValidEmail: SignUpEvent()
 }

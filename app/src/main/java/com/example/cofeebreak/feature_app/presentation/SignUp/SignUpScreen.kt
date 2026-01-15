@@ -210,6 +210,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                     singleLine = true,
                     onValueChange = {
                         vm.onEvent(SignUpEvent.EnteredEmailAddress(it))
+                        vm.onEvent(SignUpEvent.IsValidEmail)
                     },
                     modifier = Modifier
                         .padding(top = 36.dp)
@@ -237,6 +238,17 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                                     .height(25.dp)
                                     .width(1.dp)
                             )
+                        }
+                    },
+                    trailingIcon = {
+                        if(state.validEmail == true){
+                            Icon(painter = painterResource(R.drawable.valid_email_icon),
+                                contentDescription = null,
+                                tint = Color.Unspecified)
+                        } else if(state.validEmail == false){
+                            Icon(painter = painterResource(R.drawable.not_valid_email_icon),
+                                contentDescription = null,
+                                tint = Theme.colors.tfIconsColor)
                         }
                     },
                     placeholder = {
@@ -291,9 +303,14 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                                 contentDescription = null,
                                 tint = Theme.colors.eyeIconColor
                             )
+                            if(state.passwordVisible){
+                                Icon(painterResource(R.drawable.line_eye_icon),
+                                    contentDescription = null,
+                                    tint = Theme.colors.eyeIconColor)
+                            }
                         }
                     },
-                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation('*') else VisualTransformation.None,
                     placeholder = {
                         Text(
                             text = stringResource(R.string.password_placeholder),

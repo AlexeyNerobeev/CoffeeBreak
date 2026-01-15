@@ -10,5 +10,6 @@
         val error: Boolean = false,
         val fieldsEmpty: Boolean = false,
         val passwordError: Boolean = false,
-        val progressIndicator: Boolean = false
+        val progressIndicator: Boolean = false,
+        val validEmail: Boolean? = null
     )

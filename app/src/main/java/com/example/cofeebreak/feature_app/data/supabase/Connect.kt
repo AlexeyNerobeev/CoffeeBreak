@@ -11,6 +11,7 @@ object Connect {
     ){
         install(Auth)
         install(Postgrest)
-        install(Auth)
     }
 }
+
+// client secret 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

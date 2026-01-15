@@ -6,5 +6,6 @@ data class AuthorizationState(
     val isComplete: Boolean = false,
     val passwordVisible: Boolean = false,
     val error: Boolean = false,
-    val progressIndicator: Boolean = false
+    val progressIndicator: Boolean = false,
+    val validEmail: Boolean? = null
 )

@@ -26,6 +26,7 @@ class WelcomeVM(
             loadCurrentUserIdUseCase.invoke().id?.let {
                 _channel.send(WelcomeAction.OnSuccessLoadedSession)
             }
+            _channel.send(WelcomeAction.UnsuccessLoadedSession)
         }
     }
 

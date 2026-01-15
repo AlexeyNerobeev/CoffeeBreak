@@ -117,6 +117,7 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                     singleLine = true,
                     onValueChange = {
                         vm.onEvent(AuthorizationEvent.EnteredEmail(it))
+                        vm.onEvent(AuthorizationEvent.EmailValid)
                     },
                     modifier = Modifier
                         .padding(top = 57.dp)
@@ -144,6 +145,17 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                                     .height(25.dp)
                                     .width(1.dp)
                             )
+                        }
+                    },
+                    trailingIcon = {
+                        if(state.validEmail == true){
+                            Icon(painter = painterResource(R.drawable.valid_email_icon),
+                                contentDescription = null,
+                                tint = Color.Unspecified)
+                        } else if(state.validEmail == false){
+                            Icon(painter = painterResource(R.drawable.not_valid_email_icon),
+                                contentDescription = null,
+                                tint = Theme.colors.tfIconsColor)
                         }
                     },
                     placeholder = {
@@ -198,9 +210,14 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                                 contentDescription = null,
                                 tint = Theme.colors.eyeIconColor
                             )
+                            if(state.passwordVisible){
+                                Icon(painterResource(R.drawable.line_eye_icon),
+                                    contentDescription = null,
+                                    tint = Theme.colors.eyeIconColor)
+                            }
                         }
                     },
-                    visualTransformation = if(!state.passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+                    visualTransformation = if(!state.passwordVisible) PasswordVisualTransformation('*') else VisualTransformation.None,
                     placeholder = {
                         Text(
                             text = stringResource(R.string.password_placeholder),

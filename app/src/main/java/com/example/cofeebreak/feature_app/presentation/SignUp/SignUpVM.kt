@@ -7,13 +7,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SignUpVM(
     private val signUpUseCase: SignUpUseCase,
-    private val createProfileUseCase: CreateProfileUseCase
+    private val createProfileUseCase: CreateProfileUseCase,
+    private val isPasswordStrongUseCase: IsPasswordStrongUseCase,
+    private val isEmailValidUseCase: IsEmailValidUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(SignUpState())
     val state: State<SignUpState> = _state
@@ -54,10 +58,9 @@ class SignUpVM(
                 } else {
                     viewModelScope.launch(Dispatchers.IO) {
                         try {
-                            val canSignUp = Patterns.EMAIL_ADDRESS.matcher(state.value.emailAddress)
-                                .matches()
+                            val canSignUp = isEmailValidUseCase(state.value.emailAddress)
                             if (canSignUp) {
-                                if (isStrongPassword(state.value.password)) {
+                                if (isPasswordStrongUseCase(state.value.password)) {
                                     signUpUseCase.invoke(
                                         state.value.emailAddress,
                                         state.value.password
@@ -108,15 +111,11 @@ class SignUpVM(
                     progressIndicator = true
                 )
             }
+            SignUpEvent.IsValidEmail -> {
+                _state.value = state.value.copy(
+                     validEmail = isEmailValidUseCase.invoke(state.value.emailAddress)
+                )
+            }
         }
-    }
-
-    fun isStrongPassword(pass: String): Boolean {
-        return pass.length >= 9 &&
-                pass.any { it.isUpperCase() } &&
-                pass.any { it.isLowerCase() } &&
-                pass.any { it.isDigit() } &&
-                pass.any { it.isWhitespace() } &&
-                pass.any { !it.isLetterOrDigit() && !it.isWhitespace() }
     }
 }
