@@ -1,7 +1,9 @@
 package com.example.cofeebreak.di
 
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationVM
+import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordVM
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
+import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeVM
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -22,5 +24,11 @@ val moduleVM = module {
     }
     viewModel<WelcomeVM> {
         WelcomeVM(get())
+    }
+    viewModel<ForgotPasswordVM> {
+        ForgotPasswordVM(get())
+    }
+    viewModel<TwoFactorVerificationVM> {
+        TwoFactorVerificationVM()
     }
 }

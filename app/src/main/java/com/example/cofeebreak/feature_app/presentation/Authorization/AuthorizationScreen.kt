@@ -234,6 +234,9 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koin
                     color = colorResource(R.color.Red),
                     modifier = Modifier
                         .padding(top = 27.dp)
+                        .clickable{
+                            navController.navigate(Navigation.ForgotPasswordScreen)
+                        }
                 )
                 Button(
                     onClick = {

@@ -23,4 +23,10 @@
     <string name="incorrect_email_or_password">Incorrect email or password</string>
     <string name="all_fields_must_be_filled_in">All fields must be filled in</string>
     <string name="password_error_text">The password must contain uppercase and lowercase letters, numbers, spaces and special characters.</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="the_email_address_field_is_required">The email address field is required</string>
+    <string name="incorrect_email">Incorrect email</string>
+    <string name="verification">Verification</string>
+    <string name="enter_the_code_we_sent_you_by_email">Enter the code we sent you by email</string>
+    <string name="resend_in_00_30">Resend in 00:30</string>
 </resources>

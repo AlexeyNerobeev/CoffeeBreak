@@ -78,7 +78,9 @@ data class ThemeColors(
     val eyeIconColor: Color = Color.Black,
     val forgotPasswordColor: Color = Color(0x147F37),
     val authArrowIconColor: Color = Color.White,
-    val signUpTextColor: Color = Color.Black
+    val signUpTextColor: Color = Color.Black,
+    val outlinedTfColor: Color = Color(0xFFB7BBC9),
+    val resendInTextColor: Color = Color(0xFF324A59)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -103,7 +105,9 @@ fun AppTheme(
             eyeIconColor = Color(0xFFA8A8A8),
             forgotPasswordColor = Color(0xFF324A59),
             authArrowIconColor = Color.Black,
-            signUpTextColor = Color(0xFF4F7993)
+            signUpTextColor = Color(0xFF4F7993),
+            outlinedTfColor = Color(0xFF585A62),
+            resendInTextColor = Color(0xFFAAAAAA).copy(alpha = 0.5f)
         )
     } else {
         ThemeColors(
@@ -119,7 +123,9 @@ fun AppTheme(
             eyeIconColor = Color.Black,
             forgotPasswordColor = Color(0xFF147F37),
             authArrowIconColor = Color.White,
-            signUpTextColor = Color.Black
+            signUpTextColor = Color.Black,
+            outlinedTfColor = Color(0xFFB7BBC9),
+            resendInTextColor = Color(0xFF324A59)
         )
     }
 

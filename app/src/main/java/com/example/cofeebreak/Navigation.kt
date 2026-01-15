@@ -18,4 +18,10 @@ sealed class Navigation {
 
     @Serializable
     data object MenuScreen: Navigation()
+
+    @Serializable
+    data object ForgotPasswordScreen: Navigation()
+
+    @Serializable
+    data object TwoFactorVerificationScreen: Navigation()
 }
