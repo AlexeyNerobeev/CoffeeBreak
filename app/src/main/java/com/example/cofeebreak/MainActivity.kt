@@ -1,47 +1,49 @@
 package com.example.cofeebreak
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.cofeebreak.ui.theme.CofeeBreakTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
+import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
+import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
+import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
+import com.example.cofeebreak.ui.theme.AppTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)    
         setContent {
-            CofeeBreakTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            AppTheme {
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = Navigation.WelcomeScreen) {
+                    composable<Navigation.WelcomeScreen> {
+                        WelcomeScreen(navController)
+                    }
+                    composable<Navigation.StartupScreen> {
+                        StartupScreen(navController)
+                    }
+                    composable<Navigation.AuthorizationScreen> {
+                        AuthorizationScreen(navController)
+                    }
+                    composable<Navigation.SignUpScreen> {
+                        SignUpScreen(navController)
+                    }
+                    composable<Navigation.MenuScreen> {
+                        MenuScreen(navController)
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CofeeBreakTheme {
-        Greeting("Android")
     }
 }

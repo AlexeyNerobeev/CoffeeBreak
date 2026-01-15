@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">CofeeBreak</string>
+    <string name="app_name">CoffeeBreak</string>
+    <string name="email_address">"Адрес электронной почты"</string>
+    <string name="password_placeholder">Пароль</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="SignInWith">Войти с помощью</string>
+    <string name="ForTheFirstTime">Впервые?</string>
+    <string name="GoToSignUp">" Зарегистрироваться."</string>
+    <string name="Welcome">Добро пожаловать</string>
+    <string name="SignIn">Войти</string>
+    <string name="SignUp">Зарегистрироваться</string>
+    <string name="CreateAnAccountHere">Создать аккаунт здесь</string>
+    <string name="AgreementToTermsOfUse">Регистрируясь, вы соглашаетесь с нашими условиями использования</string>
+    <string name="MobilePhoneNumber">Номер мобильного телефона</string>
+    <string name="UserName">Имя пользователя</string>
+    <string name="AlreadyRegistered">Уже зарегистрировались?</string>
+    <string name="GoToSignIn">" Войти."</string>
+    <string name="coffee_break">Coffee break</string>
+    <string name="FeelLikeABarista">Почувствуй себя бариста!</string>
+    <string name="any_coffee_to_your_order">Любой кофе под ваш заказ</string>
+    <string name="error_alert">Ошибка</string>
+    <string name="incorrect_email_or_password">Неправильные почта или пароль</string>
+    <string name="all_fields_must_be_filled_in">Все поля должны быть заполнены</string>
+    <string name="password_error_text">Пароль должен содержать заглавные и строчные буквы, цифры, пробелы и специальные символы.</string>
 </resources>

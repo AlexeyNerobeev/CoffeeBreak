@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CoffeeBreak</string>
+    <string name="email_address">Email address</string>
+    <string name="password_placeholder">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="SignInWith">SignInWith</string>
+    <string name="ForTheFirstTime">For the first time?</string>
+    <string name="GoToSignUp">" Sign up."</string>
+    <string name="Welcome">Welcome</string>
+    <string name="SignIn">Sign in</string>
+    <string name="SignUp">Sign Up</string>
+    <string name="CreateAnAccountHere">Create an account here</string>
+    <string name="AgreementToTermsOfUse">By registering, you agree to our terms of use</string>
+    <string name="MobilePhoneNumber">Mobile phone number</string>
+    <string name="UserName">User name</string>
+    <string name="AlreadyRegistered">Already registered?</string>
+    <string name="GoToSignIn">" Sign in."</string>
+    <string name="coffee_break">Coffee break</string>
+    <string name="FeelLikeABarista">Feel like a barista!</string>
+    <string name="any_coffee_to_your_order">Any coffee to your order</string>
+    <string name="error_alert">Error</string>
+    <string name="incorrect_email_or_password">Incorrect email or password</string>
+    <string name="all_fields_must_be_filled_in">All fields must be filled in</string>
+    <string name="password_error_text">The password must contain uppercase and lowercase letters, numbers, spaces and special characters.</string>
+</resources>

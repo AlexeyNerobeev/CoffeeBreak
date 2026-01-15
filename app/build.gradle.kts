@@ -35,6 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
@@ -42,6 +43,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.lifecycle.runtime.compose)
     // Test dependencies
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")

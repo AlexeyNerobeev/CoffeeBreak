@@ -1,6 +1,5 @@
 package com.example.cofeebreak.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -9,18 +8,21 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.core.graphics.toColorInt
+import com.example.cofeebreak.R
+import kotlin.Int
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Purple40, secondary = PurpleGrey40, tertiary = Pink40
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -33,12 +35,125 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+//data class Theme1(val color: Color = Color.Unspecified)
+//
+//private val LocalTheme1Provider = staticCompositionLocalOf<Theme1> { Theme1() }
+//
+//@Composable
+//fun Theme1t(
+//    isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
+//    content: @Composable () -> Unit
+//) {
+//
+//    val thene = if (isSystemInDarkTheme) {
+//        Theme1()
+//    } else {
+//        Theme1()
+//    }
+//
+//    CompositionLocalProvider(
+//        LocalTheme1Provider provides thene ,
+//        content = content
+//    )
+//}
+//
+//// MainActiity // Text(color = Theme11.colorSchene.
+//
+//object Theme11 {
+//    val colorScheme: Theme1
+//        @Composable
+//        get() = LocalTheme1Provider.current
+//}
+
+data class ThemeColors(
+    val mainBackgroundColor: Color = Color.White,
+    val oppositeColor: Color = Color.Black,
+    val mainColor: Color = Color(0xFF14AC46),
+    val bottomTextAuth: Color = Color(0xFFAAAAAA),
+    val tfIconsColor: Color = Color(0xFF147F37),
+    val tfColor: Color = Color(0xFFC1C7D0),
+    val placeholderColor: Color = Color(0xFFA1A1A1),
+    val alternativeBlack: Color = Color(0xFF324A59),
+    val backIconColor: Color = Color.Black,
+    val eyeIconColor: Color = Color.Black,
+    val forgotPasswordColor: Color = Color(0x147F37),
+    val authArrowIconColor: Color = Color.White,
+    val signUpTextColor: Color = Color.Black
+)
+
+private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
+    ThemeColors()
+}
+
 @Composable
-fun CofeeBreakTheme(
+fun AppTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
+) {
+    val themeColors = if (isDarkTheme) {
+        ThemeColors(
+            mainBackgroundColor = Color.Black,
+            oppositeColor = Color.White,
+            mainColor = Color(0xFF14AC46),
+            bottomTextAuth = Color(0xFFAAAAAA),
+            tfIconsColor = Color(0xFF4F7993),
+            tfColor = Color(0xFFC1C7D0),
+            placeholderColor = Color(0xFFA1A1A1),
+            alternativeBlack = Color(0xFFA1A1A1),
+            backIconColor = Color(0xFF4F7993),
+            eyeIconColor = Color(0xFFA8A8A8),
+            forgotPasswordColor = Color(0xFF324A59),
+            authArrowIconColor = Color.Black,
+            signUpTextColor = Color(0xFF4F7993)
+        )
+    } else {
+        ThemeColors(
+            mainBackgroundColor = Color.White,
+            oppositeColor = Color.Black,
+            mainColor = Color(0xFF14AC46),
+            bottomTextAuth = Color(0xFFAAAAAA),
+            tfIconsColor = Color(0xFF147F37),
+            tfColor = Color(0xFFC1C7D0),
+            placeholderColor = Color(0xFFA1A1A1),
+            alternativeBlack = Color(0xFF324A59),
+            backIconColor = Color.Black,
+            eyeIconColor = Color.Black,
+            forgotPasswordColor = Color(0xFF147F37),
+            authArrowIconColor = Color.White,
+            signUpTextColor = Color.Black
+        )
+    }
+
+    CompositionLocalProvider(
+        LocalTheme provides themeColors
+    ) {
+        content()
+    }
+}
+
+object Theme {
+    val colors: ThemeColors
+        @Composable get() = LocalTheme.current
+}
+
+//<color name="purple_200">#FFBB86FC</color>
+//<color name="purple_500">#FF6200EE</color>
+//<color name="purple_700">#FF3700B3</color>
+//<color name="teal_200">#FF03DAC5</color>
+//<color name="teal_700">#FF018786</color>
+//<color name="black">#FF000000</color>
+//<color name="white">#FFFFFFFF</color>
+//<color name="MainColor">#14AC46</color>
+//<color name="Gray">#AAAAAA</color>
+//<color name="Red">#147F37</color>
+//<color name="TfColor">#C1C7D0</color>
+//<color name="PlaceholderColor">#A1A1A1</color>
+//<color name="AlternativeBlack">#324A59</color>
+
+@Composable
+fun CoffeeBreakTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    dynamicColor: Boolean = true, content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -51,8 +166,6 @@ fun CofeeBreakTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        colorScheme = colorScheme, typography = Typography, content = content
     )
 }
