@@ -14,19 +14,24 @@ class TwoFactorVerificationVM: ViewModel() {
                     firstNumber = event.value
                 )
             }
-            is TwoFactorVerificationEvent.EnteredFourthNumber -> {
+            is TwoFactorVerificationEvent.EnteredSecondNumber -> {
                 _state.value = state.value.copy(
                     secondNumber = event.value
                 )
             }
-            is TwoFactorVerificationEvent.EnteredSecondNumber -> {
+            is TwoFactorVerificationEvent.EnteredThirdNumber -> {
                 _state.value = state.value.copy(
                     thirdNumber = event.value
                 )
             }
-            is TwoFactorVerificationEvent.EnteredThirdNumber -> {
+            is TwoFactorVerificationEvent.EnteredFourthNumber -> {
                 _state.value = state.value.copy(
                     fourthNumber = event.value
+                )
+            }
+            TwoFactorVerificationEvent.ChangeEmptyFieldsError -> {
+                _state.value = state.value.copy(
+                    emptyFieldsError = !state.value.emptyFieldsError
                 )
             }
         }

@@ -28,4 +28,6 @@
     <string name="verification">Проверка</string>
     <string name="enter_the_code_we_sent_you_by_email">Введите код, который мы вам отправили на почту</string>
     <string name="resend_in_00_30">Выслать заново через 00:30</string>
+    <string name="reset_password">Восстановление пароля</string>
+    <string name="enter_new_password">Введите новый пароль</string>
 </resources>

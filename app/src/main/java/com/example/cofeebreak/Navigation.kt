@@ -24,4 +24,7 @@ sealed class Navigation {
 
     @Serializable
     data object TwoFactorVerificationScreen: Navigation()
+
+    @Serializable
+    data object ResetPasswordScreen: Navigation()
 }

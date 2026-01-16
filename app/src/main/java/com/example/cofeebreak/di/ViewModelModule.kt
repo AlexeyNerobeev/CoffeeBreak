@@ -2,6 +2,7 @@ package com.example.cofeebreak.di
 
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationVM
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordVM
+import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordVM
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeVM
@@ -30,5 +31,8 @@ val moduleVM = module {
     }
     viewModel<TwoFactorVerificationVM> {
         TwoFactorVerificationVM()
+    }
+    viewModel<ResetPasswordVM> {
+        ResetPasswordVM(get())
     }
 }

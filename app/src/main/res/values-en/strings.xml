@@ -29,4 +29,6 @@
     <string name="verification">Verification</string>
     <string name="enter_the_code_we_sent_you_by_email">Enter the code we sent you by email</string>
     <string name="resend_in_00_30">Resend in 00:30</string>
+    <string name="reset_password">Reset password</string>
+    <string name="enter_new_password">Enter new password</string>
 </resources>

@@ -4,5 +4,6 @@ data class TwoFactorVerificationState(
     val firstNumber: String = "",
     val secondNumber: String = "",
     val thirdNumber: String = "",
-    val fourthNumber: String = ""
+    val fourthNumber: String = "",
+    val emptyFieldsError: Boolean = false
 )

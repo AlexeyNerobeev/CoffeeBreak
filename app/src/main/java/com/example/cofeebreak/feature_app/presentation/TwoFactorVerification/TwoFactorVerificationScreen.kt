@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +50,11 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerificationVM = koinViewModel()) {
     val state = vm.state.value
+    if(state.emptyFieldsError){
+        ErrorAlertDialog(stringResource(R.string.all_fields_must_be_filled_in)) {
+            vm.onEvent(TwoFactorVerificationEvent.ChangeEmptyFieldsError)
+        }
+    }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -96,9 +103,11 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                     .padding(top = 38.dp)
                     .align(Alignment.CenterHorizontally)) {
                     OutlinedTextField(
-                        value = "",
+                        value = state.firstNumber,
                         onValueChange = {
-
+                            if(state.firstNumber.length <= 1){
+                                vm.onEvent(TwoFactorVerificationEvent.EnteredFirstNumber(it))
+                            }
                         },
                         modifier = Modifier
                             .size(48.dp, 61.dp)
@@ -112,12 +121,18 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        singleLine = true
+                        singleLine = true,
+                        textStyle = TextStyle(
+                            fontFamily = roboto,
+                            fontSize = 28.sp
+                        ),
                     )
                     OutlinedTextField(
-                        value = "",
+                        value = state.secondNumber,
                         onValueChange = {
-
+                            if(state.secondNumber.length <= 1){
+                                vm.onEvent(TwoFactorVerificationEvent.EnteredSecondNumber(it))
+                            }
                         },
                         modifier = Modifier
                             .padding(start = 22.dp)
@@ -132,12 +147,18 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        singleLine = true
+                        singleLine = true,
+                        textStyle = TextStyle(
+                            fontFamily = roboto,
+                            fontSize = 28.sp
+                        ),
                     )
                     OutlinedTextField(
-                        value = "",
+                        value = state.thirdNumber,
                         onValueChange = {
-
+                            if(state.thirdNumber.length <= 1){
+                                vm.onEvent(TwoFactorVerificationEvent.EnteredThirdNumber(it))
+                            }
                         },
                         modifier = Modifier
                             .padding(start = 22.dp)
@@ -152,12 +173,18 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        singleLine = true
+                        singleLine = true,
+                        textStyle = TextStyle(
+                            fontFamily = roboto,
+                            fontSize = 28.sp
+                        ),
                     )
                     OutlinedTextField(
-                        value = "",
+                        value = state.fourthNumber,
                         onValueChange = {
-
+                            if(state.fourthNumber.length <= 1){
+                                vm.onEvent(TwoFactorVerificationEvent.EnteredFourthNumber(it))
+                            }
                         },
                         modifier = Modifier
                             .padding(start = 22.dp)
@@ -172,7 +199,11 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        singleLine = true
+                        singleLine = true,
+                        textStyle = TextStyle(
+                            fontFamily = roboto,
+                            fontSize = 28.sp
+                        ),
                     )
                 }
                 Text(text = stringResource(R.string.resend_in_00_30),
@@ -184,7 +215,14 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                         .align(Alignment.CenterHorizontally))
                 Button(
                     onClick = {
-
+                        if(state.firstNumber.isNotEmpty() &&
+                            state.secondNumber.isNotEmpty() &&
+                            state.thirdNumber.isNotEmpty() &&
+                            state.fourthNumber.isNotEmpty()){
+                            navController.navigate(Navigation.ResetPasswordScreen)
+                        } else {
+                            vm.onEvent(TwoFactorVerificationEvent.ChangeEmptyFieldsError)
+                        }
                     },
                     modifier = Modifier
                         .padding(top = 62.dp)

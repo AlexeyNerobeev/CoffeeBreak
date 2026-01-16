@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
+import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationScreen
@@ -49,6 +50,9 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.TwoFactorVerificationScreen>{
                         TwoFactorVerificationScreen(navController)
+                    }
+                    composable<Navigation.ResetPasswordScreen> {
+                        ResetPasswordScreen(navController)
                     }
                 }
             }
