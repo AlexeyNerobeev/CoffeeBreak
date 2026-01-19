@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
@@ -53,6 +54,9 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.ResetPasswordScreen> {
                         ResetPasswordScreen(navController)
+                    }
+                    composable<Navigation.CafeScreen> {
+                        CafeScreen(navController)
                     }
                 }
             }

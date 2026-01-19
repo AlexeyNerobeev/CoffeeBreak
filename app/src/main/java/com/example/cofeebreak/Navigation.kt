@@ -27,4 +27,7 @@ sealed class Navigation {
 
     @Serializable
     data object ResetPasswordScreen: Navigation()
+
+    @Serializable
+    data object CafeScreen: Navigation()
 }

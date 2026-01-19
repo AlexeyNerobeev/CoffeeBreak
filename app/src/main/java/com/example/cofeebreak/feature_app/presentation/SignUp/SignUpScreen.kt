@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -297,7 +298,9 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
                     trailingIcon = {
                         IconButton(onClick = {
                             vm.onEvent(SignUpEvent.PasswordVisible)
-                        }) {
+                        },
+                            modifier = Modifier
+                                .testTag("button")) {
                             Icon(
                                 painter = painterResource(R.drawable.eye_icon),
                                 contentDescription = null,
