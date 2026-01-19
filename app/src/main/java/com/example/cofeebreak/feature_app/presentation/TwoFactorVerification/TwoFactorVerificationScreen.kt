@@ -113,10 +113,14 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             .size(48.dp, 61.dp)
                             .clip(RoundedCornerShape(10.dp)),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Theme.colors.outlinedTfColor,
-                            unfocusedContainerColor = Theme.colors.outlinedTfColor,
-                            focusedBorderColor = Theme.colors.outlinedTfColor,
-                            unfocusedBorderColor = Theme.colors.outlinedTfColor,
+                            focusedContainerColor = if(state.firstNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedContainerColor = if(state.firstNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            focusedBorderColor = if(state.firstNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedBorderColor = if(state.firstNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
                             focusedTextColor = Theme.colors.mainBackgroundColor,
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
@@ -139,10 +143,14 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             .size(48.dp, 61.dp)
                             .clip(RoundedCornerShape(10.dp)),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Theme.colors.outlinedTfColor,
-                            unfocusedContainerColor = Theme.colors.outlinedTfColor,
-                            focusedBorderColor = Theme.colors.outlinedTfColor,
-                            unfocusedBorderColor = Theme.colors.outlinedTfColor,
+                            focusedContainerColor = if(state.secondNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedContainerColor = if(state.secondNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            focusedBorderColor = if(state.secondNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedBorderColor = if(state.secondNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
                             focusedTextColor = Theme.colors.mainBackgroundColor,
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
@@ -165,10 +173,14 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             .size(48.dp, 61.dp)
                             .clip(RoundedCornerShape(10.dp)),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Theme.colors.outlinedTfColor,
-                            unfocusedContainerColor = Theme.colors.outlinedTfColor,
-                            focusedBorderColor = Theme.colors.outlinedTfColor,
-                            unfocusedBorderColor = Theme.colors.outlinedTfColor,
+                            focusedContainerColor = if(state.thirdNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedContainerColor = if(state.thirdNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            focusedBorderColor = if(state.thirdNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedBorderColor = if(state.thirdNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
                             focusedTextColor = Theme.colors.mainBackgroundColor,
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),
@@ -191,10 +203,14 @@ fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerif
                             .size(48.dp, 61.dp)
                             .clip(RoundedCornerShape(10.dp)),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Theme.colors.outlinedTfColor,
-                            unfocusedContainerColor = Theme.colors.outlinedTfColor,
-                            focusedBorderColor = Theme.colors.outlinedTfColor,
-                            unfocusedBorderColor = Theme.colors.outlinedTfColor,
+                            focusedContainerColor = if(state.fourthNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedContainerColor = if(state.fourthNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            focusedBorderColor = if(state.fourthNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
+                            unfocusedBorderColor = if(state.fourthNumber.isEmpty()) Theme.colors.outlinedTfColor
+                            else Theme.colors.enteredOutlinedTextFieldColor,
                             focusedTextColor = Theme.colors.mainBackgroundColor,
                             unfocusedTextColor = Theme.colors.mainBackgroundColor
                         ),

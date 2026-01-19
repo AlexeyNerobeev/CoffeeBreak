@@ -80,7 +80,8 @@ data class ThemeColors(
     val authArrowIconColor: Color = Color.White,
     val signUpTextColor: Color = Color.Black,
     val outlinedTfColor: Color = Color(0xFFB7BBC9),
-    val resendInTextColor: Color = Color(0xFF324A59)
+    val resendInTextColor: Color = Color(0xFF324A59),
+    val enteredOutlinedTextFieldColor: Color = Color(0xFFB7BBC9).copy(alpha = 0.5f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -107,7 +108,8 @@ fun AppTheme(
             authArrowIconColor = Color.Black,
             signUpTextColor = Color(0xFF4F7993),
             outlinedTfColor = Color(0xFF585A62),
-            resendInTextColor = Color(0xFFAAAAAA).copy(alpha = 0.5f)
+            resendInTextColor = Color(0xFFAAAAAA).copy(alpha = 0.5f),
+            enteredOutlinedTextFieldColor = Color(0xFF585A62).copy(alpha = 0.5f)
         )
     } else {
         ThemeColors(
@@ -125,7 +127,8 @@ fun AppTheme(
             authArrowIconColor = Color.White,
             signUpTextColor = Color.Black,
             outlinedTfColor = Color(0xFFB7BBC9),
-            resendInTextColor = Color(0xFF324A59)
+            resendInTextColor = Color(0xFF324A59),
+            enteredOutlinedTextFieldColor = Color(0xFFB7BBC9).copy(alpha = 0.5f)
         )
     }
 
