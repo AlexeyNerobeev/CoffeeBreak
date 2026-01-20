@@ -4,7 +4,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.21"
+//    kotlin("kapt")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -19,6 +22,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.cofeebreak.HiltTestRunner"
 
         buildConfigField("String", "MAPKIT_API_KEY", "\"${getMapkitApiKey()}\"")
         resValue("string", "mapkit_api_key", getMapkitApiKey())
@@ -35,11 +39,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -49,7 +53,10 @@ android {
 
 dependencies {
 
+    //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+
     // Test dependencies
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
@@ -64,9 +71,14 @@ dependencies {
     implementation("io.coil-kt:coil-compose:1.3.1")
 
     //koin
-    implementation(libs.io.koin.compose)
-    implementation(libs.io.koin.core)
-    implementation(libs.io.koin.android)
+//    implementation(libs.io.koin.compose)
+//    implementation(libs.io.koin.core)
+//    implementation(libs.io.koin.android)
+
+    //hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation)
 
     //ktor
     implementation("io.ktor:ktor-client-core:3.2.3")

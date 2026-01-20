@@ -18,7 +18,9 @@ import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationScreen
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
 import com.example.cofeebreak.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

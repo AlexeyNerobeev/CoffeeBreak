@@ -3,8 +3,11 @@ package com.example.cofeebreak.feature_app.presentation.TwoFactorVerification
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class TwoFactorVerificationVM: ViewModel() {
+@HiltViewModel
+class TwoFactorVerificationVM @Inject constructor(): ViewModel() {
     private val _state = mutableStateOf(TwoFactorVerificationState())
     val state: State<TwoFactorVerificationState> = _state
     fun onEvent(event: TwoFactorVerificationEvent){

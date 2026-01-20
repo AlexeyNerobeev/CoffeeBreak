@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
@@ -41,10 +42,9 @@ import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordEvent
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpEvent
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ResetPasswordScreen(navController: NavController, vm: ResetPasswordVM = koinViewModel()) {
+fun ResetPasswordScreen(navController: NavController, vm: ResetPasswordVM = hiltViewModel()) {
     val state = vm.state.value
     if(state.emptyFieldError){
         ErrorAlertDialog(stringResource(R.string.password_error_text)) {

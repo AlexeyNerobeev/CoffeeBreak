@@ -32,16 +32,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ForgotPasswordScreen(navController: NavController, vm: ForgotPasswordVM = koinViewModel()) {
+fun ForgotPasswordScreen(navController: NavController, vm: ForgotPasswordVM = hiltViewModel()) {
     val state = vm.state.value
     if (state.error) {
         ErrorAlertDialog(stringResource(R.string.the_email_address_field_is_required)) {

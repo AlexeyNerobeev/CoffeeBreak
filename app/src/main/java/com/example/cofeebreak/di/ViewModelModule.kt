@@ -5,34 +5,31 @@ import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPass
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordVM
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM
-import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeVM
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
 
-val moduleVM = module {
-    viewModel<AuthorizationVM>{
-        AuthorizationVM(get(),
-            get(),
-            get(),
-            get(),
-            get())
-    }
-    viewModel<SignUpVM> {
-        SignUpVM(get(),
-            get(),
-            get(),
-            get())
-    }
-    viewModel<WelcomeVM> {
-        WelcomeVM(get())
-    }
-    viewModel<ForgotPasswordVM> {
-        ForgotPasswordVM(get())
-    }
-    viewModel<TwoFactorVerificationVM> {
-        TwoFactorVerificationVM()
-    }
-    viewModel<ResetPasswordVM> {
-        ResetPasswordVM(get())
-    }
-}
+//val moduleVM = module {
+//    viewModel<AuthorizationVM>{
+//        AuthorizationVM(get(),
+//            get(),
+//            get(),
+//            get(),
+//            get())
+//    }
+//    viewModel<SignUpVM> {
+//        SignUpVM(get(),
+//            get(),
+//            get(),
+//            get())
+//    }
+//    viewModel<WelcomeVM> {
+//        WelcomeVM(get())
+//    }
+//    viewModel<ForgotPasswordVM> {
+//        ForgotPasswordVM(get())
+//    }
+//    viewModel<TwoFactorVerificationVM> {
+//        TwoFactorVerificationVM()
+//    }
+//    viewModel<ResetPasswordVM> {
+//        ResetPasswordVM(get())
+//    }
+//}

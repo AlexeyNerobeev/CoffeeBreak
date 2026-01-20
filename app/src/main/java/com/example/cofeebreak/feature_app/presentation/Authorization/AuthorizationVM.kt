@@ -19,6 +19,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,8 +32,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AuthorizationVM(
+@HiltViewModel
+class AuthorizationVM @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
     private val saveCurrentUserIdUseCase: SaveCurrentUserIdUseCase,

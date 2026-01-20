@@ -38,6 +38,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
@@ -45,10 +46,9 @@ import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordEvent
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerificationVM = koinViewModel()) {
+fun TwoFactorVerificationScreen(navController: NavController, vm: TwoFactorVerificationVM = hiltViewModel()) {
     val state = vm.state.value
     if(state.emptyFieldsError){
         ErrorAlertDialog(stringResource(R.string.all_fields_must_be_filled_in)) {

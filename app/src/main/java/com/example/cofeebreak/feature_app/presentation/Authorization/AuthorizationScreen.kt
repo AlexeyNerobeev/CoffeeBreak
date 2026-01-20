@@ -40,16 +40,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.alpha
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = koinViewModel()) {
+fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = hiltViewModel()) {
     val state = vm.state.value
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete)

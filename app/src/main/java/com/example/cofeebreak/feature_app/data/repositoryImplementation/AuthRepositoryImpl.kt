@@ -5,8 +5,9 @@ import com.example.cofeebreak.feature_app.domain.model.User
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import javax.inject.Inject
 
-class AuthRepositoryImpl: AuthRepository {
+class AuthRepositoryImpl @Inject constructor(): AuthRepository {
     override suspend fun signIn(inputEmail: String, inputPassword: String) {
         supabase.auth.signInWith(Email){
             email = inputEmail

@@ -38,6 +38,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.Navigation
@@ -45,7 +46,6 @@ import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Preview(locale = "en-en")
 @Composable
@@ -54,7 +54,7 @@ fun PrevSignUp() {
 }
 
 @Composable
-fun SignUpScreen(navController: NavController, vm: SignUpVM = koinViewModel()) {
+fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
     val state = vm.state.value
     LaunchedEffect(key1 = !state.isComplete) {
         if (state.isComplete) {

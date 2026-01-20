@@ -10,10 +10,13 @@ import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpVM(
+@HiltViewModel
+class SignUpVM @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val createProfileUseCase: CreateProfileUseCase,
     private val isPasswordStrongUseCase: IsPasswordStrongUseCase,

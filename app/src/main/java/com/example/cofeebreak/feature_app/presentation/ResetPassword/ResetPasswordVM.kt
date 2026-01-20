@@ -4,8 +4,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ResetPasswordVM(
+@HiltViewModel
+class ResetPasswordVM @Inject constructor(
     private val isPasswordStrongUseCase: IsPasswordStrongUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(ResetPasswordState())
