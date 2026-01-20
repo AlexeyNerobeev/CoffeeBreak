@@ -10,7 +10,9 @@ class CurrentSessionRepositoryImpl @Inject constructor(context: Context): Curren
     val sharedPrefs = context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE)
 
     override suspend fun saveCurrentUserId(id: User) {
-        sharedPrefs.edit { putString("userId", id.id) }
+        if(id.id.toString().isNotEmpty()){
+            sharedPrefs.edit { putString("userId", id.id) }
+        }
     }
 
     override suspend fun loadCurrentUseId(): User {
@@ -19,6 +21,6 @@ class CurrentSessionRepositoryImpl @Inject constructor(context: Context): Curren
     }
 
     override suspend fun deleteCurrentUserId() {
-        sharedPrefs.edit().clear().apply()
+        sharedPrefs.edit { clear() }
     }
 }

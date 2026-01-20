@@ -1,7 +1,6 @@
 package com.example.cofeebreak.feature_app.presentation.SignUp
 
 import android.util.Log
-import android.util.Patterns
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

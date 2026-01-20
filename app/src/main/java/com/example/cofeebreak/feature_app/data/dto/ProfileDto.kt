@@ -1,8 +1,5 @@
 package com.example.cofeebreak.feature_app.data.dto
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
 //@Serializable
 //data class ProfileDto(
 //    val id: Int = 0,

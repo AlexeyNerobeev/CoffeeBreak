@@ -1,10 +1,10 @@
 // di/ViewModelModule.kt
 package com.example.cofeebreak.di
 
-import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
-import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
+import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
@@ -13,6 +13,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationVM
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordVM
+import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreenVM
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordVM
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM

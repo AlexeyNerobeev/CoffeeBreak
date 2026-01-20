@@ -12,10 +12,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.core.graphics.toColorInt
-import com.example.cofeebreak.R
-import kotlin.Int
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
@@ -81,7 +77,11 @@ data class ThemeColors(
     val signUpTextColor: Color = Color.Black,
     val outlinedTfColor: Color = Color(0xFFB7BBC9),
     val resendInTextColor: Color = Color(0xFF324A59),
-    val enteredOutlinedTextFieldColor: Color = Color(0xFFB7BBC9).copy(alpha = 0.5f)
+    val enteredOutlinedTextFieldColor: Color = Color(0xFFB7BBC9).copy(alpha = 0.5f),
+    val menuTopText: Color = Color(0xFFA1A1A1),
+    val menuNameColor: Color = Color(0xFF4F7993),
+    val menuIconsColor: Color = Color(0xFF001833),
+    val menuBoxColor: Color = Color(0xFF272D31)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -109,7 +109,11 @@ fun AppTheme(
             signUpTextColor = Color(0xFF4F7993),
             outlinedTfColor = Color(0xFF585A62),
             resendInTextColor = Color(0xFFAAAAAA).copy(alpha = 0.5f),
-            enteredOutlinedTextFieldColor = Color(0xFF585A62).copy(alpha = 0.5f)
+            enteredOutlinedTextFieldColor = Color(0xFF585A62).copy(alpha = 0.5f),
+            menuTopText = Color(0xFFD8D8D8),
+            menuNameColor = Color(0xFFD9D9D9),
+            menuIconsColor = Color(0xFF4F7993),
+            menuBoxColor = Color(0xFF334855)
         )
     } else {
         ThemeColors(
@@ -128,7 +132,11 @@ fun AppTheme(
             signUpTextColor = Color.Black,
             outlinedTfColor = Color(0xFFB7BBC9),
             resendInTextColor = Color(0xFF324A59),
-            enteredOutlinedTextFieldColor = Color(0xFFB7BBC9).copy(alpha = 0.5f)
+            enteredOutlinedTextFieldColor = Color(0xFFB7BBC9).copy(alpha = 0.5f),
+            menuTopText = Color(0xFFA1A1A1),
+            menuNameColor = Color(0xFF4F7993),
+            menuIconsColor = Color(0xFF001833),
+            menuBoxColor = Color(0xFF272D31)
         )
     }
 

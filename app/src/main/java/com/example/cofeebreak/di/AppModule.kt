@@ -3,15 +3,19 @@ package com.example.cofeebreak.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepositoryImpl
+import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.ProfileRepositoryImpl
 import com.example.cofeebreak.feature_app.data.supabase.Connect
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
+import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
+import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
@@ -60,6 +64,12 @@ object AppModule {
         @ApplicationContext context: Context
     ): CurrentSessionRepository {
         return CurrentSessionRepositoryImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoffeeRepository(): CoffeeRepository{
+        return CoffeeRepositoryImpl()
     }
 
     @Provides
@@ -122,5 +132,21 @@ object AppModule {
         currentSessionRepository: CurrentSessionRepository
     ): DeleteCurrentUserIdUseCse {
         return DeleteCurrentUserIdUseCse(currentSessionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserNameUseCase(
+        profileRepository: ProfileRepository
+    ): GetUserNameUseCase{
+        return GetUserNameUseCase(profileRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCoffeeListUseCase(
+        coffeeRepository: CoffeeRepository
+    ): GetCoffeeListUseCase{
+        return GetCoffeeListUseCase(coffeeRepository)
     }
 }

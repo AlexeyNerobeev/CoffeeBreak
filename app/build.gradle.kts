@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "2.2.21"
+    kotlin("plugin.serialization") version "2.0.21"
 //    kotlin("kapt")
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
@@ -68,7 +68,9 @@ dependencies {
     debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
 
     //coil
-    implementation("io.coil-kt:coil-compose:1.3.1")
+    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+    //implementation("io.coil-kt.coil3:coil-compose-core:3.2.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
 
     //koin
 //    implementation(libs.io.koin.compose)
