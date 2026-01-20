@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.Navigation
@@ -35,7 +36,6 @@ import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.redressed
 import com.example.cofeebreak.feature_app.presentation.utils.ObserveActions
 import com.example.cofeebreak.ui.theme.Theme
-import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
@@ -44,7 +44,7 @@ fun prevWelcomeScreen(){
 }
 
 @Composable
-fun WelcomeScreen(navController: NavController, vm: WelcomeVM = koinViewModel()) {
+fun WelcomeScreen(navController: NavController, vm: WelcomeVM = hiltViewModel()) {
     val state = vm.state.value
 
     ObserveActions(vm.channel) {

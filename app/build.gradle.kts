@@ -1,8 +1,13 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.21"
+//    kotlin("kapt")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -11,12 +16,17 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cofeebreak"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.cofeebreak.HiltTestRunner"
+
+        buildConfigField("String", "MAPKIT_API_KEY", "\"${getMapkitApiKey()}\"")
+        resValue("string", "mapkit_api_key", getMapkitApiKey())
+        android.buildFeatures.buildConfig = true
     }
 
     buildTypes {
@@ -29,11 +39,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -43,7 +53,10 @@ android {
 
 dependencies {
 
+    //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+
     // Test dependencies
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
@@ -58,9 +71,14 @@ dependencies {
     implementation("io.coil-kt:coil-compose:1.3.1")
 
     //koin
-    implementation(libs.io.koin.compose)
-    implementation(libs.io.koin.core)
-    implementation(libs.io.koin.android)
+//    implementation(libs.io.koin.compose)
+//    implementation(libs.io.koin.core)
+//    implementation(libs.io.koin.android)
+
+    //hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation)
 
     //ktor
     implementation("io.ktor:ktor-client-core:3.2.3")
@@ -74,6 +92,9 @@ dependencies {
 
     //navigation
     implementation ("androidx.navigation:navigation-compose:2.9.4")
+
+    //карта
+    implementation("com.yandex.android:maps.mobile:4.26.0-lite")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -90,4 +111,17 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+// Функция для безопасного чтения ключа из local.properties
+fun getMapkitApiKey(): String {
+    val properties = Properties()
+    val localPropertiesFile = project.rootProject.file("local.properties")
+
+    return if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { properties.load(it) }
+        properties.getProperty("MAPKIT_API_KEY", "").trim()
+    } else {
+        "" // Или можно выбросить исключение: error("local.properties not found")
+    }
 }

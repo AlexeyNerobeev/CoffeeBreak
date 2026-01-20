@@ -1,26 +1,35 @@
 package com.example.cofeebreak.di
 
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationVM
+import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordVM
+import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordVM
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
-import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeVM
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM
 
-val moduleVM = module {
-    viewModel<AuthorizationVM>{
-        AuthorizationVM(get(),
-            get(),
-            get(),
-            get(),
-            get())
-    }
-    viewModel<SignUpVM> {
-        SignUpVM(get(),
-            get(),
-            get(),
-            get())
-    }
-    viewModel<WelcomeVM> {
-        WelcomeVM(get())
-    }
-}
+//val moduleVM = module {
+//    viewModel<AuthorizationVM>{
+//        AuthorizationVM(get(),
+//            get(),
+//            get(),
+//            get(),
+//            get())
+//    }
+//    viewModel<SignUpVM> {
+//        SignUpVM(get(),
+//            get(),
+//            get(),
+//            get())
+//    }
+//    viewModel<WelcomeVM> {
+//        WelcomeVM(get())
+//    }
+//    viewModel<ForgotPasswordVM> {
+//        ForgotPasswordVM(get())
+//    }
+//    viewModel<TwoFactorVerificationVM> {
+//        TwoFactorVerificationVM()
+//    }
+//    viewModel<ResetPasswordVM> {
+//        ResetPasswordVM(get())
+//    }
+//}

@@ -9,12 +9,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
+import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
+import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
+import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationScreen
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
 import com.example.cofeebreak.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,18 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.MenuScreen> {
                         MenuScreen(navController)
+                    }
+                    composable<Navigation.ForgotPasswordScreen> {
+                        ForgotPasswordScreen(navController)
+                    }
+                    composable<Navigation.TwoFactorVerificationScreen>{
+                        TwoFactorVerificationScreen(navController)
+                    }
+                    composable<Navigation.ResetPasswordScreen> {
+                        ResetPasswordScreen(navController)
+                    }
+                    composable<Navigation.CafeScreen> {
+                        CafeScreen(navController)
                     }
                 }
             }

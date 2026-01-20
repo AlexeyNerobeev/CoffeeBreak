@@ -5,19 +5,18 @@ import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionReposi
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
-import org.koin.dsl.module
 
-val moduleCurrentSession = module {
-    single<CurrentSessionRepository> {
-        CurrentSessionRepositoryImpl(get())
-    }
-    factory<SaveCurrentUserIdUseCase> {
-        SaveCurrentUserIdUseCase(get())
-    }
-    factory<LoadCurrentUserIdUseCase> {
-        LoadCurrentUserIdUseCase(get())
-    }
-    factory<DeleteCurrentUserIdUseCse> {
-        DeleteCurrentUserIdUseCse(get())
-    }
-}
+//val moduleCurrentSession = module {
+//    single<CurrentSessionRepository> {
+//        CurrentSessionRepositoryImpl(get())
+//    }
+//    factory<SaveCurrentUserIdUseCase> {
+//        SaveCurrentUserIdUseCase(get())
+//    }
+//    factory<LoadCurrentUserIdUseCase> {
+//        LoadCurrentUserIdUseCase(get())
+//    }
+//    factory<DeleteCurrentUserIdUseCse> {
+//        DeleteCurrentUserIdUseCse(get())
+//    }
+//}

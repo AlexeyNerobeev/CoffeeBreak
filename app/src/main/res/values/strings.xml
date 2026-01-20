@@ -22,4 +22,13 @@
     <string name="incorrect_email_or_password">Неправильные почта или пароль</string>
     <string name="all_fields_must_be_filled_in">Все поля должны быть заполнены</string>
     <string name="password_error_text">Пароль должен содержать заглавные и строчные буквы, цифры, пробелы и специальные символы.</string>
+    <string name="enter_your_email_address">Введите адрес электронной почты</string>
+    <string name="the_email_address_field_is_required">Поле адрес эектронной почты обязательно для заполнения</string>
+    <string name="incorrect_email">Некорректная почта</string>
+    <string name="verification">Проверка</string>
+    <string name="enter_the_code_we_sent_you_by_email">Введите код, который мы вам отправили на почту</string>
+    <string name="resend_in_00_30">Выслать заново через 00:30</string>
+    <string name="reset_password">Восстановление пароля</string>
+    <string name="enter_new_password">Введите новый пароль</string>
+    <string name="choose_a_coffee_break_coffee_shop">Выберите кофейню Coffee break</string>
 </resources>

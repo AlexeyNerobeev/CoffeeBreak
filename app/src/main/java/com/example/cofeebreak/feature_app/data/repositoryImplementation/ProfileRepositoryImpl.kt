@@ -5,8 +5,9 @@ import com.example.cofeebreak.feature_app.domain.model.Profile
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
+import javax.inject.Inject
 
-class ProfileRepositoryImpl: ProfileRepository {
+class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
     override suspend fun createProfile(
         name: String,
         phone: String

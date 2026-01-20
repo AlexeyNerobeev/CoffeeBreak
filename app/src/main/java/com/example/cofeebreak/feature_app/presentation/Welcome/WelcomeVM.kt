@@ -6,13 +6,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WelcomeVM(
+@HiltViewModel
+class WelcomeVM @Inject constructor(
     private val loadCurrentUserIdUseCase: LoadCurrentUserIdUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(WelcomeState())
