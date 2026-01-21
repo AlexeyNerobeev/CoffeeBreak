@@ -32,4 +32,23 @@
     <string name="enter_new_password">Введите новый пароль</string>
     <string name="choose_a_coffee_break_coffee_shop">Выберите кофейню Coffee break</string>
     <string name="choose_your_coffee">Выберите Ваш кофе</string>
+    <string name="profile">Профиль</string>
+    <string name="name">Имя</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="email">Почта</string>
+    <string name="magic_coffee_address">Адрес кофейни Magic Coffee</string>
+    <string name="qr_code">QR-code</string>
+    <string name="to_receive_your_order">Для получения заказа</string>
+    <string name="your_personal_qr_code">Ваш персональный QR-код</string>
+    <string name="show_your_qr_code_to_receive_your_order">Покажите ваш QR-code для получения заказа</string>
+    <string name="reward">Вознаграждение</string>
+    <string name="loyalty_card">Карта лояльности</string>
+    <string name="my_points">Мои баллы:</string>
+    <string name="pay_with_points">Оплатить баллами</string>
+    <string name="points_accrual_history">История начисления баллов</string>
+    <string name="americano">Американо</string>
+    <string name="june_24">24 июня | 12:30</string>
+    <string name="points_12">+ 12 баллов</string>
+    <string name="latte">Латте</string>
+    <string name="june_22">22 июня | 08:30</string>
 </resources>

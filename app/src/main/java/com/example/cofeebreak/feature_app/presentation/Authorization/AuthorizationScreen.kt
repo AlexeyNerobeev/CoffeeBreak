@@ -238,7 +238,6 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = hilt
                     onClick = {
                         vm.onEvent(AuthorizationEvent.ProgressIndicator)
                         vm.onEvent(AuthorizationEvent.SignIn)
-                        vm.onEvent(AuthorizationEvent.SaveCurrentUserId)
                     },
                     modifier = Modifier
                         .padding(top = 136.dp)

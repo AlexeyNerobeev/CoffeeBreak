@@ -18,52 +18,43 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuScreenVM @Inject constructor(
-    savedStateHandle: SavedStateHandle,
     private val getUserNameUseCase: GetUserNameUseCase,
     private val loadCurrentUserIdUseCase: LoadCurrentUserIdUseCase,
     private val getCoffeeListUseCase: GetCoffeeListUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _state = mutableStateOf(MenuScreenState())
     val state: State<MenuScreenState> = _state
-    //val t = savedStateHandle.toRoute<Navigation.MenuScreen>()
 
-//    init {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                _state.value = state.value.copy(
-//                    name = getUserNameUseCase.invoke(loadCurrentUserIdUseCase.invoke().id.toString()).name,
-//                    coffeeList = getCoffeeListUseCase.invoke()
-//                )
-//            } catch (ex: Exception){
-//                Log.e("supabase", ex.message.toString())
-//            }
-//        }
-//    }
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val userId = loadCurrentUserIdUseCase().id.orEmpty()
+                val name = getUserNameUseCase(userId).name
+                val coffeeList = getCoffeeListUseCase()
+
+                _state.value = _state.value.copy(
+                    name = name,
+                    coffeeList = coffeeList
+                )
+            } catch (e: Exception) {
+                _state.value = state.value.copy(
+                    error = "Ошибка запроса к серверу"
+                )
+                Log.e("MENU_VM", e.message.toString())
+            }
+        }
+    }
 
     fun onEvent(event: MenuScreenEvent){
         when(event){
-            MenuScreenEvent.GetDrinks -> {
-                viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        _state.value = state.value.copy(
-                            coffeeList = getCoffeeListUseCase.invoke()
-                        )
-                    }catch (ex: Exception){
-                        Log.e("supabase", ex.message.toString())
-                    }
-                }
-            }
-            MenuScreenEvent.GetUserName -> {
-                viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        _state.value = state.value.copy(
-                            userId = loadCurrentUserIdUseCase.invoke().id,
-                            name = getUserNameUseCase.invoke(state.value.userId.toString()).name
-                        )
-                    } catch (ex: Exception){
-                        Log.e("supabase", ex.message.toString())
-                    }
-                }
+            MenuScreenEvent.ChangeError -> {
+                _state.value = state.value.copy(
+                    error = ""
+                )
             }
         }
     }

@@ -25,10 +25,12 @@ class WelcomeVM @Inject constructor(
 
     init {
         viewModelScope.launch {
-            loadCurrentUserIdUseCase.invoke().id?.let {
+            val id = loadCurrentUserIdUseCase().id
+            if (!id.isNullOrEmpty()) {
                 _channel.send(WelcomeAction.OnSuccessLoadedSession)
+            } else {
+                _channel.send(WelcomeAction.UnsuccessLoadedSession)
             }
-            _channel.send(WelcomeAction.UnsuccessLoadedSession)
         }
     }
 

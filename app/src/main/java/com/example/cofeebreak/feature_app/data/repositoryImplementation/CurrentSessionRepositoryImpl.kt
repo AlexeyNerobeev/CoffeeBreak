@@ -1,6 +1,7 @@
 package com.example.cofeebreak.feature_app.data.repositoryImplementation
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.edit
 import com.example.cofeebreak.feature_app.domain.model.User
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository

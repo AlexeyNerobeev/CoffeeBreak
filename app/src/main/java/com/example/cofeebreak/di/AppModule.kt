@@ -36,18 +36,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSupabaseClient(): SupabaseClient {
-        return Connect.supabase
-    }
-
-    @Provides
-    @Singleton
-    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("current_session", Context.MODE_PRIVATE)
-    }
-
-    @Provides
-    @Singleton
     fun provideAuthRepository(): AuthRepository {
         return AuthRepositoryImpl()
     }

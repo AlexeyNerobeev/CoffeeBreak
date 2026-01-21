@@ -81,7 +81,15 @@ data class ThemeColors(
     val menuTopText: Color = Color(0xFFA1A1A1),
     val menuNameColor: Color = Color(0xFF4F7993),
     val menuIconsColor: Color = Color(0xFF001833),
-    val menuBoxColor: Color = Color(0xFF272D31)
+    val menuBoxColor: Color = Color(0xFF272D31),
+    val activeBottomBarIcon: Color = Color(0xFF324A59),
+    val defaultBottomBarIcon: Color = Color(0xFFD8D8D8),
+    val navigationBarBackground: Color = Color.White,
+    val backProfileIcon: Color = Color.Black,
+    val profileBackgroundIcon: Color = Color(0xFFF7F8FB),
+    val titleTextProfile: Color = Color(0xFF00183338).copy(alpha = 0.22f),
+    val profileMainText: Color = Color(0xFF324A59),
+    val rewardHistoryColor: Color = Color(0xFF324A5938).copy(alpha = 0.22f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -113,7 +121,15 @@ fun AppTheme(
             menuTopText = Color(0xFFD8D8D8),
             menuNameColor = Color(0xFFD9D9D9),
             menuIconsColor = Color(0xFF4F7993),
-            menuBoxColor = Color(0xFF334855)
+            menuBoxColor = Color(0xFF334855),
+            activeBottomBarIcon = Color(0xFF4F7993),
+            defaultBottomBarIcon = Color(0XFFD8D8D8),
+            navigationBarBackground = Color(0xFF272D31),
+            backProfileIcon = Color(0xFF4F7993),
+            profileBackgroundIcon = Color(0xFF444A4D),
+            titleTextProfile = Color(0xFF4F7993),
+            profileMainText = Color(0xFFAAAAAA),
+            rewardHistoryColor = Color(0xFFA1A1A1)
         )
     } else {
         ThemeColors(
@@ -136,7 +152,15 @@ fun AppTheme(
             menuTopText = Color(0xFFA1A1A1),
             menuNameColor = Color(0xFF4F7993),
             menuIconsColor = Color(0xFF001833),
-            menuBoxColor = Color(0xFF272D31)
+            menuBoxColor = Color(0xFF272D31),
+            activeBottomBarIcon = Color(0xFF324A59),
+            defaultBottomBarIcon = Color(0xFFD8D8D8),
+            navigationBarBackground = Color.White,
+            backProfileIcon = Color.Black,
+            profileBackgroundIcon = Color(0xFFF7F8FB),
+            titleTextProfile = Color(0xFF00183338).copy(alpha = 0.22f),
+            profileMainText = Color(0xFF324A59),
+            rewardHistoryColor = Color(0xFF324A5938).copy(alpha = 0.22f)
         )
     }
 

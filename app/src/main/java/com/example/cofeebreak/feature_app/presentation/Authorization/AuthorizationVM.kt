@@ -62,6 +62,8 @@ class AuthorizationVM @Inject constructor(
                                 email = state.value.email,
                                 password = state.value.password
                             )
+                            val id = getCurrentUserIdUseCase.invoke()
+                            saveCurrentUserIdUseCase.invoke(id)
                             _state.value = state.value.copy(
                                 isComplete = true
                             )
@@ -92,21 +94,10 @@ class AuthorizationVM @Inject constructor(
                     error = false
                 )
             }
-
             AuthorizationEvent.ProgressIndicator -> {
                 _state.value = state.value.copy(
                     progressIndicator = true
                 )
-            }
-            AuthorizationEvent.SaveCurrentUserId -> {
-                viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val id = getCurrentUserIdUseCase.invoke()
-                        saveCurrentUserIdUseCase.invoke(id)
-                    } catch (ex: Exception){
-                        Log.e("sharedPrefs", ex.message.toString())
-                    }
-                }
             }
             AuthorizationEvent.EmailValid -> {
                 _state.value = state.value.copy(

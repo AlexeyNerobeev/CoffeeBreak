@@ -12,7 +12,10 @@ import com.example.cofeebreak.feature_app.presentation.Authorization.Authorizati
 import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
+import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
+import com.example.cofeebreak.feature_app.presentation.Profile.ProfileScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
+import com.example.cofeebreak.feature_app.presentation.Reward.RewardScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
 import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationScreen
@@ -59,6 +62,15 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.CafeScreen> {
                         CafeScreen(navController)
+                    }
+                    composable<Navigation.MyOrderScreen> {
+                        MyOrderScreen(navController)
+                    }
+                    composable<Navigation.ProfileScreen> {
+                        ProfileScreen(navController)
+                    }
+                    composable<Navigation.RewardScreen> {
+                        RewardScreen(navController)
                     }
                 }
             }

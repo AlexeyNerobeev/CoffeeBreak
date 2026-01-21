@@ -56,6 +56,7 @@ dependencies {
     //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation(libs.androidx.compose.ui.geometry)
 
     // Test dependencies
     testImplementation ("junit:junit:4.13.2")
@@ -71,6 +72,9 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
     //implementation("io.coil-kt.coil3:coil-compose-core:3.2.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
+
+    //qr
+    implementation("com.google.zxing:core:3.5.2")
 
     //koin
 //    implementation(libs.io.koin.compose)
