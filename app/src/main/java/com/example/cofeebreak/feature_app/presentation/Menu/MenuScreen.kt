@@ -156,6 +156,9 @@
                                         modifier = Modifier
                                             .clip(RoundedCornerShape(15.dp))
                                             .background(Color.White)
+                                            .clickable{
+                                                navController.navigate(Navigation.OrderOptionsScreen(item.coffee_image))
+                                            }
                                     ) {
                                         Column(
                                             modifier = Modifier

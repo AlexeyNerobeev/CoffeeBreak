@@ -89,7 +89,8 @@ data class ThemeColors(
     val profileBackgroundIcon: Color = Color(0xFFF7F8FB),
     val titleTextProfile: Color = Color(0xFF00183338).copy(alpha = 0.22f),
     val profileMainText: Color = Color(0xFF324A59),
-    val rewardHistoryColor: Color = Color(0xFF324A5938).copy(alpha = 0.22f)
+    val rewardHistoryColor: Color = Color(0xFF324A5938).copy(alpha = 0.22f),
+    val orderOptionsBoxColor: Color = Color(0xFFD8D8D8).copy(alpha = 0.4f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -129,7 +130,8 @@ fun AppTheme(
             profileBackgroundIcon = Color(0xFF444A4D),
             titleTextProfile = Color(0xFF4F7993),
             profileMainText = Color(0xFFAAAAAA),
-            rewardHistoryColor = Color(0xFFA1A1A1)
+            rewardHistoryColor = Color(0xFFA1A1A1),
+            orderOptionsBoxColor = Color(0xFFD8D8D8)
         )
     } else {
         ThemeColors(
@@ -160,7 +162,8 @@ fun AppTheme(
             profileBackgroundIcon = Color(0xFFF7F8FB),
             titleTextProfile = Color(0xFF00183338).copy(alpha = 0.22f),
             profileMainText = Color(0xFF324A59),
-            rewardHistoryColor = Color(0xFF324A5938).copy(alpha = 0.22f)
+            rewardHistoryColor = Color(0xFF324A5938).copy(alpha = 0.22f),
+            orderOptionsBoxColor = Color(0xFFD8D8D8).copy(alpha = 0.4f)
         )
     }
 

@@ -59,4 +59,8 @@
     <string name="server_request_error">Server request error</string>
     <string name="price">" points"</string>
     <string name="valid_until">"Valid until "</string>
+    <string name="order">Order</string>
+    <string name="ristretto">Ristretto</string>
+    <string name="one">One</string>
+    <string name="two">Two</string>
 </resources>

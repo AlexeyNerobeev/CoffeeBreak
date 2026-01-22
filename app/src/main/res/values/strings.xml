@@ -58,4 +58,8 @@
     <string name="server_request_error">Ошибка запроса к серверу</string>
     <string name="price">" баллов"</string>
     <string name="valid_until">"Действительно до "</string>
+    <string name="order">Заказ</string>
+    <string name="ristretto">Ристретто</string>
+    <string name="one">Один</string>
+    <string name="two">Два</string>
 </resources>
