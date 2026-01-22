@@ -41,6 +41,9 @@ class ProfileVM @Inject constructor(
                     qrBitmap = qrBitmap
                 )
             } catch (ex: Exception){
+                _state.value = state.value.copy(
+                    serverError = true
+                )
                 Log.e("ProfileVM", ex.message.toString())
             }
         }
@@ -72,7 +75,7 @@ class ProfileVM @Inject constructor(
         when(event){
             ProfileEvent.ChangeError -> {
                 _state.value = state.value.copy(
-                    error = ""
+                    serverError = false
                 )
             }
             ProfileEvent.QRVisibleChange -> {

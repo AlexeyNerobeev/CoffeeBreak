@@ -51,4 +51,11 @@
     <string name="points_12">+ 12 баллов</string>
     <string name="latte">Латте</string>
     <string name="june_22">22 июня | 08:30</string>
+    <string name="raf">Раф</string>
+    <string name="june_16">16 июня | 10:48</string>
+    <string name="flat_white">Флэт Уайт</string>
+    <string name="may_12">12 мая | 11:25</string>
+    <string name="server_request_error">Ошибка запроса к серверу</string>
+    <string name="price">" баллов"</string>
+    <string name="valid_until">"Действительно до "</string>
 </resources>

@@ -5,5 +5,5 @@ import com.example.cofeebreak.feature_app.domain.model.Coffee
 data class MenuScreenState (
     val name: String = "",
     val coffeeList: List<Coffee> = listOf(),
-    val error: String = ""
+    val serverError: Boolean = false
 )

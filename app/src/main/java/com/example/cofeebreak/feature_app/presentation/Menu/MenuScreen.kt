@@ -46,8 +46,8 @@
     @Composable
     fun MenuScreen(navController: NavController, vm: MenuScreenVM = hiltViewModel()) {
         val state = vm.state.value
-        if(state.error.isNotEmpty()){
-            ErrorAlertDialog(error = state.error) {
+        if(state.serverError){
+            ErrorAlertDialog(error = stringResource(R.string.server_request_error)) {
                 vm.onEvent(MenuScreenEvent.ChangeError)
             }
         }
@@ -110,7 +110,7 @@
                             tint = Theme.colors.menuIconsColor,
                             modifier = Modifier
                                 .padding(start = 20.dp)
-                                .clickable{
+                                .clickable {
                                     navController.navigate(Navigation.ProfileScreen)
                                 }
                         )

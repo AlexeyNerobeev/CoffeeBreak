@@ -6,15 +6,18 @@ import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepo
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.ProfileRepositoryImpl
+import com.example.cofeebreak.feature_app.data.repositoryImplementation.RedeemRepositoryImpl
 import com.example.cofeebreak.feature_app.data.supabase.Connect
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
+import com.example.cofeebreak.feature_app.domain.repository.RedeemRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
@@ -58,6 +61,12 @@ object AppModule {
     @Singleton
     fun provideCoffeeRepository(): CoffeeRepository{
         return CoffeeRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRedeemRepository(): RedeemRepository{
+        return RedeemRepositoryImpl()
     }
 
     @Provides
@@ -136,5 +145,13 @@ object AppModule {
         coffeeRepository: CoffeeRepository
     ): GetCoffeeListUseCase{
         return GetCoffeeListUseCase(coffeeRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRedeemUseCase(
+        redeemRepository: RedeemRepository
+    ): GetRedeemUseCase{
+        return GetRedeemUseCase(redeemRepository)
     }
 }

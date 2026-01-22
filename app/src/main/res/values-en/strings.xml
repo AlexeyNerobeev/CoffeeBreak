@@ -52,4 +52,11 @@
     <string name="points_12">+ 12 points</string>
     <string name="latte">Latte</string>
     <string name="june_22">22 June | 08:30</string>
+    <string name="raf">Raf</string>
+    <string name="june_16">16 June | 10:48</string>
+    <string name="flat_white">Flat White</string>
+    <string name="may_12">12 May | 11:25</string>
+    <string name="server_request_error">Server request error</string>
+    <string name="price">" points"</string>
+    <string name="valid_until">"Valid until "</string>
 </resources>

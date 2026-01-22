@@ -13,6 +13,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -27,6 +29,10 @@ fun BottomNavigationBar(navController: NavController, currentScreen: Navigation)
         .padding(bottom = 22.dp)
         .fillMaxWidth()
         .height(64.dp)
+        .shadow(elevation = 10.dp,
+            shape = RoundedCornerShape(20.dp),
+            spotColor = colorResource(R.color.AlternativeBlack).copy(alpha = 0.12f)
+        )
         .background(Theme.colors.navigationBarBackground,
             shape = RoundedCornerShape(20.dp)
         ),

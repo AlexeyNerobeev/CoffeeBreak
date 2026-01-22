@@ -169,11 +169,17 @@ fun RewardScreen(navController: NavController) {
                         }
                         Box(modifier = Modifier
                             .clickable{
-
-                            }){
+                                navController.navigate(Navigation.RedeemScreen)
+                            },
+                            contentAlignment = Alignment.Center){
                             Icon(painter = painterResource(R.drawable.pay_points_button),
                                 contentDescription = null,
                                 tint = Color.Unspecified)
+                            Text(text = stringResource(R.string.pay_with_points),
+                                color = Color.White,
+                                fontFamily = poppins,
+                                fontWeight = FontWeight(500),
+                                fontSize = 10.sp)
                         }
                     }
                 }
@@ -260,6 +266,108 @@ fun RewardScreen(navController: NavController) {
                                     )
                                     Text(
                                         text = stringResource(R.string.june_22),
+                                        color = Theme.colors.rewardHistoryColor,
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight(400),
+                                        fontFamily = roboto,
+                                        modifier = Modifier
+                                            .padding(top = 9.dp)
+                                    )
+                                }
+                                Text(
+                                    text = stringResource(R.string.points_12),
+                                    color = colorResource(R.color.AlternativeBlack),
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight(500),
+                                    fontFamily = poppins,
+                                )
+                            }
+                            Canvas(Modifier
+                                .padding(top = 23.dp)
+                                .height(1.dp)
+                                .fillMaxWidth()
+                            ) {
+                                val width = size.width
+                                drawLine(
+                                    start = Offset(x= 0f, y = 0f),
+                                    end = Offset(x = width, y = 0f),
+                                    color = RewardLine,
+                                    strokeWidth = 1.0f
+                                )
+                            }
+                        }
+                    }
+                    item {
+                        Column(modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column {
+                                    Text(
+                                        text = stringResource(R.string.raf),
+                                        color = colorResource(R.color.AlternativeBlack),
+                                        fontFamily = roboto,
+                                        fontWeight = FontWeight(500),
+                                        fontSize = 12.sp
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.june_16),
+                                        color = Theme.colors.rewardHistoryColor,
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight(400),
+                                        fontFamily = roboto,
+                                        modifier = Modifier
+                                            .padding(top = 9.dp)
+                                    )
+                                }
+                                Text(
+                                    text = stringResource(R.string.points_12),
+                                    color = colorResource(R.color.AlternativeBlack),
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight(500),
+                                    fontFamily = poppins,
+                                )
+                            }
+                            Canvas(Modifier
+                                .padding(top = 23.dp)
+                                .height(1.dp)
+                                .fillMaxWidth()
+                            ) {
+                                val width = size.width
+                                drawLine(
+                                    start = Offset(x= 0f, y = 0f),
+                                    end = Offset(x = width, y = 0f),
+                                    color = RewardLine,
+                                    strokeWidth = 1.0f
+                                )
+                            }
+                        }
+                    }
+                    item {
+                        Column(modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth()) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column {
+                                    Text(
+                                        text = stringResource(R.string.flat_white),
+                                        color = colorResource(R.color.AlternativeBlack),
+                                        fontFamily = roboto,
+                                        fontWeight = FontWeight(500),
+                                        fontSize = 12.sp
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.may_12),
                                         color = Theme.colors.rewardHistoryColor,
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight(400),

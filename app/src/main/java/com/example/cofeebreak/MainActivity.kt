@@ -14,6 +14,7 @@ import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPass
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
 import com.example.cofeebreak.feature_app.presentation.Profile.ProfileScreen
+import com.example.cofeebreak.feature_app.presentation.Redeem.RedeemScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Reward.RewardScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
@@ -71,6 +72,9 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.RewardScreen> {
                         RewardScreen(navController)
+                    }
+                    composable<Navigation.RedeemScreen> {
+                        RedeemScreen(navController)
                     }
                 }
             }

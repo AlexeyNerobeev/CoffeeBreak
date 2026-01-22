@@ -7,7 +7,7 @@ data class ProfileState (
     val phone: String = "",
     val email: String = "",
     val address: String = "",
-    val error: String = "",
+    val serverError: Boolean = false,
     val qrVisible: Boolean = false,
     val qrBitmap: Bitmap? = null
 )

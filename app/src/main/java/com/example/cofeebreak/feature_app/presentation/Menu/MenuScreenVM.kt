@@ -42,7 +42,7 @@ class MenuScreenVM @Inject constructor(
                 )
             } catch (e: Exception) {
                 _state.value = state.value.copy(
-                    error = "Ошибка запроса к серверу"
+                    serverError = true
                 )
                 Log.e("MENU_VM", e.message.toString())
             }
@@ -53,7 +53,7 @@ class MenuScreenVM @Inject constructor(
         when(event){
             MenuScreenEvent.ChangeError -> {
                 _state.value = state.value.copy(
-                    error = ""
+                    serverError = false
                 )
             }
         }

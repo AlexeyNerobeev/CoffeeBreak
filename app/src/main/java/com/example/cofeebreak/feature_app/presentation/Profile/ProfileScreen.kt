@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.R
+import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.dmSans
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.roboto
@@ -39,6 +40,11 @@ import com.example.cofeebreak.ui.theme.Theme
 @Composable
 fun ProfileScreen(navController: NavController, vm: ProfileVM = hiltViewModel()) {
     val state = vm.state.value
+    if(state.serverError){
+        ErrorAlertDialog(stringResource(R.string.server_request_error)) {
+            vm.onEvent(ProfileEvent.ChangeError)
+        }
+    }
     Scaffold(modifier = Modifier
         .fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier

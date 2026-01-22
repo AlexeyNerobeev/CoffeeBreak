@@ -39,4 +39,7 @@ sealed class Navigation {
 
     @Serializable
     data object ProfileScreen: Navigation()
+
+    @Serializable
+    data object RedeemScreen: Navigation()
 }
