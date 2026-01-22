@@ -39,8 +39,6 @@ import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
-import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordEvent
-import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpEvent
 import com.example.cofeebreak.ui.theme.Theme
 
 @Composable

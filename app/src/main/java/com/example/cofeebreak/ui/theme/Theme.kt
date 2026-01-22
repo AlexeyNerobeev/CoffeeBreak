@@ -12,10 +12,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.core.graphics.toColorInt
-import com.example.cofeebreak.R
-import kotlin.Int
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
@@ -81,7 +77,19 @@ data class ThemeColors(
     val signUpTextColor: Color = Color.Black,
     val outlinedTfColor: Color = Color(0xFFB7BBC9),
     val resendInTextColor: Color = Color(0xFF324A59),
-    val enteredOutlinedTextFieldColor: Color = Color(0xFFB7BBC9).copy(alpha = 0.5f)
+    val enteredOutlinedTextFieldColor: Color = Color(0xFFB7BBC9).copy(alpha = 0.5f),
+    val menuTopText: Color = Color(0xFFA1A1A1),
+    val menuNameColor: Color = Color(0xFF4F7993),
+    val menuIconsColor: Color = Color(0xFF001833),
+    val menuBoxColor: Color = Color(0xFF272D31),
+    val activeBottomBarIcon: Color = Color(0xFF324A59),
+    val defaultBottomBarIcon: Color = Color(0xFFD8D8D8),
+    val navigationBarBackground: Color = Color.White,
+    val backProfileIcon: Color = Color.Black,
+    val profileBackgroundIcon: Color = Color(0xFFF7F8FB),
+    val titleTextProfile: Color = Color(0xFF00183338).copy(alpha = 0.22f),
+    val profileMainText: Color = Color(0xFF324A59),
+    val rewardHistoryColor: Color = Color(0xFF324A5938).copy(alpha = 0.22f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -109,7 +117,19 @@ fun AppTheme(
             signUpTextColor = Color(0xFF4F7993),
             outlinedTfColor = Color(0xFF585A62),
             resendInTextColor = Color(0xFFAAAAAA).copy(alpha = 0.5f),
-            enteredOutlinedTextFieldColor = Color(0xFF585A62).copy(alpha = 0.5f)
+            enteredOutlinedTextFieldColor = Color(0xFF585A62).copy(alpha = 0.5f),
+            menuTopText = Color(0xFFD8D8D8),
+            menuNameColor = Color(0xFFD9D9D9),
+            menuIconsColor = Color(0xFF4F7993),
+            menuBoxColor = Color(0xFF334855),
+            activeBottomBarIcon = Color(0xFF4F7993),
+            defaultBottomBarIcon = Color(0XFFD8D8D8),
+            navigationBarBackground = Color(0xFF272D31),
+            backProfileIcon = Color(0xFF4F7993),
+            profileBackgroundIcon = Color(0xFF444A4D),
+            titleTextProfile = Color(0xFF4F7993),
+            profileMainText = Color(0xFFAAAAAA),
+            rewardHistoryColor = Color(0xFFA1A1A1)
         )
     } else {
         ThemeColors(
@@ -128,7 +148,19 @@ fun AppTheme(
             signUpTextColor = Color.Black,
             outlinedTfColor = Color(0xFFB7BBC9),
             resendInTextColor = Color(0xFF324A59),
-            enteredOutlinedTextFieldColor = Color(0xFFB7BBC9).copy(alpha = 0.5f)
+            enteredOutlinedTextFieldColor = Color(0xFFB7BBC9).copy(alpha = 0.5f),
+            menuTopText = Color(0xFFA1A1A1),
+            menuNameColor = Color(0xFF4F7993),
+            menuIconsColor = Color(0xFF001833),
+            menuBoxColor = Color(0xFF272D31),
+            activeBottomBarIcon = Color(0xFF324A59),
+            defaultBottomBarIcon = Color(0xFFD8D8D8),
+            navigationBarBackground = Color.White,
+            backProfileIcon = Color.Black,
+            profileBackgroundIcon = Color(0xFFF7F8FB),
+            titleTextProfile = Color(0xFF00183338).copy(alpha = 0.22f),
+            profileMainText = Color(0xFF324A59),
+            rewardHistoryColor = Color(0xFF324A5938).copy(alpha = 0.22f)
         )
     }
 

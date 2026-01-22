@@ -13,4 +13,8 @@
     <color name="TfColor">#C1C7D0</color>
     <color name="PlaceholderColor">#A1A1A1</color>
     <color name="AlternativeBlack">#324A59</color>
+    <color name="ChooseYourCoffeeColor">#D9D9D9</color>
+    <color name="alternativeWhite">#D8D8D8</color>
+    <color name="payPointsButtonColor">#A2CDE930</color>
+    <color name="rewardLine">#F4F5F7</color>
 </resources>

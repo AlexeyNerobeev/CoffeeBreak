@@ -21,3 +21,9 @@ val roboto = FontFamily(
         resId = R.font.roboto_regular
     )
 )
+
+val dmSans = FontFamily(
+    Font(
+        resId = R.font.dmsans_regular
+    )
+)

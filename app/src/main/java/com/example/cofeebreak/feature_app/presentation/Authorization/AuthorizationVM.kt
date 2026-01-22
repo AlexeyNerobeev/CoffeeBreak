@@ -1,37 +1,18 @@
 package com.example.cofeebreak.feature_app.presentation.Authorization
 
 import android.util.Log
-import android.util.Patterns
-import androidx.compose.animation.core.AnimationState
-import androidx.compose.material3.Button
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import com.example.cofeebreak.R
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
-import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,6 +36,7 @@ class AuthorizationVM @Inject constructor(
 //        Patterns.EMAIL_ADDRESS.matcher(_email.value).matches() &&
 //                _password.value.length > 8
 //    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), false)
+
 
     fun onEvent(event: AuthorizationEvent) {
         when (event) {
@@ -80,6 +62,8 @@ class AuthorizationVM @Inject constructor(
                                 email = state.value.email,
                                 password = state.value.password
                             )
+                            val id = getCurrentUserIdUseCase.invoke()
+                            saveCurrentUserIdUseCase.invoke(id)
                             _state.value = state.value.copy(
                                 isComplete = true
                             )
@@ -110,21 +94,10 @@ class AuthorizationVM @Inject constructor(
                     error = false
                 )
             }
-
             AuthorizationEvent.ProgressIndicator -> {
                 _state.value = state.value.copy(
                     progressIndicator = true
                 )
-            }
-            AuthorizationEvent.SaveCurrentUserId -> {
-                viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val id = getCurrentUserIdUseCase.invoke()
-                        saveCurrentUserIdUseCase.invoke(id)
-                    } catch (ex: Exception){
-                        Log.e("sharedPrefs", ex.message.toString())
-                    }
-                }
             }
             AuthorizationEvent.EmailValid -> {
                 _state.value = state.value.copy(

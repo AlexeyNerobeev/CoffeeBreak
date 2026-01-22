@@ -1,11 +1,5 @@
 package com.example.cofeebreak.di
 
-import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationVM
-import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordVM
-import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordVM
-import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
-import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.TwoFactorVerificationVM
-
 //val moduleVM = module {
 //    viewModel<AuthorizationVM>{
 //        AuthorizationVM(get(),
