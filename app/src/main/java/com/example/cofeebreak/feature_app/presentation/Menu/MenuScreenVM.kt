@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.cofeebreak.Navigation
+import com.example.cofeebreak.feature_app.domain.model.Profile
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetUserAvatarUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +22,8 @@ import javax.inject.Inject
 class MenuScreenVM @Inject constructor(
     private val getUserNameUseCase: GetUserNameUseCase,
     private val loadCurrentUserIdUseCase: LoadCurrentUserIdUseCase,
-    private val getCoffeeListUseCase: GetCoffeeListUseCase
+    private val getCoffeeListUseCase: GetCoffeeListUseCase,
+    private val getUserAvatarUseCase: GetUserAvatarUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(MenuScreenState())
     val state: State<MenuScreenState> = _state
@@ -32,12 +35,14 @@ class MenuScreenVM @Inject constructor(
     private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val userId = loadCurrentUserIdUseCase().id.orEmpty()
-                val name = getUserNameUseCase(userId).name
+                val userId = loadCurrentUserIdUseCase.invoke().id.orEmpty()
+                val name = getUserNameUseCase.invoke(userId).name
+                val avatar = getUserAvatarUseCase.invoke(Profile(user_id = userId)).avatar_url
                 val coffeeList = getCoffeeListUseCase()
 
                 _state.value = _state.value.copy(
                     name = name,
+                    avatar_url = avatar,
                     coffeeList = coffeeList
                 )
             } catch (e: Exception) {

@@ -24,6 +24,11 @@ class OrderOptionsVM @Inject constructor(): ViewModel() {
                     coffeeCount = state.value.coffeeCount + 1
                 )
             }
+            OrderOptionsEvent.Switch -> {
+                _state.value = state.value.copy(
+                    switch = !state.value.switch
+                )
+            }
         }
     }
 }

@@ -18,4 +18,5 @@
     <color name="payPointsButtonColor">#A2CDE930</color>
     <color name="rewardLine">#F4F5F7</color>
     <color name="coffeeBackground">#F7F8FB</color>
+    <color name="coffeeManConstructorButton">#147F37</color>
 </resources>

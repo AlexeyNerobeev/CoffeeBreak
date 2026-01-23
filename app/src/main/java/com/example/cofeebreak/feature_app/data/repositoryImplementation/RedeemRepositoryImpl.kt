@@ -5,8 +5,9 @@ import com.example.cofeebreak.feature_app.domain.model.Redeem
 import com.example.cofeebreak.feature_app.domain.repository.RedeemRepository
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
+import javax.inject.Inject
 
-class RedeemRepositoryImpl: RedeemRepository {
+class RedeemRepositoryImpl @Inject constructor(): RedeemRepository {
     override suspend fun getRedeem(): List<Redeem> {
         return supabase.postgrest["redeem"].select(
             columns = Columns.list(

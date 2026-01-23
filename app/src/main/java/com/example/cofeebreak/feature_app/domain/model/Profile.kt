@@ -10,6 +10,6 @@ data class Profile (
     val name: String = "",
     val phone: String = "",
     val email: String = "",
-    @SerialName("coffe_shop_address")
-    val coffe_shop_address: String = ""
+    val coffee_shop_address: String? = "",
+    val avatar_url: String? = null
 )

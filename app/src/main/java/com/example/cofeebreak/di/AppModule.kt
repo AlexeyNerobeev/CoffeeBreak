@@ -1,13 +1,11 @@
 package com.example.cofeebreak.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.ProfileRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.RedeemRepositoryImpl
-import com.example.cofeebreak.feature_app.data.supabase.Connect
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
@@ -18,6 +16,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseC
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetUserAvatarUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
@@ -25,12 +24,13 @@ import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCas
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.UpdateAvatarUrlUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.UploadAvatarUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.github.jan.supabase.SupabaseClient
 import javax.inject.Singleton
 
 @Module
@@ -153,5 +153,29 @@ object AppModule {
         redeemRepository: RedeemRepository
     ): GetRedeemUseCase{
         return GetRedeemUseCase(redeemRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUploadAvatarUseCase(
+        profileRepository: ProfileRepository
+    ): UploadAvatarUseCase{
+        return UploadAvatarUseCase(profileRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdateAvatarUrlUseCase(
+        profileRepository: ProfileRepository
+    ): UpdateAvatarUrlUseCase{
+        return UpdateAvatarUrlUseCase(profileRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserAvatarUseCase(
+        profileRepository: ProfileRepository
+    ): GetUserAvatarUseCase{
+        return GetUserAvatarUseCase(profileRepository)
     }
 }

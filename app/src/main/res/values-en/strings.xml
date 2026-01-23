@@ -63,4 +63,13 @@
     <string name="ristretto">Ristretto</string>
     <string name="one">One</string>
     <string name="two">Two</string>
+    <string name="select_from_gallery">Select from gallery</string>
+    <string name="take_a_photo">Take a photo</string>
+    <string name="cancellation">Cancel</string>
+    <string name="on_site_takeaway">On-site / takeaway</string>
+    <string name="volume_ml">Volume, ml</string>
+    <string name="prepare_by_a_certain_time_today">Prepare\nby a certain time\ntoday?</string>
+    <string name="coffee_lovers_designer">Coffee lovers designer</string>
+    <string name="total_amount">Total amount</string>
+    <string name="next">Next</string>
 </resources>

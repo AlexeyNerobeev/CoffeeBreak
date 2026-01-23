@@ -62,4 +62,13 @@
     <string name="ristretto">Ристретто</string>
     <string name="one">Один</string>
     <string name="two">Два</string>
+    <string name="select_from_gallery">Выбрать из галереи</string>
+    <string name="take_a_photo">Сделать фото</string>
+    <string name="cancellation">Отмена</string>
+    <string name="on_site_takeaway">На месте / навынос</string>
+    <string name="volume_ml">Объем, мл</string>
+    <string name="prepare_by_a_certain_time_today">Приготовить к\nопределенному времени\nсегодня?</string>
+    <string name="coffee_lovers_designer">Конструктор кофемана</string>
+    <string name="total_amount">Итоговая сумма</string>
+    <string name="next">Далее</string>
 </resources>

@@ -13,13 +13,13 @@
     import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
     import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
     import androidx.compose.foundation.lazy.staggeredgrid.items
+    import androidx.compose.foundation.shape.CircleShape
     import androidx.compose.foundation.shape.RoundedCornerShape
     import androidx.compose.material3.CircularProgressIndicator
     import androidx.compose.material3.Icon
     import androidx.compose.material3.Scaffold
     import androidx.compose.material3.Text
     import androidx.compose.runtime.Composable
-    import androidx.compose.runtime.LaunchedEffect
     import androidx.compose.ui.Alignment
     import androidx.compose.ui.Modifier
     import androidx.compose.ui.draw.clip
@@ -104,16 +104,29 @@
                                     navController.navigate(Navigation.MyOrderScreen)
                                 }
                         )
-                        Icon(
-                            painter = painterResource(R.drawable.menu_profile_icon),
-                            contentDescription = null,
-                            tint = Theme.colors.menuIconsColor,
-                            modifier = Modifier
-                                .padding(start = 20.dp)
-                                .clickable {
-                                    navController.navigate(Navigation.ProfileScreen)
-                                }
-                        )
+                        if(state.avatar_url.isNullOrEmpty()) {
+                            Icon(
+                                painter = painterResource(R.drawable.menu_profile_icon),
+                                contentDescription = null,
+                                tint = Theme.colors.menuIconsColor,
+                                modifier = Modifier
+                                    .padding(start = 20.dp)
+                                    .clickable {
+                                        navController.navigate(Navigation.ProfileScreen)
+                                    }
+                            )
+                        } else{
+                            AsyncImage(model = state.avatar_url,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(start = 20.dp)
+                                    .size(26.dp)
+                                    .clip(CircleShape)
+                                    .clickable{
+                                        navController.navigate(Navigation.ProfileScreen)
+                                    },
+                                contentScale = ContentScale.Crop)
+                        }
                     }
                 }
                 Box(
@@ -126,6 +139,7 @@
                     Column(
                         modifier = Modifier
                             .padding(horizontal = 25.dp)
+                            .fillMaxWidth()
                     ) {
                         Text(
                             text = stringResource(R.string.choose_your_coffee),

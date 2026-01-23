@@ -6,4 +6,14 @@ interface ProfileRepository {
     suspend fun createProfile(name: String, phone: String)
     suspend fun getUserName(id: String): Profile
     suspend fun getProfile(id: Profile): Profile
+    suspend fun getUserAvatar(id: Profile): Profile
+    suspend fun uploadAvatar(
+        userId: String,
+        bytes: ByteArray
+    ): String
+
+    suspend fun updateAvatarUrl(
+        userId: String,
+        avatarUrl: String
+    )
 }
