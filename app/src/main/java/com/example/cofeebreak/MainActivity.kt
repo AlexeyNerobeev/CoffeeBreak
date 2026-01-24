@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
 import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
+import com.example.cofeebreak.feature_app.presentation.Designer.DesignerScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
@@ -81,6 +82,9 @@ class MainActivity() : ComponentActivity() {
                     composable<Navigation.OrderOptionsScreen> { backStackEntry ->
                         val route = backStackEntry.toRoute<Navigation.OrderOptionsScreen>()
                         OrderOptionsScreen(navController, route.imageUrl)
+                    }
+                    composable<Navigation.DesignerScreen> {
+                        DesignerScreen(navController)
                     }
                 }
             }

@@ -14,7 +14,7 @@ class OrderOptionsVM @Inject constructor(): ViewModel() {
     fun onEvent(event: OrderOptionsEvent){
         when(event){
             OrderOptionsEvent.MinusCoffeeCount -> {
-                if(state.value.coffeeCount > 0)
+                if(state.value.coffeeCount > 1)
                 _state.value = state.value.copy(
                     coffeeCount = state.value.coffeeCount - 1
                 )

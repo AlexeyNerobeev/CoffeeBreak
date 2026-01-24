@@ -478,7 +478,7 @@ fun OrderOptionsScreen(
             }
             Button(
                 onClick = {
-
+                    navController.navigate(Navigation.DesignerScreen)
                 },
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -486,10 +486,10 @@ fun OrderOptionsScreen(
                     .padding(end = 28.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
-                    .background(color = colorResource(R.color.MainColor),
+                    .background(color = colorResource(R.color.secondColor),
                         shape = RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.MainColor),
+                    containerColor = colorResource(R.color.secondColor),
                     contentColor = Color.White
                 )
             ) {
@@ -542,7 +542,7 @@ fun OrderOptionsScreen(
                     fontSize = 14.sp
                 )
                 Text(
-                    text = "100 ₽",
+                    text = (state.coffeeCount * 100).toString() + " ₽",
                     color = Theme.colors.totalPriceColor,
                     fontSize = 16.sp,
                     fontFamily = poppins,
@@ -570,7 +570,9 @@ fun OrderOptionsScreen(
                     color = Color.White,
                     fontWeight = FontWeight(600),
                     fontFamily = roboto,
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
+                    modifier = Modifier
+                        .padding(vertical = 12.dp)
                 )
             }
         }

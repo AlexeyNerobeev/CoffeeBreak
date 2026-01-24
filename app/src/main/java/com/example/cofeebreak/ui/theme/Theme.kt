@@ -94,7 +94,9 @@ data class ThemeColors(
     val switchColor: Color = Color(0xFF14AC46),
     val dateBoxColor: Color = Color(0xFF7676801F).copy(alpha = 0.88f),
     val totalPriceColor: Color = Color(0xFF001833),
-    val nextButton: Color = Color(0xFF324A59)
+    val nextButton: Color = Color(0xFF324A59),
+    val activeSlider: Color = Color(0xFF007AFF),
+    val inactiveSlider: Color = Color(0xFF78788033).copy(alpha = 0.2f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -139,7 +141,9 @@ fun AppTheme(
             switchColor = Color(0xFF34C759),
             dateBoxColor = Color(0xFF7676801F).copy(alpha = 0.12f),
             totalPriceColor = Color(0xFF61ADDD),
-            nextButton = Color(0xFF334855)
+            nextButton = Color(0xFF334855),
+            activeSlider = Color(0xFF4F7993),
+            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f)
         )
     } else {
         ThemeColors(
@@ -175,7 +179,9 @@ fun AppTheme(
             switchColor = Color(0xFF14AC46),
             dateBoxColor = Color(0xFF7676801F).copy(alpha = 0.12f),
             totalPriceColor = Color(0xFF001833),
-            nextButton = Color(0xFF324A59)
+            nextButton = Color(0xFF324A59),
+            activeSlider = Color(0xFF007AFF),
+            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f)
         )
     }
 

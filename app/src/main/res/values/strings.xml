@@ -71,4 +71,17 @@
     <string name="coffee_lovers_designer">Конструктор кофемана</string>
     <string name="total_amount">Итоговая сумма</string>
     <string name="next">Далее</string>
+    <string name="select_a_barista">Выберите бариста</string>
+    <string name="type_of_coffee">Вид кофе</string>
+    <string name="arabica">Арабика</string>
+    <string name="robusta">Робуста</string>
+    <string name="coffee_type">Сорт кофе</string>
+    <string name="roasting">Обжарка</string>
+    <string name="grinding">Помол</string>
+    <string name="milk">Молоко</string>
+    <string name="select">Выбрать</string>
+    <string name="syrup">Сироп</string>
+    <string name="supplements">"Добавки"</string>
+    <string name="ice">Лед</string>
+    <string name="coffee_lovers_encyclopedia">Энциклопедия кофемана</string>
 </resources>

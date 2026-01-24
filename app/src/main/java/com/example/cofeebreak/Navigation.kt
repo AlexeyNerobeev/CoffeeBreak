@@ -46,4 +46,7 @@ sealed class Navigation {
 
     @Serializable
     data class OrderOptionsScreen(val imageUrl: String): Navigation()
+
+    @Serializable
+    data object DesignerScreen: Navigation()
 }

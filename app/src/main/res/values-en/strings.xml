@@ -72,4 +72,17 @@
     <string name="coffee_lovers_designer">Coffee lovers designer</string>
     <string name="total_amount">Total amount</string>
     <string name="next">Next</string>
+    <string name="select_a_barista">Select a barista</string>
+    <string name="type_of_coffee">Type of coffee</string>
+    <string name="arabica">Arabica</string>
+    <string name="robusta">Robusta</string>
+    <string name="coffee_type">Coffee type</string>
+    <string name="roasting">Roasting</string>
+    <string name="grinding">Grinding</string>
+    <string name="milk">Milk</string>
+    <string name="select">Select</string>
+    <string name="syrup">Syrup</string>
+    <string name="supplements">"Supplements"</string>
+    <string name="ice">Ice</string>
+    <string name="coffee_lovers_encyclopedia">Coffee Lovers Encyclopedia</string>
 </resources>

@@ -2,17 +2,20 @@ package com.example.cofeebreak.di
 
 import android.content.Context
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepositoryImpl
+import com.example.cofeebreak.feature_app.data.repositoryImplementation.BaristaRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.ProfileRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.RedeemRepositoryImpl
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
+import com.example.cofeebreak.feature_app.domain.repository.BaristaRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
 import com.example.cofeebreak.feature_app.domain.repository.RedeemRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
+import com.example.cofeebreak.feature_app.domain.usecase.GetBaristaUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
@@ -67,6 +70,12 @@ object AppModule {
     @Singleton
     fun provideRedeemRepository(): RedeemRepository{
         return RedeemRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBaristaRepository(): BaristaRepository{
+        return BaristaRepositoryImpl()
     }
 
     @Provides
@@ -177,5 +186,13 @@ object AppModule {
         profileRepository: ProfileRepository
     ): GetUserAvatarUseCase{
         return GetUserAvatarUseCase(profileRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetBaristaUseCase(
+        baristaRepository: BaristaRepository
+    ): GetBaristaUseCase{
+        return GetBaristaUseCase(baristaRepository)
     }
 }
