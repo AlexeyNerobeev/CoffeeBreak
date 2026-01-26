@@ -49,4 +49,16 @@ sealed class Navigation {
 
     @Serializable
     data object DesignerScreen: Navigation()
+
+    @Serializable
+    data object BaristaScreen: Navigation()
+
+    @Serializable
+    data object AdditivesScreen: Navigation()
+
+    @Serializable
+    data object CoffeeCountryScreen: Navigation()
+
+    @Serializable
+    data object CoffeeTypeScreen: Navigation()
 }

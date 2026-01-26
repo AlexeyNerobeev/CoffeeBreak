@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.dmSans
 import com.example.cofeebreak.common.poppins
@@ -110,7 +111,7 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            navController.navigate()
+                            navController.navigate(Navigation.BaristaScreen)
                         },
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -239,7 +240,10 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                 Row(
                     modifier = Modifier
                         .padding(top = 14.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .clickable {
+                            navController.navigate(Navigation.CoffeeCountryScreen)
+                        },
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -418,7 +422,10 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                 }
                 Row(modifier = Modifier
                     .padding(top = 15.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable {
+                        navController.navigate(Navigation.AdditivesScreen)
+                    },
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically){
                     Text(text = stringResource(R.string.supplements),
@@ -556,6 +563,31 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                         fontSize = 14.sp,
                         modifier = Modifier
                             .padding(vertical = 12.dp)
+                    )
+                }
+            }
+        }
+        if (state.selectMilk || state.selectSyrup) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = Color.Black.copy(alpha = 0.9f)),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(bottom = 32.dp)
+                        .padding(horizontal = 8.dp)
+                        .fillMaxWidth()
+                        .background(
+                            color = Theme.colors.designerSelectTypeColor,
+                            shape = RoundedCornerShape(13.dp)
+                        )
+                ) {
+                    Text(text = if(state.selectMilk)
+                        stringResource(R.string.what_type_of_milk_do_you_prefer)
+                        else
+                        stringResource(R.string.what_flavor_of_syrup_do_you_prefer)
                     )
                 }
             }

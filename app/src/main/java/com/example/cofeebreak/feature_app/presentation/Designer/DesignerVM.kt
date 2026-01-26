@@ -18,6 +18,16 @@ class DesignerVM @Inject constructor(): ViewModel() {
                     sliderPosition = event.value
                 )
             }
+            DesignerEvent.SelectMilk -> {
+                _state.value = state.value.copy(
+                    selectMilk = !state.value.selectMilk
+                )
+            }
+            DesignerEvent.SelectSyrup -> {
+                _state.value = state.value.copy(
+                    selectSyrup = !state.value.selectSyrup
+                )
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -96,7 +97,10 @@ data class ThemeColors(
     val totalPriceColor: Color = Color(0xFF001833),
     val nextButton: Color = Color(0xFF324A59),
     val activeSlider: Color = Color(0xFF007AFF),
-    val inactiveSlider: Color = Color(0xFF78788033).copy(alpha = 0.2f)
+    val inactiveSlider: Color = Color(0xFF78788033).copy(alpha = 0.2f),
+    val baristaShadow: Color = Color(0xFF5A6CEA12).copy(alpha = 0.7f),
+    val baristaBoxBackground: Color = Color.White,
+    val designerSelectTypeColor: Color = Color.White
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -143,7 +147,10 @@ fun AppTheme(
             totalPriceColor = Color(0xFF61ADDD),
             nextButton = Color(0xFF334855),
             activeSlider = Color(0xFF4F7993),
-            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f)
+            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f),
+            baristaShadow = Color.Transparent,
+            baristaBoxBackground = Color(0xFF334855),
+            designerSelectTypeColor = Color(color = 0xFF324A59)
         )
     } else {
         ThemeColors(
@@ -181,7 +188,10 @@ fun AppTheme(
             totalPriceColor = Color(0xFF001833),
             nextButton = Color(0xFF324A59),
             activeSlider = Color(0xFF007AFF),
-            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f)
+            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f),
+            baristaShadow = Color(0xFF5A6CEA12).copy(alpha = 0.7f),
+            baristaBoxBackground = Color.White,
+            designerSelectTypeColor = Color.White
         )
     }
 

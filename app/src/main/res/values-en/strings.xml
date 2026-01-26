@@ -85,4 +85,8 @@
     <string name="supplements">"Supplements"</string>
     <string name="ice">Ice</string>
     <string name="coffee_lovers_encyclopedia">Coffee Lovers Encyclopedia</string>
+    <string name="select_supplement">Select supplement</string>
+    <string name="select_country_and_coffee_variety">Select country and coffee variety</string>
+    <string name="what_type_of_milk_do_you_prefer">What type of milk do you prefer?</string>
+    <string name="what_flavor_of_syrup_do_you_prefer">What flavor of syrup do you prefer?</string>
 </resources>

@@ -9,8 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.cofeebreak.feature_app.presentation.Additives.AdditivesScreen
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Barista.BaristaScreen
 import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
+import com.example.cofeebreak.feature_app.presentation.CoffeeCountry.CoffeeCountryScreen
+import com.example.cofeebreak.feature_app.presentation.CoffeeType.CoffeeTypeScreen
 import com.example.cofeebreak.feature_app.presentation.Designer.DesignerScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
@@ -85,6 +89,18 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.DesignerScreen> {
                         DesignerScreen(navController)
+                    }
+                    composable<Navigation.BaristaScreen> {
+                        BaristaScreen(navController)
+                    }
+                    composable<Navigation.AdditivesScreen> {
+                        AdditivesScreen(navController)
+                    }
+                    composable<Navigation.CoffeeCountryScreen> {
+                        CoffeeCountryScreen(navController)
+                    }
+                    composable<Navigation.CoffeeTypeScreen> {
+                        CoffeeTypeScreen(navController)
                     }
                 }
             }
