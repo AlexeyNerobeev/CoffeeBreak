@@ -73,7 +73,7 @@ data class ThemeColors(
     val alternativeBlack: Color = Color(0xFF324A59),
     val backIconColor: Color = Color.Black,
     val eyeIconColor: Color = Color.Black,
-    val forgotPasswordColor: Color = Color(0x147F37),
+    val forgotPasswordColor: Color = Color(0xFF147F37),
     val authArrowIconColor: Color = Color.White,
     val signUpTextColor: Color = Color.Black,
     val outlinedTfColor: Color = Color(0xFFB7BBC9),
@@ -88,19 +88,22 @@ data class ThemeColors(
     val navigationBarBackground: Color = Color.White,
     val backProfileIcon: Color = Color.Black,
     val profileBackgroundIcon: Color = Color(0xFFF7F8FB),
-    val titleTextProfile: Color = Color(0xFF00183338).copy(alpha = 0.22f),
+    val titleTextProfile: Color = Color(0x00183338).copy(alpha = 0.22f),
     val profileMainText: Color = Color(0xFF324A59),
-    val rewardHistoryColor: Color = Color(0xFF324A5938).copy(alpha = 0.22f),
+    val rewardHistoryColor: Color = Color(0x324A5938).copy(alpha = 0.22f),
     val orderOptionsBoxColor: Color = Color(0xFFD8D8D8).copy(alpha = 0.4f),
     val switchColor: Color = Color(0xFF14AC46),
-    val dateBoxColor: Color = Color(0xFF7676801F).copy(alpha = 0.88f),
+    val dateBoxColor: Color = Color(0x7676801F).copy(alpha = 0.88f),
     val totalPriceColor: Color = Color(0xFF001833),
     val nextButton: Color = Color(0xFF324A59),
     val activeSlider: Color = Color(0xFF007AFF),
-    val inactiveSlider: Color = Color(0xFF78788033).copy(alpha = 0.2f),
-    val baristaShadow: Color = Color(0xFF5A6CEA12).copy(alpha = 0.7f),
+    val inactiveSlider: Color = Color(0x78788033).copy(alpha = 0.2f),
+    val baristaShadow: Color = Color(0x5A6CEA12).copy(alpha = 0.7f),
     val baristaBoxBackground: Color = Color.White,
-    val designerSelectTypeColor: Color = Color.White
+    val designerSelectTypeColor: Color = Color.White,
+    val milkSyrupTitle: Color = Color(0x3C3C4399).copy(alpha = 0.6f),
+    val selectDesigner: Color = Color(0xFF001833),
+    val cancelButton: Color = Color.White
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -143,14 +146,17 @@ fun AppTheme(
             rewardHistoryColor = Color(0xFFA1A1A1),
             orderOptionsBoxColor = Color(0xFFD8D8D8),
             switchColor = Color(0xFF34C759),
-            dateBoxColor = Color(0xFF7676801F).copy(alpha = 0.12f),
+            dateBoxColor = Color(0x7676801F).copy(alpha = 0.12f),
             totalPriceColor = Color(0xFF61ADDD),
             nextButton = Color(0xFF334855),
             activeSlider = Color(0xFF4F7993),
-            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f),
+            inactiveSlider = Color(0x78788033).copy(alpha = 0.2f),
             baristaShadow = Color.Transparent,
             baristaBoxBackground = Color(0xFF334855),
-            designerSelectTypeColor = Color(color = 0xFF324A59)
+            designerSelectTypeColor = Color(color = 0xFF324A59),
+            milkSyrupTitle = Color(0xFFCDECFF),
+            selectDesigner = Color(0xFFB5B5B5),
+            cancelButton = Color(0xFF334855)
         )
     } else {
         ThemeColors(
@@ -179,19 +185,22 @@ fun AppTheme(
             navigationBarBackground = Color.White,
             backProfileIcon = Color.Black,
             profileBackgroundIcon = Color(0xFFF7F8FB),
-            titleTextProfile = Color(0xFF00183338).copy(alpha = 0.22f),
+            titleTextProfile = Color(0x00183338).copy(alpha = 0.22f),
             profileMainText = Color(0xFF324A59),
-            rewardHistoryColor = Color(0xFF324A5938).copy(alpha = 0.22f),
+            rewardHistoryColor = Color(0x324A5938).copy(alpha = 0.22f),
             orderOptionsBoxColor = Color(0xFFD8D8D8).copy(alpha = 0.4f),
             switchColor = Color(0xFF14AC46),
-            dateBoxColor = Color(0xFF7676801F).copy(alpha = 0.12f),
+            dateBoxColor = Color(0x7676801F).copy(alpha = 0.12f),
             totalPriceColor = Color(0xFF001833),
             nextButton = Color(0xFF324A59),
             activeSlider = Color(0xFF007AFF),
-            inactiveSlider = Color(0xFF78788033).copy(alpha = 0.2f),
-            baristaShadow = Color(0xFF5A6CEA12).copy(alpha = 0.7f),
+            inactiveSlider = Color(0x78788033).copy(alpha = 0.2f),
+            baristaShadow = Color(0x5A6CEA12).copy(alpha = 0.7f),
             baristaBoxBackground = Color.White,
-            designerSelectTypeColor = Color.White
+            designerSelectTypeColor = Color.White,
+            milkSyrupTitle = Color(0x3C3C4399).copy(alpha = 0.6f),
+            selectDesigner = Color(0xFF001833),
+            cancelButton = Color.White
         )
     }
 

@@ -88,4 +88,13 @@
     <string name="select_country_and_coffee_variety">Выберите страну и сорт кофе</string>
     <string name="what_type_of_milk_do_you_prefer">Какой тип молока вы предпочитаете?</string>
     <string name="what_flavor_of_syrup_do_you_prefer">Какой вкус сиропа вы предпочитаете?</string>
+    <string name="No">Нет</string>
+    <string name="cow">Коровье</string>
+    <string name="amaretto">Амаретто</string>
+    <string name="lactose_free">Безлактозное</string>
+    <string name="coconut">Кокос</string>
+    <string name="low_fat">Обезжиренное</string>
+    <string name="vanilla">Ваниль</string>
+    <string name="vegetable">Растительное</string>
+    <string name="caramel">Карамель</string>
 </resources>

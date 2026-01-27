@@ -27,3 +27,9 @@ val dmSans = FontFamily(
         resId = R.font.dmsans_regular
     )
 )
+
+val montserrat = FontFamily(
+    Font(
+        resId = R.font.montserrat_regular
+    )
+)

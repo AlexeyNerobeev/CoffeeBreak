@@ -89,4 +89,13 @@
     <string name="select_country_and_coffee_variety">Select country and coffee variety</string>
     <string name="what_type_of_milk_do_you_prefer">What type of milk do you prefer?</string>
     <string name="what_flavor_of_syrup_do_you_prefer">What flavor of syrup do you prefer?</string>
+    <string name="No">No</string>
+    <string name="cow">Cow</string>
+    <string name="amaretto">Amaretto</string>
+    <string name="lactose_free">Lactose-free</string>
+    <string name="coconut">Coconut</string>
+    <string name="low_fat">Low fat</string>
+    <string name="vanilla">Vanilla</string>
+    <string name="vegetable">Vegetable</string>
+    <string name="caramel">Caramel</string>
 </resources>
