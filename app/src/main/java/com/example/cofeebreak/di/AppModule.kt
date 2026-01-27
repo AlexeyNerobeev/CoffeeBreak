@@ -8,8 +8,10 @@ import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeCo
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeTypeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
+import com.example.cofeebreak.feature_app.data.repositoryImplementation.OrderRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.ProfileRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.RedeemRepositoryImpl
+import com.example.cofeebreak.feature_app.domain.model.Order
 import com.example.cofeebreak.feature_app.domain.repository.AdditivesRepository
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import com.example.cofeebreak.feature_app.domain.repository.BaristaRepository
@@ -17,6 +19,7 @@ import com.example.cofeebreak.feature_app.domain.repository.CoffeeCountryReposit
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeTypeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
+import com.example.cofeebreak.feature_app.domain.repository.OrderRepository
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
 import com.example.cofeebreak.feature_app.domain.repository.RedeemRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
@@ -27,6 +30,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeCountryUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeTypeUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetMyOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserAvatarUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
@@ -103,6 +107,12 @@ object AppModule {
     @Singleton
     fun provideCoffeeTypeRepository(): CoffeeTypeRepository{
         return CoffeeTypeRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderRepository(): OrderRepository{
+        return OrderRepositoryImpl()
     }
 
     @Provides
@@ -245,5 +255,13 @@ object AppModule {
         coffeeTypeRepository: CoffeeTypeRepository
     ): GetCoffeeTypeUseCase{
         return GetCoffeeTypeUseCase(coffeeTypeRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetMyOrderUseCase(
+        orderRepository: OrderRepository
+    ): GetMyOrderUseCase{
+        return GetMyOrderUseCase(orderRepository)
     }
 }

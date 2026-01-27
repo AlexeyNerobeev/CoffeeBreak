@@ -551,7 +551,7 @@ fun OrderOptionsScreen(
             }
             Button(
                 onClick = {
-
+                    navController.navigate(Navigation.MyOrderScreen)
                 },
                 modifier = Modifier
                     .padding(top = 16.dp)

@@ -103,7 +103,10 @@ data class ThemeColors(
     val designerSelectTypeColor: Color = Color.White,
     val milkSyrupTitle: Color = Color(0x3C3C4399).copy(alpha = 0.6f),
     val selectDesigner: Color = Color(0xFF001833),
-    val cancelButton: Color = Color.White
+    val cancelButton: Color = Color.White,
+    val orderBoxBackground: Color = Color(0xFFF7F8FB),
+    val optionsColor: Color = Color(0xFF757575),
+    val countColor: Color = Color.Black.copy(alpha = 0.57f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -156,7 +159,10 @@ fun AppTheme(
             designerSelectTypeColor = Color(color = 0xFF324A59),
             milkSyrupTitle = Color(0xFFCDECFF),
             selectDesigner = Color(0xFFB5B5B5),
-            cancelButton = Color(0xFF334855)
+            cancelButton = Color(0xFF334855),
+            orderBoxBackground = Color(0xFF334855),
+            optionsColor = Color(0xFFA1A1A1),
+            countColor = Color(0xFFD9D9D9)
         )
     } else {
         ThemeColors(
@@ -200,7 +206,10 @@ fun AppTheme(
             designerSelectTypeColor = Color.White,
             milkSyrupTitle = Color(0x3C3C4399).copy(alpha = 0.6f),
             selectDesigner = Color(0xFF001833),
-            cancelButton = Color.White
+            cancelButton = Color.White,
+            orderBoxBackground = Color(0xFFF7F8FB),
+            optionsColor = Color(0xFF757575),
+            countColor = Color.Black.copy(alpha = 0.57f)
         )
     }
 

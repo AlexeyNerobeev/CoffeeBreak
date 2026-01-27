@@ -552,7 +552,7 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                 }
                 Button(
                     onClick = {
-
+                        navController.navigate(Navigation.MyOrderScreen)
                     },
                     modifier = Modifier
                         .padding(top = 16.dp)

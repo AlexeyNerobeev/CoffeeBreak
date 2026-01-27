@@ -43,7 +43,7 @@ class MainActivity() : ComponentActivity() {
         setContent {
             AppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Navigation.DesignerScreen) {
+                NavHost(navController = navController, startDestination = Navigation.WelcomeScreen) {
                     composable<Navigation.WelcomeScreen> {
                         WelcomeScreen(navController)
                     }
