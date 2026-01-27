@@ -86,6 +86,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
 
+
     //ktor
     implementation("io.ktor:ktor-client-core:3.2.3")
     implementation("io.ktor:ktor-client-cio:3.2.3")
@@ -95,6 +96,7 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt:3.1.0")
 
     //navigation
     implementation ("androidx.navigation:navigation-compose:2.9.4")

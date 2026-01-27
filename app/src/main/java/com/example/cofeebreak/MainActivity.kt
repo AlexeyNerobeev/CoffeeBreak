@@ -8,11 +8,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.cofeebreak.feature_app.presentation.Additives.AdditivesScreen
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
+import com.example.cofeebreak.feature_app.presentation.Barista.BaristaScreen
 import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
+import com.example.cofeebreak.feature_app.presentation.CoffeeCountry.CoffeeCountryScreen
+import com.example.cofeebreak.feature_app.presentation.CoffeeType.CoffeeTypeScreen
+import com.example.cofeebreak.feature_app.presentation.Designer.DesignerScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
+import com.example.cofeebreak.feature_app.presentation.OrderOptions.OrderOptionsScreen
 import com.example.cofeebreak.feature_app.presentation.Profile.ProfileScreen
 import com.example.cofeebreak.feature_app.presentation.Redeem.RedeemScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
@@ -36,7 +43,7 @@ class MainActivity() : ComponentActivity() {
         setContent {
             AppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Navigation.WelcomeScreen) {
+                NavHost(navController = navController, startDestination = Navigation.DesignerScreen) {
                     composable<Navigation.WelcomeScreen> {
                         WelcomeScreen(navController)
                     }
@@ -75,6 +82,25 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.RedeemScreen> {
                         RedeemScreen(navController)
+                    }
+                    composable<Navigation.OrderOptionsScreen> { backStackEntry ->
+                        val route = backStackEntry.toRoute<Navigation.OrderOptionsScreen>()
+                        OrderOptionsScreen(navController, route.imageUrl)
+                    }
+                    composable<Navigation.DesignerScreen> {
+                        DesignerScreen(navController)
+                    }
+                    composable<Navigation.BaristaScreen> {
+                        BaristaScreen(navController)
+                    }
+                    composable<Navigation.AdditivesScreen> {
+                        AdditivesScreen(navController)
+                    }
+                    composable<Navigation.CoffeeCountryScreen> {
+                        CoffeeCountryScreen(navController)
+                    }
+                    composable<Navigation.CoffeeTypeScreen> {
+                        CoffeeTypeScreen(navController)
                     }
                 }
             }

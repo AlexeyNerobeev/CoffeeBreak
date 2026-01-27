@@ -31,7 +31,8 @@ fun BottomNavigationBar(navController: NavController, currentScreen: Navigation)
         .height(64.dp)
         .shadow(elevation = 10.dp,
             shape = RoundedCornerShape(20.dp),
-            spotColor = colorResource(R.color.AlternativeBlack).copy(alpha = 0.12f)
+            spotColor = colorResource(R.color.AlternativeBlack).copy(alpha = 0.12f),
+            clip = false
         )
         .background(Theme.colors.navigationBarBackground,
             shape = RoundedCornerShape(20.dp)

@@ -3,6 +3,7 @@ package com.example.cofeebreak.feature_app.data.supabase
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.storage.Storage
 
 object Connect {
     val supabase = createSupabaseClient(
@@ -11,6 +12,7 @@ object Connect {
     ){
         install(Auth)
         install(Postgrest)
+        install(Storage)
     }
 }
 
