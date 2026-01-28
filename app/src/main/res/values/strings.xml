@@ -98,4 +98,10 @@
     <string name="vegetable">Растительное</string>
     <string name="caramel">Карамель</string>
     <string name="my_order">Мой заказ</string>
+    <string name="payment_for_the_order">Оплата заказа</string>
+    <string name="coffee_shop_coffee_break">кофейня Coffee break</string>
+    <string name="payment_online">Оплата онлайн</string>
+    <string name="bank_card">Банковская карта</string>
+    <string name="sum">Сумма</string>
+    <string name="pay_now">Оплатить\nсейчас</string>
 </resources>

@@ -7,7 +7,6 @@ data class Order(
     val id: Int = 0,
     val created_at: String = "",
     val name: String = "",
-    val address: String = "",
     val time_to: String = "",
     val price: Int = 0,
     val coffee_image: String = "",

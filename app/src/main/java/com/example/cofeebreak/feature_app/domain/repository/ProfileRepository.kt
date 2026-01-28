@@ -16,4 +16,6 @@ interface ProfileRepository {
         userId: String,
         avatarUrl: String
     )
+
+    suspend fun getCoffeeShopAddress(id: Profile): Profile
 }

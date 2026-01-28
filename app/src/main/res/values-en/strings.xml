@@ -99,4 +99,10 @@
     <string name="vegetable">Vegetable</string>
     <string name="caramel">Caramel</string>
     <string name="my_order">My order</string>
+    <string name="payment_for_the_order">Payment for the order</string>
+    <string name="coffee_shop_coffee_break">coffee shop Coffee break</string>
+    <string name="payment_online">Payment online</string>
+    <string name="bank_card">Bank card</string>
+    <string name="sum">Sum</string>
+    <string name="pay_now">Pay\nnow</string>
 </resources>

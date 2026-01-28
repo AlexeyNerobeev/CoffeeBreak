@@ -106,7 +106,9 @@ data class ThemeColors(
     val cancelButton: Color = Color.White,
     val orderBoxBackground: Color = Color(0xFFF7F8FB),
     val optionsColor: Color = Color(0xFF757575),
-    val countColor: Color = Color.Black.copy(alpha = 0.57f)
+    val countColor: Color = Color.Black.copy(alpha = 0.57f),
+    val orderAddressColor: Color = Color(0xFF001833),
+    val sbpColor: Color = Color(0x00183338).copy(alpha = 0.22f)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -162,7 +164,9 @@ fun AppTheme(
             cancelButton = Color(0xFF334855),
             orderBoxBackground = Color(0xFF334855),
             optionsColor = Color(0xFFA1A1A1),
-            countColor = Color(0xFFD9D9D9)
+            countColor = Color(0xFFD9D9D9),
+            orderAddressColor = Color(0xFFA1A1A1),
+            sbpColor = Color(0xFFA1A1A1)
         )
     } else {
         ThemeColors(
@@ -209,7 +213,9 @@ fun AppTheme(
             cancelButton = Color.White,
             orderBoxBackground = Color(0xFFF7F8FB),
             optionsColor = Color(0xFF757575),
-            countColor = Color.Black.copy(alpha = 0.57f)
+            countColor = Color.Black.copy(alpha = 0.57f),
+            orderAddressColor = Color(0xFF001833),
+            sbpColor = Color(0x00183338).copy(alpha = 0.22f)
         )
     }
 

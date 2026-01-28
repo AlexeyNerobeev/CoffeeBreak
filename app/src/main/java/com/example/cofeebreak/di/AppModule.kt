@@ -28,6 +28,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetAdditivesUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetBaristaUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeCountryUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeShopAddressUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeTypeUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetMyOrderUseCase
@@ -263,5 +264,13 @@ object AppModule {
         orderRepository: OrderRepository
     ): GetMyOrderUseCase{
         return GetMyOrderUseCase(orderRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCoffeeShopAddress(
+        profileRepository: ProfileRepository
+    ): GetCoffeeShopAddressUseCase{
+        return GetCoffeeShopAddressUseCase(profileRepository)
     }
 }

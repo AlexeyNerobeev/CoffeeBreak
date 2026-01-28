@@ -99,6 +99,20 @@ class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
         }.decodeSingle<Profile>()
     }
 
+    override suspend fun getCoffeeShopAddress(id: Profile): Profile {
+        return supabase.postgrest["profile"].select(
+            columns = Columns.list(
+                "coffee_shop_address"
+            )
+        ){
+            filter {
+                and {
+                    eq("user_id", id.user_id)
+                }
+            }
+        }.decodeSingle<Profile>()
+    }
+
     suspend fun getCurrentUserId(): String{
         supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id?:""
