@@ -30,7 +30,9 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeCountryUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeShopAddressUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeTypeUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetHistoryOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetMyOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserAvatarUseCase
@@ -272,5 +274,21 @@ object AppModule {
         profileRepository: ProfileRepository
     ): GetCoffeeShopAddressUseCase{
         return GetCoffeeShopAddressUseCase(profileRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCurrentOrderUseCase(
+        orderRepository: OrderRepository
+    ): GetCurrentOrderUseCase{
+        return GetCurrentOrderUseCase(orderRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetHistoryOrderUseCase(
+        orderRepository: OrderRepository
+    ): GetHistoryOrderUseCase{
+        return GetHistoryOrderUseCase(orderRepository)
     }
 }

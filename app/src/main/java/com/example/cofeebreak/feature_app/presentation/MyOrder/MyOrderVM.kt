@@ -28,12 +28,12 @@ class MyOrderVM @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val orderList = getMyOrderUseCase.invoke()
+                val userId = loadCurrentUserIdUseCase.invoke().id.toString()
+                val orderList = getMyOrderUseCase.invoke(Profile(user_id = userId))
                 var totalAmount = 0
                 for(item in orderList){
                     totalAmount += item.price * item.count
                 }
-                val userId = loadCurrentUserIdUseCase.invoke().id.toString()
                 val name = getUserNameUseCase.invoke(userId).name
                 val address = getCoffeeShopAddressUseCase.invoke(Profile(user_id = userId)).coffee_shop_address
                 _state.value = state.value.copy(

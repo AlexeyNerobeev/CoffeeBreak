@@ -70,7 +70,7 @@ fun MyOrderScreen(navController: NavController, vm: MyOrderVM = hiltViewModel())
         ) {
             IconButton(
                 onClick = {
-                    navController.navigate(Navigation.MenuScreen)
+                    navController.navigate(Navigation.MenuScreen(false))
                 },
                 modifier = Modifier
                     .padding(top = 21.dp)
@@ -525,7 +525,7 @@ fun MyOrderScreen(navController: NavController, vm: MyOrderVM = hiltViewModel())
                                 }
                                 Button(
                                     onClick = {
-
+                                        navController.navigate(Navigation.OrderIsConfirmedScreen)
                                     },
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(30.dp))

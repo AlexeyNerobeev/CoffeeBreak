@@ -108,7 +108,10 @@ data class ThemeColors(
     val optionsColor: Color = Color(0xFF757575),
     val countColor: Color = Color.Black.copy(alpha = 0.57f),
     val orderAddressColor: Color = Color(0xFF001833),
-    val sbpColor: Color = Color(0x00183338).copy(alpha = 0.22f)
+    val sbpColor: Color = Color(0x00183338).copy(alpha = 0.22f),
+    val grayColor: Color = Color(0xFFAAAAAA),
+    val reviewRequestBlack: Color = Color.Black,
+    val unSelectOrder: Color = Color(0xFFD8D8D8)
 )
 
 private val LocalTheme = staticCompositionLocalOf<ThemeColors> {
@@ -166,7 +169,10 @@ fun AppTheme(
             optionsColor = Color(0xFFA1A1A1),
             countColor = Color(0xFFD9D9D9),
             orderAddressColor = Color(0xFFA1A1A1),
-            sbpColor = Color(0xFFA1A1A1)
+            sbpColor = Color(0xFFA1A1A1),
+            grayColor = Color(0xFFA1A1A1),
+            reviewRequestBlack = Color(0xFFA1A1A1),
+            unSelectOrder = Color(0xFFD9D9D9)
         )
     } else {
         ThemeColors(
@@ -215,7 +221,10 @@ fun AppTheme(
             optionsColor = Color(0xFF757575),
             countColor = Color.Black.copy(alpha = 0.57f),
             orderAddressColor = Color(0xFF001833),
-            sbpColor = Color(0x00183338).copy(alpha = 0.22f)
+            sbpColor = Color(0x00183338).copy(alpha = 0.22f),
+            grayColor = Color(0xFFAAAAAA),
+            reviewRequestBlack = Color.Black,
+            unSelectOrder = Color(0xFFD8D8D8)
         )
     }
 

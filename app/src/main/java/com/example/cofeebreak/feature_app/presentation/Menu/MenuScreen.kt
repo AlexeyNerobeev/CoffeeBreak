@@ -1,5 +1,6 @@
     package com.example.cofeebreak.feature_app.presentation.Menu
 
+    import androidx.compose.foundation.Canvas
     import androidx.compose.foundation.background
     import androidx.compose.foundation.clickable
     import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@
     import androidx.compose.foundation.layout.Row
     import androidx.compose.foundation.layout.fillMaxSize
     import androidx.compose.foundation.layout.fillMaxWidth
+    import androidx.compose.foundation.layout.height
     import androidx.compose.foundation.layout.padding
     import androidx.compose.foundation.layout.size
     import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -20,15 +22,18 @@
     import androidx.compose.material3.Scaffold
     import androidx.compose.material3.Text
     import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.LaunchedEffect
     import androidx.compose.ui.Alignment
     import androidx.compose.ui.Modifier
     import androidx.compose.ui.draw.clip
+    import androidx.compose.ui.geometry.Offset
     import androidx.compose.ui.graphics.Color
     import androidx.compose.ui.layout.ContentScale
     import androidx.compose.ui.res.colorResource
     import androidx.compose.ui.res.painterResource
     import androidx.compose.ui.res.stringResource
     import androidx.compose.ui.text.font.FontWeight
+    import androidx.compose.ui.text.style.TextAlign
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
     import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,11 +46,15 @@
     import com.example.cofeebreak.common.dmSans
     import com.example.cofeebreak.common.poppins
     import com.example.cofeebreak.common.roboto
+    import com.example.cofeebreak.ui.theme.SeparatorColor
     import com.example.cofeebreak.ui.theme.Theme
 
     @Composable
-    fun MenuScreen(navController: NavController, vm: MenuScreenVM = hiltViewModel()) {
+    fun MenuScreen(navController: NavController, reviewRequest: Boolean, vm: MenuScreenVM = hiltViewModel()) {
         val state = vm.state.value
+        LaunchedEffect(key1 = !state.reviewRequest) {
+            vm.onEvent(MenuScreenEvent.ReviewRequest(reviewRequest))
+        }
         if(state.serverError){
             ErrorAlertDialog(error = stringResource(R.string.server_request_error)) {
                 vm.onEvent(MenuScreenEvent.ChangeError)
@@ -101,7 +110,7 @@
                             tint = Theme.colors.menuIconsColor,
                             modifier = Modifier
                                 .clickable{
-                                    navController.navigate(Navigation.MyOrderScreen)
+                                    navController.navigate(Navigation.MyOrderCurrentScreen)
                                 }
                         )
                         if(state.avatar_url.isNullOrEmpty()) {
@@ -122,7 +131,7 @@
                                     .padding(start = 20.dp)
                                     .size(26.dp)
                                     .clip(CircleShape)
-                                    .clickable{
+                                    .clickable {
                                         navController.navigate(Navigation.ProfileScreen)
                                     },
                                 contentScale = ContentScale.Crop)
@@ -170,8 +179,12 @@
                                         modifier = Modifier
                                             .clip(RoundedCornerShape(15.dp))
                                             .background(Color.White)
-                                            .clickable{
-                                                navController.navigate(Navigation.OrderOptionsScreen(item.coffee_image))
+                                            .clickable {
+                                                navController.navigate(
+                                                    Navigation.OrderOptionsScreen(
+                                                        item.coffee_image
+                                                    )
+                                                )
                                             }
                                     ) {
                                         Column(
@@ -220,7 +233,132 @@
             Box(modifier = Modifier
                 .fillMaxSize(),
                 contentAlignment = Alignment.BottomCenter){
-                BottomNavigationBar(navController, Navigation.MenuScreen)
+                BottomNavigationBar(navController, Navigation.MenuScreen(false))
+            }
+            if(state.reviewRequest){
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(0.3f)),
+                    contentAlignment = Alignment.Center){
+                    Box(modifier = Modifier
+                        .padding(horizontal = 37.dp)
+                        .fillMaxWidth()
+                        .background(
+                            color = Theme.colors.baristaBoxBackground,
+                            shape = RoundedCornerShape(19.dp)
+                        )){
+                        Column(modifier = Modifier
+                            .padding(top = 18.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(text = stringResource(R.string.the_order_has_been_completed),
+                                color = Theme.colors.oppositeColor,
+                                fontFamily = poppins,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight(600),
+                                textAlign = TextAlign.Center
+                            )
+                            Text(text = stringResource(R.string.please_rate_the_service),
+                                color = Theme.colors.reviewRequestBlack,
+                                fontFamily = poppins,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight(400),
+                                textAlign = TextAlign.Center
+                            )
+                            Canvas(
+                                modifier = Modifier
+                                    .padding(top = 18.dp)
+                                    .height(1.dp)
+                                    .fillMaxWidth()
+                            ){
+                                drawLine(
+                                    start = Offset(0f, 0f),
+                                    end = Offset(size.width, 0f),
+                                    color = SeparatorColor
+                                )
+                            }
+                            Row(modifier = Modifier
+                                .padding(vertical = 24.dp)
+                                .padding(horizontal = 30.dp)
+                                .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically) {
+                                Icon(painter = painterResource(R.drawable.star_icon),
+                                    contentDescription = null,
+                                    tint = colorResource(R.color.starColor),
+                                    modifier = Modifier
+                                        .size(28.dp))
+                                Icon(painter = painterResource(R.drawable.star_icon),
+                                    contentDescription = null,
+                                    tint = colorResource(R.color.starColor),
+                                    modifier = Modifier
+                                        .size(28.dp))
+                                Icon(painter = painterResource(R.drawable.star_icon),
+                                    contentDescription = null,
+                                    tint = colorResource(R.color.starColor),
+                                    modifier = Modifier
+                                        .size(28.dp))
+                                Icon(painter = painterResource(R.drawable.star_icon),
+                                    contentDescription = null,
+                                    tint = colorResource(R.color.starColor),
+                                    modifier = Modifier
+                                        .size(28.dp))
+                                Icon(painter = painterResource(R.drawable.star_icon),
+                                    contentDescription = null,
+                                    tint = colorResource(R.color.lightGray),
+                                    modifier = Modifier
+                                        .size(28.dp))
+                            }
+                            Canvas(
+                                modifier = Modifier
+                                    .height(1.dp)
+                                    .fillMaxWidth()
+                            ){
+                                drawLine(
+                                    start = Offset(0f, 0f),
+                                    end = Offset(size.width, 0f),
+                                    color = SeparatorColor
+                                )
+                            }
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .height(55.dp)
+                                .clickable {
+                                    vm.onEvent(MenuScreenEvent.ReviewRequest(false))
+                                },
+                                contentAlignment = Alignment.Center){
+                                Text(text = stringResource(R.string.rate),
+                                    color = Theme.colors.oppositeColor,
+                                    fontWeight = FontWeight(400),
+                                    fontFamily = roboto,
+                                    fontSize = 16.sp)
+                            }
+                            Canvas(
+                                modifier = Modifier
+                                    .height(1.dp)
+                                    .fillMaxWidth()
+                            ){
+                                drawLine(
+                                    start = Offset(0f, 0f),
+                                    end = Offset(size.width, 0f),
+                                    color = SeparatorColor
+                                )
+                            }
+                            Box(modifier = Modifier
+                                .fillMaxWidth()
+                                .height(55.dp)
+                                .clickable {
+                                    vm.onEvent(MenuScreenEvent.ReviewRequest(false))
+                                },
+                                contentAlignment = Alignment.Center){
+                                Text(text = stringResource(R.string.no_thanks),
+                                    color = Theme.colors.oppositeColor,
+                                    fontWeight = FontWeight(400),
+                                    fontFamily = roboto,
+                                    fontSize = 16.sp)
+                            }
+                        }
+                    }
+                }
             }
         }
     }

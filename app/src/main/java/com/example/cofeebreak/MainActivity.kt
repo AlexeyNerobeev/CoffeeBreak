@@ -19,7 +19,9 @@ import com.example.cofeebreak.feature_app.presentation.Designer.DesignerScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
+import com.example.cofeebreak.feature_app.presentation.MyOrderCurrent.MyOrderCurrentScreen
 import com.example.cofeebreak.feature_app.presentation.OrderOptions.OrderOptionsScreen
+import com.example.cofeebreak.feature_app.presentation.OrerIsConfirmed.OrderIsConfirmed
 import com.example.cofeebreak.feature_app.presentation.Profile.ProfileScreen
 import com.example.cofeebreak.feature_app.presentation.Redeem.RedeemScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
@@ -56,8 +58,9 @@ class MainActivity() : ComponentActivity() {
                     composable<Navigation.SignUpScreen> {
                         SignUpScreen(navController)
                     }
-                    composable<Navigation.MenuScreen> {
-                        MenuScreen(navController)
+                    composable<Navigation.MenuScreen> { backStackEntry ->
+                        val route = backStackEntry.toRoute<Navigation.MenuScreen>()
+                        MenuScreen(navController, route.value)
                     }
                     composable<Navigation.ForgotPasswordScreen> {
                         ForgotPasswordScreen(navController)
@@ -101,6 +104,12 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.CoffeeTypeScreen> {
                         CoffeeTypeScreen(navController)
+                    }
+                    composable<Navigation.OrderIsConfirmedScreen> {
+                        OrderIsConfirmed(navController)
+                    }
+                    composable<Navigation.MyOrderCurrentScreen> {
+                        MyOrderCurrentScreen(navController)
                     }
                 }
             }

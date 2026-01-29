@@ -1,6 +1,5 @@
 package com.example.cofeebreak
 
-import com.example.cofeebreak.feature_app.domain.model.Coffee
 import kotlinx.serialization.Serializable
 
 sealed class Navigation {
@@ -18,7 +17,7 @@ sealed class Navigation {
     data object SignUpScreen: Navigation()
 
     @Serializable
-    data object MenuScreen: Navigation()
+    data class MenuScreen(val value: Boolean): Navigation()
 
     @Serializable
     data object ForgotPasswordScreen: Navigation()
@@ -61,4 +60,10 @@ sealed class Navigation {
 
     @Serializable
     data object CoffeeTypeScreen: Navigation()
+
+    @Serializable
+    data object OrderIsConfirmedScreen: Navigation()
+
+    @Serializable
+    data object MyOrderCurrentScreen: Navigation()
 }

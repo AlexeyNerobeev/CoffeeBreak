@@ -104,4 +104,12 @@
     <string name="bank_card">Банковская карта</string>
     <string name="sum">Сумма</string>
     <string name="pay_now">Оплатить\nсейчас</string>
+    <string name="ordered">Заказано</string>
+    <string name="alexey_your_order_has_been_successfully_placed">Алексей, Ваш заказ успешно размещен.</string>
+    <string name="the_order_will_be_ready">Заказ будет готов сегодня\nк 18:10 по адресу\nг. Оренбург, ул. Чкалова 32</string>
+    <string name="present_your_personal_qr_code">Предъявите Ваш персональный QR-код\nв кофейне для получения заказа.\n</string>
+    <string name="the_order_has_been_completed">Заказ выполнен.</string>
+    <string name="please_rate_the_service">Пожалуйста, оцените сервис.</string>
+    <string name="rate">Оценить</string>
+    <string name="no_thanks">Нет, спасибо</string>
 </resources>

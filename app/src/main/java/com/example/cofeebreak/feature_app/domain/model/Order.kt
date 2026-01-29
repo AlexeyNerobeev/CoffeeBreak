@@ -11,5 +11,7 @@ data class Order(
     val price: Int = 0,
     val coffee_image: String = "",
     val options: String = "",
-    val count: Int = 0
+    val count: Int = 0,
+    val user_id: String = "",
+    val status: String = ""
 )

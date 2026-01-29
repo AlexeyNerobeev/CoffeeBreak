@@ -6,5 +6,6 @@ data class MenuScreenState (
     val name: String = "",
     val coffeeList: List<Coffee> = listOf(),
     val serverError: Boolean = false,
-    val avatar_url: String? = null
+    val avatar_url: String? = null,
+    val reviewRequest: Boolean = false
 )
