@@ -16,9 +16,6 @@
       <SelectionState runConfigName="SignUpVMTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Tests">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="emailValid_passwordInvalid_nameAndPhoneNotEmpty_passwordError()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -26,6 +23,9 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="emailInvalid_passwordValid_nameAndPhoneNotEmpty_emailError()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="UITests">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

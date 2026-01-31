@@ -357,14 +357,8 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         .size(64.dp)
                         .testTag("signUpButton"),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if(state.name.isNotEmpty() &&
-                            state.emailAddress.isNotEmpty() &&
-                            state.phone.isNotEmpty() &&
-                            state.password.isNotEmpty()
-                        )
-                            colorResource(R.color.activeColor)
-                        else
-                            colorResource(R.color.MainColor)
+                        containerColor = colorResource(R.color.activeColor),
+                        disabledContainerColor = colorResource(R.color.MainColor)
                     ),
                     contentPadding = PaddingValues(16.dp)
                 ) {
