@@ -9,3 +9,12 @@ data class Additives(
     val title: String = "",
     val description: String = ""
 )
+
+interface Dobavki {
+    val id: String
+    val name: String
+}
+
+interface DobavkiRepository {
+    suspend fun getDobavki() : Dobavki
+}

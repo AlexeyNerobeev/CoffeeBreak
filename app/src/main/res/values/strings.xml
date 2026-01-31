@@ -112,4 +112,7 @@
     <string name="please_rate_the_service">Пожалуйста, оцените сервис.</string>
     <string name="rate">Оценить</string>
     <string name="no_thanks">Нет, спасибо</string>
+    <string name="сurrent">Текущий</string>
+    <string name="history">История</string>
+    <string name="to_order">Заказать</string>
 </resources>

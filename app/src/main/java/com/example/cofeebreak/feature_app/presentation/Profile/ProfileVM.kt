@@ -41,7 +41,7 @@ class ProfileVM @Inject constructor(
             try {
                 val userId = loadCurrentUserIdUseCase.invoke().id.toString()
                 val profile = profileRepository.getProfile(Profile(user_id = userId))
-                val qrBitmap = generateQrCode("https://example.com")
+                val qrBitmap = generateQrCode("https://www.figma.com/design/sjQgCbldwJ6jLW0Y2nzBAn/Untitled?node-id=0-1&t=U1LuGJoT5LjlfUPQ-1")
                 _state.value = state.value.copy(
                     name = profile.name,
                     phone = profile.phone,

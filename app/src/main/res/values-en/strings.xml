@@ -113,4 +113,7 @@
     <string name="please_rate_the_service">Please rate the service.</string>
     <string name="rate">Rate</string>
     <string name="no_thanks">No, thanks</string>
+    <string name="сurrent">Current</string>
+    <string name="history">History</string>
+    <string name="to_order">To order</string>
 </resources>

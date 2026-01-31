@@ -1,6 +1,5 @@
 package com.example.cofeebreak.feature_app.data.repositoryImplementation
 
-import android.util.Log
 import com.example.cofeebreak.feature_app.data.supabase.Connect.supabase
 import com.example.cofeebreak.feature_app.domain.model.Profile
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
@@ -8,6 +7,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.storage.storage
+import kotlinx.serialization.json.jsonPrimitive
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
@@ -113,6 +113,24 @@ class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
         }.decodeSingle<Profile>()
     }
 
+    override suspend fun checkAndCreateProfile(profile: Profile) {
+        val exists = supabase.postgrest["profile"].select{
+            filter {
+                and {
+                    eq("user_id", profile.user_id)
+                }
+            }
+        }.decodeList<Profile>()
+            .isNotEmpty()
+        if(!exists){
+            val newProfile = Profile(user_id = profile.user_id,
+                name = getCurrentUserName(),
+                email = getCurrentUserEmail(),
+                phone = "-")
+            supabase.postgrest["profile"].insert(newProfile)
+        }
+    }
+
     suspend fun getCurrentUserId(): String{
         supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id?:""
@@ -121,5 +139,15 @@ class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
     suspend fun getCurrentUserEmail(): String{
         supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.email?:""
+    }
+
+    suspend fun getCurrentUserName(): String{
+        supabase.auth.awaitInitialization()
+        return supabase.auth.currentUserOrNull()?.identities
+            ?.firstOrNull()
+            ?.identityData
+            ?.get("name")
+            ?.jsonPrimitive
+            ?.content.toString()
     }
 }

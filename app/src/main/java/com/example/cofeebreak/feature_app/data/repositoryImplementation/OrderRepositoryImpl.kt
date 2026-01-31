@@ -32,7 +32,6 @@ class OrderRepositoryImpl: OrderRepository {
         return supabase.postgrest["order"].select(
             columns = Columns.list(
                 "name",
-                "address",
                 "created_at",
                 "time_to",
                 "price",
@@ -52,7 +51,6 @@ class OrderRepositoryImpl: OrderRepository {
         return supabase.postgrest["order"].select(
             columns = Columns.list(
                 "name",
-                "address",
                 "created_at",
                 "time_to",
                 "price",

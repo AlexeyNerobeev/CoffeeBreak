@@ -1,5 +1,7 @@
 package com.example.cofeebreak.feature_app.presentation.Authorization
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -24,11 +26,13 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,24 +40,64 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.CredentialManager
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
 import com.example.cofeebreak.common.roboto
+import com.example.cofeebreak.feature_app.data.supabase.Connect.supabase
 import com.example.cofeebreak.ui.theme.Theme
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import io.github.jan.supabase.compose.auth.ComposeAuth
+import io.github.jan.supabase.compose.auth.composable.GoogleDialogType
+import io.github.jan.supabase.compose.auth.composable.NativeSignInResult
+import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle
+import io.github.jan.supabase.compose.auth.composeAuth
+import kotlinx.coroutines.launch
+import java.security.MessageDigest
+import java.util.UUID
 
 @Composable
 fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = hiltViewModel()) {
     val state = vm.state.value
-    LaunchedEffect(key1 = !state.isComplete) {
-        if(state.isComplete)
-        navController.navigate(Navigation.StartupScreen){
-            popUpTo(0){
-                inclusive = true
+    val action = supabase.composeAuth.rememberSignInWithGoogle(
+        type = GoogleDialogType.BOTTOM_SHEET,
+        onResult = { result ->
+            when (result) {
+                is NativeSignInResult.Success -> {
+                    Log.e("google", "success")
+                    vm.onEvent(AuthorizationEvent.ProgressIndicator)
+                    vm.onEvent(AuthorizationEvent.SignInWithGoogle)
+                }
+                is NativeSignInResult.ClosedByUser -> {
+                    Log.e("google", "close")
+
+                }
+                is NativeSignInResult.Error -> {
+                    Log.e("google", "error ${result.message}")
+
+                }
+                is NativeSignInResult.NetworkError -> {
+                    Log.e("google", "network error")
+
+                }
             }
         }
+    )
+
+    LaunchedEffect(key1 = !state.isComplete) {
+        if(state.isComplete)
+            navController.navigate(Navigation.StartupScreen){
+                popUpTo(0){
+                    inclusive = true
+                }
+            }
     }
     if (state.error) {
         ErrorAlertDialog(error = stringResource(R.string.incorrect_email_or_password)) {
@@ -290,9 +334,50 @@ fun AuthorizationScreen(navController: NavController, vm: AuthorizationVM = hilt
                                 .fillMaxSize()
                         )
                     }
+                    val context = LocalContext.current
+                    val coroutineScope = rememberCoroutineScope()
                     IconButton(
                         onClick = {
-
+                            action.startFlow()
+//                            val credentialManager = CredentialManager.create(context)
+//
+//                            val rawNonce = UUID.randomUUID().toString()
+//                            val bytes = rawNonce.toByteArray()
+//                            val md = MessageDigest.getInstance("SHA-256")
+//                            val digest = md.digest(bytes)
+//                            val hashedNonce = digest.fold("") {str, it -> str + "%02x".format(it)}
+//
+//                            val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+//                                .setFilterByAuthorizedAccounts(false)
+//                                .setServerClientId("624576438845-ia64o3ee7hdd9e3h8jpfohk0138vrjiv.apps.googleusercontent.com")
+//                                .setNonce(hashedNonce)
+//                                .build()
+//
+//                            val request: GetCredentialRequest = GetCredentialRequest.Builder()
+//                                .addCredentialOption(googleIdOption)
+//                                .build()
+//
+//                            coroutineScope.launch {
+//                                try{
+//                                    val result = credentialManager.getCredential(
+//                                        request = request,
+//                                        context = context
+//                                    )
+//                                    val credential = result.credential
+//
+//                                    val googleIdTokenCredential = GoogleIdTokenCredential
+//                                        .createFrom(credential.data)
+//
+//                                    val googleIdToken = googleIdTokenCredential.idToken
+//                                    Log.i("googleToken", googleIdToken)
+//
+//                                    Toast.makeText(context, "Sign in!", Toast.LENGTH_SHORT).show()
+//                                } catch (e: GetCredentialException){
+//                                    Log.e("getCredentialsException", e.message.toString())
+//                                } catch (e: GoogleIdTokenParsingException){
+//                                    Log.e("googleIdTokenParsingException", e.message.toString())
+//                                }
+//                            }
                         },
                         modifier = Modifier
                             .padding(start = 10.dp)

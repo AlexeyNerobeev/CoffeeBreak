@@ -25,4 +25,5 @@
     <color name="regularBaristaColor">#FF3030</color>
     <color name="starColor">#FF9500</color>
     <color name="lightGray">#C7C7CC</color>
+    <color name="activeColor">#35764A</color>
 </resources>

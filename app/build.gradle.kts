@@ -22,11 +22,36 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner = "com.example.cofeebreak.HiltTestRunner"
 
-        buildConfigField("String", "MAPKIT_API_KEY", "\"${getMapkitApiKey()}\"")
-        resValue("string", "mapkit_api_key", getMapkitApiKey())
-        android.buildFeatures.buildConfig = true
+        buildConfigField(
+            "String",
+            "SUPABASE_URL",
+            "\"${getLocalProperty("SUPABASE_URL")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "SUPABASE_KEY",
+            "\"${getLocalProperty("SUPABASE_KEY")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "GOOGLE_SERVER_CLIENT_ID",
+            "\"${getLocalProperty("GOOGLE_SERVER_CLIENT_ID")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "MAPKIT_API_KEY",
+            "\"${getLocalProperty("MAPKIT_API_KEY")}\""
+        )
+
+        resValue(
+            "string",
+            "mapkit_api_key",
+            getLocalProperty("MAPKIT_API_KEY")
+        )
     }
 
     buildTypes {
@@ -48,6 +73,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -59,14 +85,14 @@ dependencies {
     implementation(libs.androidx.compose.ui.geometry)
 
     // Test dependencies
-    testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+//    testImplementation ("junit:junit:4.13.2")
+//    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
     // Для Android тестов
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.4")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
+//    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+//    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+//    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.4")
+//    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
 
     //coil
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
@@ -83,8 +109,15 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.testing)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
+
+    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.49")
+    androidTestImplementation ("androidx.test:core:1.5.0")
+    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.0")
 
 
     //ktor
@@ -97,12 +130,18 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:auth-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
     implementation("io.github.jan-tennert.supabase:storage-kt:3.1.0")
+    implementation("io.github.jan-tennert.supabase:compose-auth:3.1.0")
 
     //navigation
     implementation ("androidx.navigation:navigation-compose:2.9.4")
 
     //карта
     implementation("com.yandex.android:maps.mobile:4.26.0-lite")
+
+    //google
+    implementation("androidx.credentials:credentials:1.6.0-rc01")
+    implementation("androidx.credentials:credentials-play-services-auth:1.6.0-rc01")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -121,15 +160,28 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
-// Функция для безопасного чтения ключа из local.properties
-fun getMapkitApiKey(): String {
+fun getLocalProperty(key: String): String {
     val properties = Properties()
     val localPropertiesFile = project.rootProject.file("local.properties")
 
     return if (localPropertiesFile.exists()) {
         localPropertiesFile.inputStream().use { properties.load(it) }
-        properties.getProperty("MAPKIT_API_KEY", "").trim()
+        properties.getProperty(key, "").trim()
     } else {
-        "" // Или можно выбросить исключение: error("local.properties not found")
+        ""
     }
 }
+
+
+//// Функция для безопасного чтения ключа из local.properties
+//fun getMapkitApiKey(): String {
+//    val properties = Properties()
+//    val localPropertiesFile = project.rootProject.file("local.properties")
+//
+//    return if (localPropertiesFile.exists()) {
+//        localPropertiesFile.inputStream().use { properties.load(it) }
+//        properties.getProperty("MAPKIT_API_KEY", "").trim()
+//    } else {
+//        "" // Или можно выбросить исключение: error("local.properties not found")
+//    }
+//}

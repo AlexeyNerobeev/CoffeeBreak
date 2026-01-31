@@ -65,17 +65,17 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
             }
         }
     }
-    if(state.error){
+    if (state.error) {
         ErrorAlertDialog(error = stringResource(R.string.incorrect_email_or_password)) {
             vm.onEvent(SignUpEvent.ClearErrors)
         }
     }
-    if(state.fieldsEmpty){
+    if (state.fieldsEmpty) {
         ErrorAlertDialog(error = stringResource(R.string.all_fields_must_be_filled_in)) {
             vm.onEvent(SignUpEvent.ClearErrors)
         }
     }
-    if (state.passwordError){
+    if (state.passwordError) {
         ErrorAlertDialog(error = stringResource(R.string.password_error_text)) {
             vm.onEvent(SignUpEvent.ClearErrors)
         }
@@ -242,14 +242,18 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         }
                     },
                     trailingIcon = {
-                        if(state.validEmail == true){
-                            Icon(painter = painterResource(R.drawable.valid_email_icon),
+                        if (state.validEmail == true) {
+                            Icon(
+                                painter = painterResource(R.drawable.valid_email_icon),
                                 contentDescription = null,
-                                tint = Color.Unspecified)
-                        } else if(state.validEmail == false){
-                            Icon(painter = painterResource(R.drawable.not_valid_email_icon),
+                                tint = Color.Unspecified
+                            )
+                        } else if (state.validEmail == false) {
+                            Icon(
+                                painter = painterResource(R.drawable.not_valid_email_icon),
                                 contentDescription = null,
-                                tint = Theme.colors.tfIconsColor)
+                                tint = Theme.colors.tfIconsColor
+                            )
                         }
                     },
                     placeholder = {
@@ -296,24 +300,30 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         }
                     },
                     trailingIcon = {
-                        IconButton(onClick = {
-                            vm.onEvent(SignUpEvent.PasswordVisible)
-                        },
+                        IconButton(
+                            onClick = {
+                                vm.onEvent(SignUpEvent.PasswordVisible)
+                            },
                             modifier = Modifier
-                                .testTag("button")) {
+                                .testTag("button")
+                        ) {
                             Icon(
                                 painter = painterResource(R.drawable.eye_icon),
                                 contentDescription = null,
                                 tint = Theme.colors.eyeIconColor
                             )
-                            if(state.passwordVisible){
-                                Icon(painterResource(R.drawable.line_eye_icon),
+                            if (state.passwordVisible) {
+                                Icon(
+                                    painterResource(R.drawable.line_eye_icon),
                                     contentDescription = null,
-                                    tint = Theme.colors.eyeIconColor)
+                                    tint = Theme.colors.eyeIconColor
+                                )
                             }
                         }
                     },
-                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation('*') else VisualTransformation.None,
+                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation(
+                        '*'
+                    ) else VisualTransformation.None,
                     placeholder = {
                         Text(
                             text = stringResource(R.string.password_placeholder),
@@ -332,6 +342,10 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         .padding(top = 24.dp)
                 )
                 Button(
+                    enabled = state.name.isNotEmpty() &&
+                        state.emailAddress.isNotEmpty() &&
+                        state.phone.isNotEmpty() &&
+                        state.password.isNotEmpty(),
                     onClick = {
                         vm.onEvent(SignUpEvent.ProgressIndicator)
                         vm.onEvent(SignUpEvent.SignUp)
@@ -340,13 +354,21 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         .padding(top = 13.dp)
                         .align(Alignment.End)
                         .clip(CircleShape)
-                        .size(64.dp),
+                        .size(64.dp)
+                        .testTag("signUpButton"),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = colorResource(R.color.MainColor)
+                        containerColor = if(state.name.isNotEmpty() &&
+                            state.emailAddress.isNotEmpty() &&
+                            state.phone.isNotEmpty() &&
+                            state.password.isNotEmpty()
+                        )
+                            colorResource(R.color.activeColor)
+                        else
+                            colorResource(R.color.MainColor)
                     ),
                     contentPadding = PaddingValues(16.dp)
                 ) {
-                    if(state.progressIndicator){
+                    if (state.progressIndicator) {
                         CircularProgressIndicator(
                             color = Theme.colors.mainBackgroundColor,
                             modifier = Modifier

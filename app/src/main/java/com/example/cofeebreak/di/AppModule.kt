@@ -22,6 +22,7 @@ import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionReposi
 import com.example.cofeebreak.feature_app.domain.repository.OrderRepository
 import com.example.cofeebreak.feature_app.domain.repository.ProfileRepository
 import com.example.cofeebreak.feature_app.domain.repository.RedeemRepository
+import com.example.cofeebreak.feature_app.domain.usecase.CheckAndCreateProfile
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
 import com.example.cofeebreak.feature_app.domain.usecase.GetAdditivesUseCase
@@ -290,5 +291,13 @@ object AppModule {
         orderRepository: OrderRepository
     ): GetHistoryOrderUseCase{
         return GetHistoryOrderUseCase(orderRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCheckAndCreateProfileUseCase(
+        profileRepository: ProfileRepository
+    ): CheckAndCreateProfile{
+        return CheckAndCreateProfile(profileRepository)
     }
 }

@@ -5,6 +5,7 @@ import com.example.cofeebreak.feature_app.domain.model.User
 import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
+import kotlinx.serialization.json.jsonPrimitive
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(): AuthRepository {

@@ -33,7 +33,7 @@ class Tests {
                     SignUpScreen(navController)
                 }
                 composable<Navigation.MenuScreen> {
-                    MenuScreen(navController)
+                    MenuScreen(navController, false)
                 }
             }
         }
