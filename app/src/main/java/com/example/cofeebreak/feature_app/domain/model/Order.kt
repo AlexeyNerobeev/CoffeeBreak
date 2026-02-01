@@ -13,5 +13,12 @@ data class Order(
     val options: String = "",
     val count: Int = 0,
     val user_id: String = "",
-    val status: String = ""
+    val status: String = "",
+    val ristretto: Int = 0,
+    val volume: Int = 0,
+    val barista: Int = 0,
+    val coffee_type: Int = 0,
+    val milk: String = "",
+    val syrup: String = "",
+    val additives: Int = 0
 )

@@ -11,5 +11,6 @@ data class MyOrderState(
     val userName: String = "",
     val address: String = "",
     val selectSbp: Boolean = true,
-    val selectBankCard: Boolean = false
+    val selectBankCard: Boolean = false,
+    val load: Boolean = true
 )

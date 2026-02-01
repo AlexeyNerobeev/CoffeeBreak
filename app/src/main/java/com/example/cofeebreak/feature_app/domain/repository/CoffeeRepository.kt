@@ -4,4 +4,5 @@ import com.example.cofeebreak.feature_app.domain.model.Coffee
 
 interface CoffeeRepository {
     suspend fun getCoffeeList(): List<Coffee>
+    suspend fun getCoffeeById(id: Coffee): Coffee
 }

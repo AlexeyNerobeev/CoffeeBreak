@@ -44,7 +44,7 @@ sealed class Navigation {
     data object RedeemScreen: Navigation()
 
     @Serializable
-    data class OrderOptionsScreen(val imageUrl: String): Navigation()
+    data class OrderOptionsScreen(val coffeeId: Int): Navigation()
 
     @Serializable
     data object DesignerScreen: Navigation()

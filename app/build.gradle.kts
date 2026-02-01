@@ -143,6 +143,11 @@ dependencies {
     implementation("androidx.credentials:credentials-play-services-auth:1.6.0-rc01")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
 
+    //tensorflow lite
+    implementation("org.tensorflow:tensorflow-lite:1.9.0")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.0")
+    implementation ("org.tensorflow:tensorflow-lite-support:0.4.0")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

@@ -27,6 +27,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.DeleteCurrentUserIdUseCse
 import com.example.cofeebreak.feature_app.domain.usecase.GetAdditivesUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetBaristaUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeByIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeCountryUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeShopAddressUseCase
@@ -42,6 +43,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.SaveOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.UpdateAvatarUrlUseCase
@@ -299,5 +301,21 @@ object AppModule {
         profileRepository: ProfileRepository
     ): CheckAndCreateProfile{
         return CheckAndCreateProfile(profileRepository)
+    }
+
+     @Provides
+     @Singleton
+     fun provideGetCoffeeByIdUseCase(
+         coffeeRepository: CoffeeRepository
+     ): GetCoffeeByIdUseCase{
+         return GetCoffeeByIdUseCase(coffeeRepository)
+     }
+
+    @Provides
+    @Singleton
+    fun provideSaveOrderUseCase(
+        orderRepository: OrderRepository
+    ): SaveOrderUseCase{
+        return SaveOrderUseCase(orderRepository)
     }
 }

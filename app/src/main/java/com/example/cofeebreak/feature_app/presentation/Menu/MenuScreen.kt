@@ -182,7 +182,7 @@
                                             .clickable {
                                                 navController.navigate(
                                                     Navigation.OrderOptionsScreen(
-                                                        item.coffee_image
+                                                        coffeeId = item.id
                                                     )
                                                 )
                                             }

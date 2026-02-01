@@ -32,7 +32,7 @@ class MyOrderVM @Inject constructor(
                 val orderList = getMyOrderUseCase.invoke(Profile(user_id = userId))
                 var totalAmount = 0
                 for(item in orderList){
-                    totalAmount += item.price * item.count
+                    totalAmount += item.price
                 }
                 val name = getUserNameUseCase.invoke(userId).name
                 val address = getCoffeeShopAddressUseCase.invoke(Profile(user_id = userId)).coffee_shop_address
@@ -40,7 +40,8 @@ class MyOrderVM @Inject constructor(
                     orderList = orderList,
                     totalAmount = totalAmount,
                     userName = name,
-                    address = address.toString()
+                    address = address.toString(),
+                    load = false
                 )
             } catch (ex: Exception){
                 Log.e("supabase", ex.message.toString())

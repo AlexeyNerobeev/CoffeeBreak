@@ -22,7 +22,7 @@ class OrderRepositoryImpl: OrderRepository {
             filter {
                 and {
                     eq("user_id", id.user_id)
-                    eq("status", "current")
+                    eq("status", "not paid")
                 }
             }
         }.decodeList<Order>()
@@ -64,5 +64,25 @@ class OrderRepositoryImpl: OrderRepository {
                 }
             }
         }.decodeList<Order>()
+    }
+
+    override suspend fun saveOrder(order: Order) {
+        val newOrder = Order(name = order.name,
+            time_to = order.time_to,
+            price = order.price,
+            coffee_image = order.coffee_image,
+            options = "single | iced | medium | full ice",
+            count = order.count,
+            user_id = order.user_id,
+            status = order.status,
+            ristretto = order.ristretto,
+            volume = order.volume,
+            barista = order.barista,
+            coffee_type = order.coffee_type,
+            milk = order.milk,
+            syrup = order.syrup,
+            additives = order.additives
+            )
+        supabase.postgrest["order"].insert(newOrder)
     }
 }

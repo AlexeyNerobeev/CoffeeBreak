@@ -88,7 +88,7 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.OrderOptionsScreen> { backStackEntry ->
                         val route = backStackEntry.toRoute<Navigation.OrderOptionsScreen>()
-                        OrderOptionsScreen(navController, route.imageUrl)
+                        OrderOptionsScreen(navController, route.coffeeId)
                     }
                     composable<Navigation.DesignerScreen> {
                         DesignerScreen(navController)

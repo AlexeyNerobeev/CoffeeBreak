@@ -1,7 +1,6 @@
 package com.example.cofeebreak.feature_app.presentation.OrderOptions
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -24,11 +24,11 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -45,18 +45,21 @@ import com.example.cofeebreak.R
 import com.example.cofeebreak.common.dmSans
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.roboto
-import com.example.cofeebreak.feature_app.domain.model.Coffee
 import com.example.cofeebreak.ui.theme.RewardLine
 import com.example.cofeebreak.ui.theme.Theme
-import io.github.jan.supabase.realtime.Column
 
 @Composable
 fun OrderOptionsScreen(
     navController: NavController,
-    imageUrl: String,
+    coffeeId: Int,
     vm: OrderOptionsVM = hiltViewModel()
 ) {
     val state = vm.state.value
+    LaunchedEffect(key1 = !state.isComplete) {
+        if (state.isComplete) {
+            navController.navigate(Navigation.MyOrderScreen)
+        }
+    }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -116,14 +119,23 @@ fun OrderOptionsScreen(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(150.dp)
-                        .padding(vertical = 12.dp),
-                    contentScale = ContentScale.Fit
-                )
+                if (state.load) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .align(Alignment.Center),
+                        color = Theme.colors.oppositeColor
+                    )
+                } else {
+                    AsyncImage(
+                        model = state.coffee.coffee_image,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(150.dp)
+                            .padding(vertical = 12.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                }
             }
             Row(
                 modifier = Modifier
@@ -134,13 +146,21 @@ fun OrderOptionsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(R.string.americano),
-                    color = Theme.colors.backIconColor,
-                    fontWeight = FontWeight(500),
-                    fontFamily = dmSans,
-                    fontSize = 14.sp
-                )
+                if (state.load) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(14.dp),
+                        color = Theme.colors.oppositeColor
+                    )
+                } else {
+                    Text(
+                        text = state.coffee.coffee_name,
+                        color = Theme.colors.backIconColor,
+                        fontWeight = FontWeight(500),
+                        fontFamily = dmSans,
+                        fontSize = 14.sp
+                    )
+                }
                 Box(
                     modifier = Modifier
                         .size(73.dp, 29.dp)
@@ -228,7 +248,20 @@ fun OrderOptionsScreen(
                                 width = 1.dp,
                                 color = Theme.colors.orderOptionsBoxColor
                             )
-                            .padding(horizontal = 12.dp),
+                            .background(
+                                color = if (state.ristretto == 100)
+                                    Theme.colors.orderOptionsBoxColor
+                                else
+                                    Color.Unspecified
+                            )
+                            .padding(horizontal = 12.dp)
+                            .clickable {
+                                if (state.ristretto == 100) {
+                                    vm.onEvent(OrderOptionsEvent.SelectRistretto(0))
+                                } else {
+                                    vm.onEvent(OrderOptionsEvent.SelectRistretto(100))
+                                }
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -249,7 +282,20 @@ fun OrderOptionsScreen(
                                 width = 1.dp,
                                 color = Theme.colors.orderOptionsBoxColor
                             )
-                            .padding(horizontal = 12.dp),
+                            .background(
+                                color = if (state.ristretto == 200)
+                                    Theme.colors.orderOptionsBoxColor
+                                else
+                                    Color.Unspecified
+                            )
+                            .padding(horizontal = 12.dp)
+                            .clickable {
+                                if (state.ristretto == 200) {
+                                    vm.onEvent(OrderOptionsEvent.SelectRistretto(0))
+                                } else {
+                                    vm.onEvent(OrderOptionsEvent.SelectRistretto(200))
+                                }
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -347,17 +393,32 @@ fun OrderOptionsScreen(
                     fontSize = 14.sp
                 )
                 Row(verticalAlignment = Alignment.Bottom) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .clickable {
+                                if (state.volume != 250) {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(250))
+                                } else {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(0))
+                                }
+                            }) {
                         Icon(
                             painter = painterResource(R.drawable.volume_icon),
                             contentDescription = null,
-                            tint = colorResource(R.color.alternativeWhite),
+                            tint = if (state.volume == 250)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             modifier = Modifier
                                 .size(17.dp, 22.dp)
                         )
                         Text(
                             text = "250",
-                            color = colorResource(R.color.alternativeWhite),
+                            color = if (state.volume == 250)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             fontFamily = dmSans,
                             fontWeight = FontWeight(500),
                             fontSize = 14.sp,
@@ -368,17 +429,30 @@ fun OrderOptionsScreen(
                     Column(
                         modifier = Modifier
                             .padding(start = 22.dp)
+                            .clickable {
+                                if (state.volume != 350) {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(350))
+                                } else {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(0))
+                                }
+                            }
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.volume_icon),
                             contentDescription = null,
-                            tint = Theme.colors.backIconColor,
+                            tint = if (state.volume == 350)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             modifier = Modifier
                                 .size(24.dp, 31.dp)
                         )
                         Text(
                             text = "350",
-                            color = Theme.colors.backIconColor,
+                            color = if (state.volume == 350)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             fontFamily = dmSans,
                             fontWeight = FontWeight(500),
                             fontSize = 14.sp,
@@ -389,17 +463,30 @@ fun OrderOptionsScreen(
                     Column(
                         modifier = Modifier
                             .padding(start = 25.dp)
+                            .clickable {
+                                if (state.volume != 450) {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(450))
+                                } else {
+                                    vm.onEvent(OrderOptionsEvent.SelectVolume(0))
+                                }
+                            }
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.volume_icon),
                             contentDescription = null,
-                            tint = colorResource(R.color.alternativeWhite),
+                            tint = if (state.volume == 450)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             modifier = Modifier
                                 .size(29.dp, 38.dp)
                         )
                         Text(
-                            text = "250",
-                            color = colorResource(R.color.alternativeWhite),
+                            text = "450",
+                            color = if (state.volume == 450)
+                                Theme.colors.backIconColor
+                            else
+                                colorResource(R.color.alternativeWhite),
                             fontFamily = dmSans,
                             fontWeight = FontWeight(500),
                             fontSize = 14.sp,
@@ -486,8 +573,10 @@ fun OrderOptionsScreen(
                     .padding(end = 28.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(16.dp))
-                    .background(color = colorResource(R.color.secondColor),
-                        shape = RoundedCornerShape(16.dp)),
+                    .background(
+                        color = colorResource(R.color.secondColor),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(R.color.secondColor),
                     contentColor = Color.White
@@ -524,6 +613,7 @@ fun OrderOptionsScreen(
                         tint = Color.White
                     )
                 }
+
             }
             Row(
                 modifier = Modifier
@@ -541,17 +631,26 @@ fun OrderOptionsScreen(
                     fontWeight = FontWeight(400),
                     fontSize = 14.sp
                 )
-                Text(
-                    text = (state.coffeeCount * 100).toString() + " ₽",
-                    color = Theme.colors.totalPriceColor,
-                    fontSize = 16.sp,
-                    fontFamily = poppins,
-                    fontWeight = FontWeight(600)
-                )
+                if (state.load) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .size(16.dp),
+                        color = Theme.colors.oppositeColor
+                    )
+                } else {
+                    Text(
+                        text = state.totalPrice.toString() + " ₽",
+                        color = Theme.colors.totalPriceColor,
+                        fontSize = 16.sp,
+                        fontFamily = poppins,
+                        fontWeight = FontWeight(600)
+                    )
+                }
             }
             Button(
                 onClick = {
-                    navController.navigate(Navigation.MyOrderScreen)
+                    vm.onEvent(OrderOptionsEvent.ProgressIndicator)
+                    vm.onEvent(OrderOptionsEvent.SaveOrder)
                 },
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -565,15 +664,19 @@ fun OrderOptionsScreen(
                     containerColor = Theme.colors.nextButton
                 )
             ) {
-                Text(
-                    text = stringResource(R.string.next),
-                    color = Color.White,
-                    fontWeight = FontWeight(600),
-                    fontFamily = roboto,
-                    fontSize = 14.sp,
-                    modifier = Modifier
-                        .padding(vertical = 12.dp)
-                )
+                if(state.progressIndicator){
+                    CircularProgressIndicator(color = Color.White)
+                } else {
+                    Text(
+                        text = stringResource(R.string.next),
+                        color = Color.White,
+                        fontWeight = FontWeight(600),
+                        fontFamily = roboto,
+                        fontSize = 14.sp,
+                        modifier = Modifier
+                            .padding(vertical = 12.dp)
+                    )
+                }
             }
         }
     }
