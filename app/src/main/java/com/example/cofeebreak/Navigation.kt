@@ -66,4 +66,7 @@ sealed class Navigation {
 
     @Serializable
     data object MyOrderCurrentScreen: Navigation()
+
+    @Serializable
+    data object EmptyMenuScreen: Navigation()
 }

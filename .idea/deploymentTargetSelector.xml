@@ -13,19 +13,19 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="SignUpVMTest">
+      <SelectionState runConfigName="passwordNotValid()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="emailValid_passwordInvalid_nameAndPhoneNotEmpty_passwordError()">
+      <SelectionState runConfigName="emailNotValid()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="UITests">
+      <SelectionState runConfigName="allFieldsFill()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="allFieldsFilled_buttonBecomesActive()">
+      <SelectionState runConfigName="navigation()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="correctFields_clickSignUp_opensMenuScreen()">
+      <SelectionState runConfigName="Tests">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

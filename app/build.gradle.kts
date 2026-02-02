@@ -113,7 +113,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
 
-    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.49")
+    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.48")
     androidTestImplementation ("androidx.test:core:1.5.0")
     androidTestImplementation ("androidx.test:runner:1.5.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")

@@ -5,6 +5,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.example.cofeebreak.R
@@ -14,6 +16,8 @@ import com.example.cofeebreak.ui.theme.Theme
 fun ErrorAlertDialog(error: String,
                      click: () -> Unit) {
     AlertDialog(
+        modifier = Modifier
+            .testTag("AlertError"),
         containerColor = Theme.colors.mainBackgroundColor,
         onDismissRequest = click,
         title = {

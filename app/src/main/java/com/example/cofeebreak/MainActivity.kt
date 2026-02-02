@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.cofeebreak.common.EmptyMenuScreen
 import com.example.cofeebreak.feature_app.presentation.Additives.AdditivesScreen
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
 import com.example.cofeebreak.feature_app.presentation.Barista.BaristaScreen
@@ -111,6 +112,9 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.MyOrderCurrentScreen> {
                         MyOrderCurrentScreen(navController)
+                    }
+                    composable<Navigation.EmptyMenuScreen> {
+                        EmptyMenuScreen(navController)
                     }
                 }
             }

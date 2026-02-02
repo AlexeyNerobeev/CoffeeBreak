@@ -307,9 +307,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                         IconButton(
                             onClick = {
                                 vm.onEvent(SignUpEvent.PasswordVisible)
-                            },
-                            modifier = Modifier
-                                .testTag("button")
+                            }
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.eye_icon),
