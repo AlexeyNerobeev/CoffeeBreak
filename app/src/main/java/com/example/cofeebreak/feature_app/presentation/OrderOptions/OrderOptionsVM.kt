@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OrderOptionsVM @Inject constructor(
     private val getCoffeeByIdUseCase: GetCoffeeByIdUseCase,
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val saveOrderUseCase: SaveOrderUseCase,
     private val loadCurrentUserIdUseCase: LoadCurrentUserIdUseCase
 
@@ -80,8 +80,9 @@ class OrderOptionsVM @Inject constructor(
                             status = "not paid",
                             ristretto = state.value.ristretto,
                             volume = state.value.volume)
-                        saveOrderUseCase.invoke(order)
+                        val orderId = saveOrderUseCase.invoke(order).id
                         _state.value = state.value.copy(
+                            orderId = orderId,
                             isComplete = true
                         )
                     } catch (ex: Exception){

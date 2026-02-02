@@ -54,7 +54,7 @@ class SignUpVMTest {
         vm.onEvent(SignUpEvent.EnteredPassword("Strong 1!"))
 
         vm.onEvent(SignUpEvent.SignUp)
-        advanceUntilIdle()
+//        advanceUntilIdle()
 
         assertTrue(vm.state.value.isComplete)
         assertFalse(vm.state.value.error)
@@ -69,8 +69,8 @@ class SignUpVMTest {
         vm.onEvent(SignUpEvent.EnteredPassword("weak"))
 
         vm.onEvent(SignUpEvent.SignUp)
-        advanceUntilIdle()
-        delay(5000)
+//        delay(5000)
+//        advanceUntilIdle()
 
         assertTrue(vm.state.value.passwordError)
         assertFalse(vm.state.value.isComplete)
@@ -84,8 +84,8 @@ class SignUpVMTest {
         vm.onEvent(SignUpEvent.EnteredPassword("Strong 1!"))
 
         vm.onEvent(SignUpEvent.SignUp)
-        advanceUntilIdle()
-        delay(5000)
+//        delay(5000)
+//        advanceUntilIdle()
 
         assertTrue(vm.state.value.error)
         assertFalse(vm.state.value.isComplete)

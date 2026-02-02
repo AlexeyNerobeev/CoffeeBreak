@@ -5,7 +5,7 @@ import com.example.cofeebreak.feature_app.domain.model.Profile
 import com.example.cofeebreak.feature_app.domain.repository.OrderRepository
 
 class SaveOrderUseCase(private val orderRepository: OrderRepository) {
-    suspend operator fun invoke(order: Order){
-        orderRepository.saveOrder(order = order)
+    suspend operator fun invoke(order: Order): Order{
+        return orderRepository.saveOrder(order = order)
     }
 }

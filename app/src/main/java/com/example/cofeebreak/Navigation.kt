@@ -47,7 +47,7 @@ sealed class Navigation {
     data class OrderOptionsScreen(val coffeeId: Int): Navigation()
 
     @Serializable
-    data object DesignerScreen: Navigation()
+    data class DesignerScreen(val orderId: Int): Navigation()
 
     @Serializable
     data object BaristaScreen: Navigation()

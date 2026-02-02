@@ -3,12 +3,26 @@
   <component name="AndroidTestResultsUserPreferences">
     <option name="androidTestResultsTableState">
       <map>
+        <entry key="-202015202">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
+                  <entry key="Tests" value="360" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-102421969">
           <value>
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
                   <entry key="Pixel_8_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -22,6 +36,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
                   <entry key="Pixel_8_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -35,6 +50,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
                   <entry key="Pixel_8_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -48,6 +64,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
                   <entry key="Pixel_8_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
@@ -88,6 +105,7 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="Pixel_8" value="120" />
                   <entry key="Pixel_8_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>

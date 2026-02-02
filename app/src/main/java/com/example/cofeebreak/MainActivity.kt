@@ -90,8 +90,9 @@ class MainActivity() : ComponentActivity() {
                         val route = backStackEntry.toRoute<Navigation.OrderOptionsScreen>()
                         OrderOptionsScreen(navController, route.coffeeId)
                     }
-                    composable<Navigation.DesignerScreen> {
-                        DesignerScreen(navController)
+                    composable<Navigation.DesignerScreen> { backStackEntry ->
+                        val route = backStackEntry.toRoute<Navigation.DesignerScreen>()
+                        DesignerScreen(navController, route.orderId )
                     }
                     composable<Navigation.BaristaScreen> {
                         BaristaScreen(navController)

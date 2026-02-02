@@ -36,6 +36,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetHistoryOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetMyOrderUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetOrderByIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetRedeemUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserAvatarUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
@@ -317,5 +318,13 @@ object AppModule {
         orderRepository: OrderRepository
     ): SaveOrderUseCase{
         return SaveOrderUseCase(orderRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetOrderByIdUseCase(
+        orderRepository: OrderRepository
+    ): GetOrderByIdUseCase{
+        return GetOrderByIdUseCase(orderRepository)
     }
 }

@@ -12,5 +12,6 @@ data class OrderOptionsState(
     val ristretto: Int = 0,
     val volume: Int = 250,
     val isComplete: Boolean = false,
-    val progressIndicator: Boolean = false
+    val progressIndicator: Boolean = false,
+    val orderId: Int = 0
 )

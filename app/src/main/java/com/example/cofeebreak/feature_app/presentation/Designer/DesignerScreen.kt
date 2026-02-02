@@ -55,7 +55,7 @@ import io.github.jan.supabase.realtime.Column
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel()) {
+fun DesignerScreen(navController: NavController, orderId: Int, vm: DesignerVM = hiltViewModel()) {
     val state = vm.state.value
     Scaffold(
         modifier = Modifier

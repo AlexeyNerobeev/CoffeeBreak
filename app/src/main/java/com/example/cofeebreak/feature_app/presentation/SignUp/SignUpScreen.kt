@@ -128,7 +128,8 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                     },
                     modifier = Modifier
                         .padding(top = 57.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .testTag("UserName"),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
                         unfocusedContainerColor = Color.Transparent,
@@ -171,7 +172,8 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                     },
                     modifier = Modifier
                         .padding(top = 36.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .testTag("Mobile Phone Number"),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
                         unfocusedContainerColor = Color.Transparent,
@@ -215,7 +217,8 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                     },
                     modifier = Modifier
                         .padding(top = 36.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .testTag("Email Address"),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
                         unfocusedContainerColor = Color.Transparent,
@@ -273,7 +276,8 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                     },
                     modifier = Modifier
                         .padding(top = 36.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .testTag("Password"),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
                         unfocusedContainerColor = Color.Transparent,

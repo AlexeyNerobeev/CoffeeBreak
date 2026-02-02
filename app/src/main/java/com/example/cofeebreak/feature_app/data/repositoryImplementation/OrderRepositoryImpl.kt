@@ -66,7 +66,7 @@ class OrderRepositoryImpl: OrderRepository {
         }.decodeList<Order>()
     }
 
-    override suspend fun saveOrder(order: Order) {
+    override suspend fun saveOrder(order: Order): Order {
         val newOrder = Order(name = order.name,
             time_to = order.time_to,
             price = order.price,
@@ -83,6 +83,23 @@ class OrderRepositoryImpl: OrderRepository {
             syrup = order.syrup,
             additives = order.additives
             )
-        supabase.postgrest["order"].insert(newOrder)
+        return supabase.postgrest["order"].insert(newOrder){
+            select(
+                columns = Columns.list(
+                    "id"
+                )
+            )
+        }.decodeSingle<Order>()
+    }
+
+    override suspend fun getOrderById(id: Order): Order {
+        return supabase.postgrest["order"].select(){
+            filter {
+                and {
+                    eq("id", id.id)
+                    eq("user_id", id.user_id)
+                }
+            }
+        }.decodeSingle<Order>()
     }
 }

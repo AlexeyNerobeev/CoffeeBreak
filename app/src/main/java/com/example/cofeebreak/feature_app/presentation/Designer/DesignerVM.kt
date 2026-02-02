@@ -1,12 +1,17 @@
 package com.example.cofeebreak.feature_app.presentation.Designer
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cofeebreak.common.TFLite.TextGenerator
+import com.example.cofeebreak.feature_app.domain.model.Order
+import com.example.cofeebreak.feature_app.domain.usecase.GetMyOrderUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetOrderByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -16,12 +21,26 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DesignerVM @Inject constructor(
-    @param:ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context,
+    private val savedStateHandle: SavedStateHandle,
+    private val getOrderByIdUseCase: GetOrderByIdUseCase
 ): ViewModel() {
+    private val orderId: Int = savedStateHandle["orderId"]
+        ?: throw IllegalArgumentException("orderId is missing")
     private val _state = mutableStateOf(DesignerState())
     val state: State<DesignerState> = _state
 
     init {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val order = getOrderByIdUseCase.invoke(Order(orderId))
+                _state.value = state.value.copy(
+                    order = order
+                )
+            } catch (ex: Exception){
+                Log.e("supabase", ex.message.toString())
+            }
+        }
         loadDescription()
     }
 
