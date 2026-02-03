@@ -1,7 +1,6 @@
 package com.example.cofeebreak
 
 import androidx.activity.ComponentActivity
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -9,24 +8,19 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navOptions
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.cofeebreak.FakeRepository.FakeAuthRepository
 import com.example.cofeebreak.FakeRepository.FakeProfileRepository
-import com.example.cofeebreak.common.EmptyMenuScreen
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
-import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
-import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -155,7 +149,7 @@ class Tests {
                     SignUpScreen(navController, vm)
                 }
                 composable<Navigation.StartupScreen> {
-                    EmptyMenuScreen(navController)
+                    StartupScreen(navController)
                 }
             }
         }

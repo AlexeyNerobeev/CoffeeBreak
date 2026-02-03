@@ -6,7 +6,7 @@
         val emailAddress: String = "",
         val password: String = "",
         val isComplete: Boolean = false,
-        val passwordVisible: Boolean = false,
+        val passwordVisible: Boolean = true,
         val error: Boolean = false,
         val fieldsEmpty: Boolean = false,
         val passwordError: Boolean = false,

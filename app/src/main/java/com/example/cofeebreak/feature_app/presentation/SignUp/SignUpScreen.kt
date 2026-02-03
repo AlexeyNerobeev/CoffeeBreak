@@ -44,7 +44,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.ErrorAlertDialog
+import com.example.cofeebreak.common.ModifiedTextField
 import com.example.cofeebreak.common.roboto
+import com.example.cofeebreak.feature_app.presentation.SignUp.common.TextFields
 import com.example.cofeebreak.ui.theme.Theme
 
 @Preview(locale = "en-en")
@@ -56,6 +58,52 @@ fun PrevSignUp() {
 @Composable
 fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
     val state = vm.state.value
+    val tfList = listOf(
+        TextFields(
+            state.name,
+            { vm.onEvent(SignUpEvent.EnteredName(it)) },
+            testTag = "UserName",
+            placeholder = stringResource(R.string.UserName),
+            leadingIcon = R.drawable.profile_icon,
+            trailingIcon = false,
+            passwordTransformation = false,
+            passwordVisible = {},
+            padding = 57,
+        ),
+        TextFields(
+            state.phone,
+            { vm.onEvent(SignUpEvent.EnteredPhone(it)) },
+            testTag = "Mobile Phone Number",
+            placeholder = stringResource(R.string.MobilePhoneNumber),
+            leadingIcon = R.drawable.smartphone_icon,
+            trailingIcon = false,
+            passwordTransformation = false,
+            passwordVisible = {},
+            padding = 36,
+        ),
+        TextFields(
+            state.emailAddress,
+            { vm.onEvent(SignUpEvent.EnteredEmailAddress(it)) },
+            testTag = "Email Address",
+            placeholder = stringResource(R.string.email_address),
+            leadingIcon = R.drawable.email_icon,
+            trailingIcon = false,
+            passwordTransformation = false,
+            passwordVisible = {},
+            padding = 36,
+        ),
+        TextFields(
+            state.password,
+            { vm.onEvent(SignUpEvent.EnteredPassword(it)) },
+            testTag = "Password",
+            placeholder = stringResource(R.string.password_placeholder),
+            leadingIcon = R.drawable.password_icon,
+            trailingIcon = true,
+            passwordTransformation = state.passwordVisible,
+            passwordVisible = {vm.onEvent(SignUpEvent.PasswordVisible)},
+            padding = 36,
+        )
+    )
     LaunchedEffect(key1 = !state.isComplete) {
         if (state.isComplete) {
             navController.navigate(Navigation.StartupScreen) {
@@ -120,221 +168,234 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                     modifier = Modifier
                         .padding(top = 24.dp)
                 )
-                TextField(
-                    value = state.name,
-                    singleLine = true,
-                    onValueChange = {
-                        vm.onEvent(SignUpEvent.EnteredName(it))
-                    },
-                    modifier = Modifier
-                        .padding(top = 57.dp)
-                        .fillMaxWidth()
-                        .testTag("UserName"),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
-                        focusedTextColor = Theme.colors.oppositeColor,
-                        unfocusedTextColor = Theme.colors.oppositeColor
-                    ),
-                    leadingIcon = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(R.drawable.profile_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.tfIconsColor
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .padding(start = 9.dp)
-                                    .background(colorResource(R.color.TfColor))
-                                    .clip(RectangleShape)
-                                    .height(25.dp)
-                                    .width(1.dp)
-                            )
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.UserName),
-                            fontFamily = roboto,
-                            fontSize = 12.sp,
-                            color = colorResource(R.color.PlaceholderColor)
-                        )
-                    }
-                )
-                TextField(
-                    value = state.phone,
-                    singleLine = true,
-                    onValueChange = {
-                        vm.onEvent(SignUpEvent.EnteredPhone(it))
-                    },
-                    modifier = Modifier
-                        .padding(top = 36.dp)
-                        .fillMaxWidth()
-                        .testTag("Mobile Phone Number"),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
-                        focusedTextColor = Theme.colors.oppositeColor,
-                        unfocusedTextColor = Theme.colors.oppositeColor
-                    ),
-                    leadingIcon = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(R.drawable.smartphone_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.tfIconsColor
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .padding(start = 9.dp)
-                                    .background(colorResource(R.color.TfColor))
-                                    .clip(RectangleShape)
-                                    .height(25.dp)
-                                    .width(1.dp)
-                            )
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.MobilePhoneNumber),
-                            fontFamily = roboto,
-                            fontSize = 12.sp,
-                            color = colorResource(R.color.PlaceholderColor)
-                        )
-                    }
-                )
-                TextField(
-                    value = state.emailAddress,
-                    singleLine = true,
-                    onValueChange = {
-                        vm.onEvent(SignUpEvent.EnteredEmailAddress(it))
-                        vm.onEvent(SignUpEvent.IsValidEmail)
-                    },
-                    modifier = Modifier
-                        .padding(top = 36.dp)
-                        .fillMaxWidth()
-                        .testTag("Email Address"),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
-                        focusedTextColor = Theme.colors.oppositeColor,
-                        unfocusedTextColor = Theme.colors.oppositeColor
-                    ),
-                    leadingIcon = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(R.drawable.email_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.tfIconsColor
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .padding(start = 9.dp)
-                                    .background(colorResource(R.color.TfColor))
-                                    .clip(RectangleShape)
-                                    .height(25.dp)
-                                    .width(1.dp)
-                            )
-                        }
-                    },
-                    trailingIcon = {
-                        if (state.validEmail == true) {
-                            Icon(
-                                painter = painterResource(R.drawable.valid_email_icon),
-                                contentDescription = null,
-                                tint = Color.Unspecified
-                            )
-                        } else if (state.validEmail == false) {
-                            Icon(
-                                painter = painterResource(R.drawable.not_valid_email_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.tfIconsColor
-                            )
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.email_address),
-                            fontFamily = roboto,
-                            fontSize = 12.sp,
-                            color = colorResource(R.color.PlaceholderColor)
-                        )
-                    }
-                )
-                TextField(
-                    value = state.password,
-                    singleLine = true,
-                    onValueChange = {
-                        vm.onEvent(SignUpEvent.EnteredPassword(it))
-                    },
-                    modifier = Modifier
-                        .padding(top = 36.dp)
-                        .fillMaxWidth()
-                        .testTag("Password"),
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = colorResource(R.color.TfColor),
-                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
-                        focusedTextColor = Theme.colors.oppositeColor,
-                        unfocusedTextColor = Theme.colors.oppositeColor
-                    ),
-                    leadingIcon = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(R.drawable.password_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.tfIconsColor
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .padding(start = 9.dp)
-                                    .background(colorResource(R.color.TfColor))
-                                    .clip(RectangleShape)
-                                    .height(25.dp)
-                                    .width(1.dp)
-                            )
-                        }
-                    },
-                    trailingIcon = {
-                        IconButton(
-                            onClick = {
-                                vm.onEvent(SignUpEvent.PasswordVisible)
-                            }
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.eye_icon),
-                                contentDescription = null,
-                                tint = Theme.colors.eyeIconColor
-                            )
-                            if (state.passwordVisible) {
-                                Icon(
-                                    painterResource(R.drawable.line_eye_icon),
-                                    contentDescription = null,
-                                    tint = Theme.colors.eyeIconColor
-                                )
-                            }
-                        }
-                    },
-                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation(
-                        '*'
-                    ) else VisualTransformation.None,
-                    placeholder = {
-                        Text(
-                            text = stringResource(R.string.password_placeholder),
-                            fontFamily = roboto,
-                            fontSize = 12.sp,
-                            color = colorResource(R.color.PlaceholderColor)
-                        )
-                    }
-                )
+                for(item in tfList){
+                    ModifiedTextField(
+                        item.value,
+                        item.onValueChange,
+                        item.testTag,
+                        item.leadingIcon,
+                        item.placeholder,
+                        item.trailingIcon,
+                        item.passwordTransformation,
+                        item.passwordVisible,
+                        item.padding
+                    )
+                }
+//                TextField(
+//                    value = state.name,
+//                    singleLine = true,
+//                    onValueChange = {
+//                        vm.onEvent(SignUpEvent.EnteredName(it))
+//                    },
+//                    modifier = Modifier
+//                        .padding(top = 57.dp)
+//                        .fillMaxWidth()
+//                        .testTag("UserName"),
+//                    colors = TextFieldDefaults.colors(
+//                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+//                        unfocusedContainerColor = Color.Transparent,
+//                        focusedIndicatorColor = colorResource(R.color.TfColor),
+//                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+//                        focusedTextColor = Theme.colors.oppositeColor,
+//                        unfocusedTextColor = Theme.colors.oppositeColor
+//                    ),
+//                    leadingIcon = {
+//                        Row(verticalAlignment = Alignment.CenterVertically) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.profile_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.tfIconsColor
+//                            )
+//                            Box(
+//                                modifier = Modifier
+//                                    .padding(start = 9.dp)
+//                                    .background(colorResource(R.color.TfColor))
+//                                    .clip(RectangleShape)
+//                                    .height(25.dp)
+//                                    .width(1.dp)
+//                            )
+//                        }
+//                    },
+//                    placeholder = {
+//                        Text(
+//                            text = stringResource(R.string.UserName),
+//                            fontFamily = roboto,
+//                            fontSize = 12.sp,
+//                            color = colorResource(R.color.PlaceholderColor)
+//                        )
+//                    }
+//                )
+//                TextField(
+//                    value = state.phone,
+//                    singleLine = true,
+//                    onValueChange = {
+//                        vm.onEvent(SignUpEvent.EnteredPhone(it))
+//                    },
+//                    modifier = Modifier
+//                        .padding(top = 36.dp)
+//                        .fillMaxWidth()
+//                        .testTag("Mobile Phone Number"),
+//                    colors = TextFieldDefaults.colors(
+//                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+//                        unfocusedContainerColor = Color.Transparent,
+//                        focusedIndicatorColor = colorResource(R.color.TfColor),
+//                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+//                        focusedTextColor = Theme.colors.oppositeColor,
+//                        unfocusedTextColor = Theme.colors.oppositeColor
+//                    ),
+//                    leadingIcon = {
+//                        Row(verticalAlignment = Alignment.CenterVertically) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.smartphone_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.tfIconsColor
+//                            )
+//                            Box(
+//                                modifier = Modifier
+//                                    .padding(start = 9.dp)
+//                                    .background(colorResource(R.color.TfColor))
+//                                    .clip(RectangleShape)
+//                                    .height(25.dp)
+//                                    .width(1.dp)
+//                            )
+//                        }
+//                    },
+//                    placeholder = {
+//                        Text(
+//                            text = stringResource(R.string.MobilePhoneNumber),
+//                            fontFamily = roboto,
+//                            fontSize = 12.sp,
+//                            color = colorResource(R.color.PlaceholderColor)
+//                        )
+//                    }
+//                )
+//                TextField(
+//                    value = state.emailAddress,
+//                    singleLine = true,
+//                    onValueChange = {
+//                        vm.onEvent(SignUpEvent.EnteredEmailAddress(it))
+//                        vm.onEvent(SignUpEvent.IsValidEmail)
+//                    },
+//                    modifier = Modifier
+//                        .padding(top = 36.dp)
+//                        .fillMaxWidth()
+//                        .testTag("Email Address"),
+//                    colors = TextFieldDefaults.colors(
+//                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+//                        unfocusedContainerColor = Color.Transparent,
+//                        focusedIndicatorColor = colorResource(R.color.TfColor),
+//                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+//                        focusedTextColor = Theme.colors.oppositeColor,
+//                        unfocusedTextColor = Theme.colors.oppositeColor
+//                    ),
+//                    leadingIcon = {
+//                        Row(verticalAlignment = Alignment.CenterVertically) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.email_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.tfIconsColor
+//                            )
+//                            Box(
+//                                modifier = Modifier
+//                                    .padding(start = 9.dp)
+//                                    .background(colorResource(R.color.TfColor))
+//                                    .clip(RectangleShape)
+//                                    .height(25.dp)
+//                                    .width(1.dp)
+//                            )
+//                        }
+//                    },
+//                    trailingIcon = {
+//                        if (state.validEmail == true) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.valid_email_icon),
+//                                contentDescription = null,
+//                                tint = Color.Unspecified
+//                            )
+//                        } else if (state.validEmail == false) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.not_valid_email_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.tfIconsColor
+//                            )
+//                        }
+//                    },
+//                    placeholder = {
+//                        Text(
+//                            text = stringResource(R.string.email_address),
+//                            fontFamily = roboto,
+//                            fontSize = 12.sp,
+//                            color = colorResource(R.color.PlaceholderColor)
+//                        )
+//                    }
+//                )
+//                TextField(
+//                    value = state.password,
+//                    singleLine = true,
+//                    onValueChange = {
+//                        vm.onEvent(SignUpEvent.EnteredPassword(it))
+//                    },
+//                    modifier = Modifier
+//                        .padding(top = 36.dp)
+//                        .fillMaxWidth()
+//                        .testTag("Password"),
+//                    colors = TextFieldDefaults.colors(
+//                        focusedContainerColor = Color.Transparent.copy(alpha = 0.1f),
+//                        unfocusedContainerColor = Color.Transparent,
+//                        focusedIndicatorColor = colorResource(R.color.TfColor),
+//                        unfocusedIndicatorColor = colorResource(R.color.TfColor),
+//                        focusedTextColor = Theme.colors.oppositeColor,
+//                        unfocusedTextColor = Theme.colors.oppositeColor
+//                    ),
+//                    leadingIcon = {
+//                        Row(verticalAlignment = Alignment.CenterVertically) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.password_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.tfIconsColor
+//                            )
+//                            Box(
+//                                modifier = Modifier
+//                                    .padding(start = 9.dp)
+//                                    .background(colorResource(R.color.TfColor))
+//                                    .clip(RectangleShape)
+//                                    .height(25.dp)
+//                                    .width(1.dp)
+//                            )
+//                        }
+//                    },
+//                    trailingIcon = {
+//                        IconButton(
+//                            onClick = {
+//                                vm.onEvent(SignUpEvent.PasswordVisible)
+//                            }
+//                        ) {
+//                            Icon(
+//                                painter = painterResource(R.drawable.eye_icon),
+//                                contentDescription = null,
+//                                tint = Theme.colors.eyeIconColor
+//                            )
+//                            if (state.passwordVisible) {
+//                                Icon(
+//                                    painterResource(R.drawable.line_eye_icon),
+//                                    contentDescription = null,
+//                                    tint = Theme.colors.eyeIconColor
+//                                )
+//                            }
+//                        }
+//                    },
+//                    visualTransformation = if (!state.passwordVisible) PasswordVisualTransformation(
+//                        '*'
+//                    ) else VisualTransformation.None,
+//                    placeholder = {
+//                        Text(
+//                            text = stringResource(R.string.password_placeholder),
+//                            fontFamily = roboto,
+//                            fontSize = 12.sp,
+//                            color = colorResource(R.color.PlaceholderColor)
+//                        )
+//                    }
+//                )
                 Text(
                     text = stringResource(R.string.AgreementToTermsOfUse),
                     color = Theme.colors.alternativeBlack,
@@ -345,9 +406,9 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
                 )
                 Button(
                     enabled = state.name.isNotEmpty() &&
-                        state.emailAddress.isNotEmpty() &&
-                        state.phone.isNotEmpty() &&
-                        state.password.isNotEmpty(),
+                            state.emailAddress.isNotEmpty() &&
+                            state.phone.isNotEmpty() &&
+                            state.password.isNotEmpty(),
                     onClick = {
                         vm.onEvent(SignUpEvent.ProgressIndicator)
                         vm.onEvent(SignUpEvent.SignUp)
