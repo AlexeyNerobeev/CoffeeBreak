@@ -43,6 +43,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetUserNameUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.ResetPasswordUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
@@ -326,5 +327,13 @@ object AppModule {
         orderRepository: OrderRepository
     ): GetOrderByIdUseCase{
         return GetOrderByIdUseCase(orderRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideResetPasswordUseCase(
+        authRepository: AuthRepository
+    ): ResetPasswordUseCase{
+        return ResetPasswordUseCase(authRepository)
     }
 }

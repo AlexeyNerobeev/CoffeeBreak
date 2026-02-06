@@ -31,4 +31,8 @@ class AuthRepositoryImpl @Inject constructor(): AuthRepository {
         val id = supabase.auth.currentUserOrNull()?.id?:""
         return User(id = id)
     }
+
+    override suspend fun resetPassword(user: User) {
+        supabase.auth.resetPasswordForEmail(user.email)
+    }
 }
