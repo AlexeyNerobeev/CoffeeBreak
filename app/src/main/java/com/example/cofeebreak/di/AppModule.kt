@@ -6,6 +6,7 @@ import com.example.cofeebreak.feature_app.data.repositoryImplementation.AuthRepo
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.BaristaRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeCountryRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeRepositoryImpl
+import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeShopRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CoffeeTypeRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.CurrentSessionRepositoryImpl
 import com.example.cofeebreak.feature_app.data.repositoryImplementation.OrderRepositoryImpl
@@ -17,6 +18,7 @@ import com.example.cofeebreak.feature_app.domain.repository.AuthRepository
 import com.example.cofeebreak.feature_app.domain.repository.BaristaRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeCountryRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeRepository
+import com.example.cofeebreak.feature_app.domain.repository.CoffeeShopRepository
 import com.example.cofeebreak.feature_app.domain.repository.CoffeeTypeRepository
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
 import com.example.cofeebreak.feature_app.domain.repository.OrderRepository
@@ -31,6 +33,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeByIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeCountryUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeShopAddressUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeShopsListUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCoffeeTypeUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
@@ -44,6 +47,7 @@ import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.LoadCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.ResetPasswordUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.SaveCoffeeShopAddressUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SaveOrderUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignInUseCase
@@ -121,6 +125,20 @@ object AppModule {
     @Singleton
     fun provideOrderRepository(): OrderRepository{
         return OrderRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoffeeShopRepository(): CoffeeShopRepository{
+        return CoffeeShopRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveCoffeeShopAddressUseCase(
+        profileRepository: ProfileRepository
+    ): SaveCoffeeShopAddressUseCase{
+        return SaveCoffeeShopAddressUseCase(profileRepository)
     }
 
     @Provides
@@ -335,5 +353,13 @@ object AppModule {
         authRepository: AuthRepository
     ): ResetPasswordUseCase{
         return ResetPasswordUseCase(authRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCoffeeShopsListUseCase(
+        coffeeShopRepository: CoffeeShopRepository
+    ): GetCoffeeShopsListUseCase{
+        return GetCoffeeShopsListUseCase(coffeeShopRepository)
     }
 }

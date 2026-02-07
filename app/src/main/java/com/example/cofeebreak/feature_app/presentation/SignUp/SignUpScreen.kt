@@ -106,7 +106,7 @@ fun SignUpScreen(navController: NavController, vm: SignUpVM = hiltViewModel()) {
     )
     LaunchedEffect(key1 = !state.isComplete) {
         if (state.isComplete) {
-            navController.navigate(Navigation.StartupScreen) {
+            navController.navigate(Navigation.CafeScreen) {
                 popUpTo(0) {
                     inclusive = true
                 }

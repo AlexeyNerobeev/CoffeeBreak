@@ -131,6 +131,16 @@ class ProfileRepositoryImpl @Inject constructor(): ProfileRepository {
         }
     }
 
+    override suspend fun saveCoffeeShopAddress(profile: Profile) {
+        supabase.postgrest["profile"].update(profile){
+            filter {
+                and {
+                    eq("user_id", getCurrentUserId())
+                }
+            }
+        }
+    }
+
     suspend fun getCurrentUserId(): String{
         supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id?:""

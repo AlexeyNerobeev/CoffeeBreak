@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -38,7 +40,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.roboto
 import com.example.cofeebreak.ui.theme.Theme
@@ -49,7 +53,13 @@ import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 
 @Composable
-fun CafeScreen(navController: NavController) {
+fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
+    val state = vm.state.value
+    LaunchedEffect(key1 = state.isComplete) {
+        if(state.isComplete){
+            navController.navigate(Navigation.StartupScreen)
+        }
+    }
     Scaffold(modifier = Modifier
         .fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
@@ -60,8 +70,8 @@ fun CafeScreen(navController: NavController) {
             val mapView = remember { MapView(context).apply {
                 map.move(
                     CameraPosition(
-                        Point(55.751244, 37.618423),
-                        10f,
+                        Point(51.765311, 55.124087),
+                        20f,
                         0f,
                         0f
                     )
@@ -100,6 +110,17 @@ fun CafeScreen(navController: NavController) {
                 modifier = Modifier.fillMaxSize()
             )
         }
+        IconButton(onClick = {
+            navController.popBackStack()
+        },
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(start = 26.dp)
+                .padding(top = 21.dp)) {
+            Icon(painter = painterResource(R.drawable.back_icon),
+                contentDescription = null,
+                tint = Color.Black)
+        }
         Box(
             modifier = Modifier
                 .padding(innerPadding)
@@ -124,7 +145,9 @@ fun CafeScreen(navController: NavController) {
                     Icon(
                         painter = painterResource(R.drawable.location_icon),
                         contentDescription = null,
-                        tint = Color.Unspecified
+                        tint = Color.Unspecified,
+                        modifier = Modifier
+                            .size(50.dp)
                     )
                 }
                 Box(
@@ -154,101 +177,138 @@ fun CafeScreen(navController: NavController) {
                                 .clip(RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp))
                                 .background(Theme.colors.mainBackgroundColor)
                         ) {
-                            Column(modifier = Modifier
-                                .padding(vertical = 21.dp)
-                                .padding(horizontal = 30.dp)) {
-                                Box(modifier = Modifier
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(Theme.colors.mainColor)
-                                    .clickable{
-
-                                    }){
-                                    Row(modifier = Modifier
-                                        .padding(13.dp)
-                                        .fillMaxWidth(),
-                                        verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(painter = painterResource(R.drawable.coffee_shop_icon),
-                                            contentDescription = null,
-                                            tint = Color.White)
-                                        Text(text = "ул. Туркестанская, 3",
-                                            color = Color.White,
-                                            fontFamily = roboto,
-                                            fontSize = 14.sp,
-                                            fontWeight = FontWeight(600),
+                            if(state.load){
+                                CircularProgressIndicator(
+                                    color = Theme.colors.oppositeColor,
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                )
+                            } else {
+                                Column(
+                                    modifier = Modifier
+                                        .padding(vertical = 21.dp)
+                                        .padding(horizontal = 30.dp)
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .clip(RoundedCornerShape(16.dp))
+                                            .background(Theme.colors.mainColor)
+                                            .clickable {
+                                                vm.onEvent(CafeEvent.SaveCoffeeShopAddress(state.coffeeShopList[0].address))
+                                            }) {
+                                        Row(
                                             modifier = Modifier
-                                                .padding(start = 11.dp))
-                                        Box(modifier = Modifier
-                                            .fillMaxWidth(),
-                                            contentAlignment = Alignment.CenterEnd) {
+                                                .padding(13.dp)
+                                                .fillMaxWidth(),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
                                             Icon(
-                                                painter = painterResource(R.drawable.more_icon),
+                                                painter = painterResource(R.drawable.coffee_shop_icon),
                                                 contentDescription = null,
                                                 tint = Color.White
                                             )
+                                            Text(
+                                                text = state.coffeeShopList[0].address,
+                                                color = Color.White,
+                                                fontFamily = roboto,
+                                                fontSize = 14.sp,
+                                                fontWeight = FontWeight(600),
+                                                modifier = Modifier
+                                                    .padding(start = 11.dp)
+                                            )
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth(),
+                                                contentAlignment = Alignment.CenterEnd
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(R.drawable.more_icon),
+                                                    contentDescription = null,
+                                                    tint = Color.White
+                                                )
+                                            }
                                         }
                                     }
-                                }
-                                Box(modifier = Modifier
-                                    .padding(top = 7.dp)
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(Theme.colors.mainColor)
-                                    .clickable{
-
-                                    }){
-                                    Row(modifier = Modifier
-                                        .padding(13.dp)
-                                        .fillMaxWidth(),
-                                        verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(painter = painterResource(R.drawable.coffee_shop_icon),
-                                            contentDescription = null,
-                                            tint = Color.White)
-                                        Text(text = "ул. Чкалова, 32",
-                                            color = Color.White,
-                                            fontFamily = roboto,
-                                            fontSize = 14.sp,
-                                            fontWeight = FontWeight(600),
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(top = 7.dp)
+                                            .clip(RoundedCornerShape(16.dp))
+                                            .background(Theme.colors.mainColor)
+                                            .clickable {
+                                                vm.onEvent(CafeEvent.SaveCoffeeShopAddress(state.coffeeShopList[1].address))
+                                            }) {
+                                        Row(
                                             modifier = Modifier
-                                                .padding(start = 11.dp))
-                                        Box(modifier = Modifier
-                                            .fillMaxWidth(),
-                                            contentAlignment = Alignment.CenterEnd) {
+                                                .padding(13.dp)
+                                                .fillMaxWidth(),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
                                             Icon(
-                                                painter = painterResource(R.drawable.more_icon),
+                                                painter = painterResource(R.drawable.coffee_shop_icon),
                                                 contentDescription = null,
                                                 tint = Color.White
                                             )
+                                            Text(
+                                                text = state.coffeeShopList[1].address,
+                                                color = Color.White,
+                                                fontFamily = roboto,
+                                                fontSize = 14.sp,
+                                                fontWeight = FontWeight(600),
+                                                modifier = Modifier
+                                                    .padding(start = 11.dp)
+                                            )
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth(),
+                                                contentAlignment = Alignment.CenterEnd
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(R.drawable.more_icon),
+                                                    contentDescription = null,
+                                                    tint = Color.White
+                                                )
+                                            }
                                         }
                                     }
-                                }
-                                Box(modifier = Modifier
-                                    .padding(top = 7.dp)
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(Theme.colors.mainColor)
-                                    .clickable{
-
-                                    }){
-                                    Row(modifier = Modifier
-                                        .padding(13.dp)
-                                        .fillMaxWidth(),
-                                        verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(painter = painterResource(R.drawable.coffee_shop_icon),
-                                            contentDescription = null,
-                                            tint = Color.White)
-                                        Text(text = "ул. Советская, 3",
-                                            color = Color.White,
-                                            fontFamily = roboto,
-                                            fontSize = 14.sp,
-                                            fontWeight = FontWeight(600),
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(top = 7.dp)
+                                            .clip(RoundedCornerShape(16.dp))
+                                            .background(Theme.colors.mainColor)
+                                            .clickable {
+                                                vm.onEvent(CafeEvent.SaveCoffeeShopAddress(state.coffeeShopList[2].address))
+                                            }) {
+                                        Row(
                                             modifier = Modifier
-                                                .padding(start = 11.dp))
-                                        Box(modifier = Modifier
-                                            .fillMaxWidth(),
-                                            contentAlignment = Alignment.CenterEnd) {
+                                                .padding(13.dp)
+                                                .fillMaxWidth(),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
                                             Icon(
-                                                painter = painterResource(R.drawable.more_icon),
+                                                painter = painterResource(R.drawable.coffee_shop_icon),
                                                 contentDescription = null,
                                                 tint = Color.White
                                             )
+                                            Text(
+                                                text = state.coffeeShopList[2].address,
+                                                color = Color.White,
+                                                fontFamily = roboto,
+                                                fontSize = 14.sp,
+                                                fontWeight = FontWeight(600),
+                                                modifier = Modifier
+                                                    .padding(start = 11.dp)
+                                            )
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth(),
+                                                contentAlignment = Alignment.CenterEnd
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(R.drawable.more_icon),
+                                                    contentDescription = null,
+                                                    tint = Color.White
+                                                )
+                                            }
                                         }
                                     }
                                 }

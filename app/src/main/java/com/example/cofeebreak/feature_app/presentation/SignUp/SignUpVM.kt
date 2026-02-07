@@ -6,8 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,9 @@ class SignUpVM @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val createProfileUseCase: CreateProfileUseCase,
     private val isPasswordStrongUseCase: IsPasswordStrongUseCase,
-    private val isEmailValidUseCase: IsEmailValidUseCase
+    private val isEmailValidUseCase: IsEmailValidUseCase,
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val saveCurrentUserIdUseCase: SaveCurrentUserIdUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(SignUpState())
     val state: State<SignUpState> = _state
@@ -71,6 +75,8 @@ class SignUpVM @Inject constructor(
                                         name = state.value.name,
                                         phone = state.value.phone
                                     )
+                                    val id = getCurrentUserIdUseCase.invoke()
+                                    saveCurrentUserIdUseCase.invoke(id)
                                     _state.value = state.value.copy(
                                         isComplete = true
                                     )

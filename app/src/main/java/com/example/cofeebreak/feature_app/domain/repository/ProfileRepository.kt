@@ -20,4 +20,5 @@ interface ProfileRepository {
 
     suspend fun getCoffeeShopAddress(id: Profile): Profile
     suspend fun checkAndCreateProfile(profile: Profile)
+    suspend fun saveCoffeeShopAddress(profile: Profile)
 }
