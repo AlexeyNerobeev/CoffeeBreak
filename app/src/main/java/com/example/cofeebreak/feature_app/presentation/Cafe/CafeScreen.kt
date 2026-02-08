@@ -3,6 +3,7 @@ package com.example.cofeebreak.feature_app.presentation.Cafe
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.PointF
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -28,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,11 +52,19 @@ import com.google.android.gms.location.LocationServices
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.IconStyle
+import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.runtime.image.ImageProvider
 
 @Composable
 fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
     val state = vm.state.value
+    val context = LocalContext.current
+    val mapView = remember { MapView(context) }
+    val mapObjects = remember { mapView.map.mapObjects.addCollection() }
+    var permissionGranted by rememberSaveable { mutableStateOf(false) }
+
     LaunchedEffect(key1 = state.isComplete) {
         if(state.isComplete){
             navController.navigate(Navigation.StartupScreen)
@@ -66,18 +76,7 @@ fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
             .padding(innerPadding)
             .fillMaxSize()
             .background(Theme.colors.mainBackgroundColor)) {
-            val context = LocalContext.current
-            val mapView = remember { MapView(context).apply {
-                map.move(
-                    CameraPosition(
-                        Point(51.765311, 55.124087),
-                        20f,
-                        0f,
-                        0f
-                    )
-                )
-            }}
-            var permissionGranted by remember { mutableStateOf(false) }
+
             DisposableEffect(Unit) {
                 MapKitFactory.getInstance().onStart()
                 mapView.onStart()
@@ -97,11 +96,34 @@ fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
             LaunchedEffect(permissionGranted) {
                 if (permissionGranted) {
                     getCurrentLocation(context) { point ->
-                        mapView.map.move(
-                            CameraPosition(point, 16f, 0f, 0f)
-                        )
-                        mapView.map.mapObjects.addPlacemark(point)
+                        vm.onEvent(CafeEvent.OnUserLocationReceived(point))
                     }
+                }
+            }
+
+            LaunchedEffect(state.coffeePoints) {
+                mapObjects.clear()
+
+                state.coffeePoints.forEach { point ->
+                    val placemark = mapObjects.addPlacemark(point)
+
+                    placemark.setIcon(
+                        ImageProvider.fromResource(context, R.drawable.coffee_shop_location)
+                    )
+                }
+            }
+
+            LaunchedEffect(state.userLocation) {
+                state.userLocation?.let {
+                    val placemark = mapObjects.addPlacemark(it)
+
+                    placemark.setIcon(
+                        ImageProvider.fromResource(context, R.drawable.user_location)
+                    )
+
+                    mapView.map.move(
+                        CameraPosition(state.userLocation, 16f, 0f, 0f)
+                    )
                 }
             }
 
@@ -111,7 +133,7 @@ fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
             )
         }
         IconButton(onClick = {
-            navController.popBackStack()
+
         },
             modifier = Modifier
                 .padding(innerPadding)
@@ -134,7 +156,11 @@ fun CafeScreen(navController: NavController, vm: CafeVM = hiltViewModel()) {
             ) {
                 IconButton(
                     onClick = {
-
+                        state.userLocation?.let {
+                            mapView.map.move(
+                                CameraPosition(state.userLocation, 16f, 0f, 0f)
+                            )
+                        }
                     },
                     modifier = Modifier
                         .padding(bottom = 35.dp)
@@ -348,9 +374,12 @@ fun getCurrentLocation(
 ) {
     val client = LocationServices.getFusedLocationProviderClient(context)
 
-    client.lastLocation.addOnSuccessListener { location ->
-        location?.let {
-            onLocation(Point(it.latitude, it.longitude))
+    client.getCurrentLocation(
+        com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY,
+        null
+    ).addOnSuccessListener { location ->
+        if (location != null) {
+            onLocation(Point(location.latitude, location.longitude))
         }
     }
 }

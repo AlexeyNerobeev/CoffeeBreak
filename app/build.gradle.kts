@@ -46,12 +46,6 @@ android {
             "MAPKIT_API_KEY",
             "\"${getLocalProperty("MAPKIT_API_KEY")}\""
         )
-
-        resValue(
-            "string",
-            "mapkit_api_key",
-            getLocalProperty("MAPKIT_API_KEY")
-        )
     }
 
     buildTypes {
