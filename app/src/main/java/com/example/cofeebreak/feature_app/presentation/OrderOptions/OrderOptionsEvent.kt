@@ -10,4 +10,6 @@ sealed class OrderOptionsEvent {
     data class SelectVolume(val value: Int): OrderOptionsEvent()
     data object SaveOrder: OrderOptionsEvent()
     data object ProgressIndicator: OrderOptionsEvent()
+    data object TimeInputChange: OrderOptionsEvent()
+    data class TimeSelect(val hour: Int, val minute: Int): OrderOptionsEvent()
 }

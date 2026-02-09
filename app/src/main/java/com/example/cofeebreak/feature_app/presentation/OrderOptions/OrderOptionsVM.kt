@@ -98,6 +98,17 @@ class OrderOptionsVM @Inject constructor(
                     progressIndicator = true
                 )
             }
+            OrderOptionsEvent.TimeInputChange -> {
+                _state.value = state.value.copy(
+                    timeInput = !state.value.timeInput
+                )
+            }
+            is OrderOptionsEvent.TimeSelect -> {
+                _state.value = state.value.copy(
+                    hour = event.hour,
+                    minute = event.minute
+                )
+            }
         }
     }
 

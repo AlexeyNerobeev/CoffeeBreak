@@ -115,4 +115,5 @@
     <string name="сurrent">Текущий</string>
     <string name="history">История</string>
     <string name="to_order">Заказать</string>
+    <string name="choose_a_time">Выберите время</string>
 </resources>

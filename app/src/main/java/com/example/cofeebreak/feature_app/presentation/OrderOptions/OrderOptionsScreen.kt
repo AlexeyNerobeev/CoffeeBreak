@@ -23,6 +23,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TimeInput
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -42,6 +44,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
+import com.example.cofeebreak.common.AlertTimeInput
 import com.example.cofeebreak.common.dmSans
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.roboto
@@ -59,6 +62,17 @@ fun OrderOptionsScreen(
         if (state.isComplete) {
             navController.navigate(Navigation.MyOrderScreen)
         }
+    }
+    if (state.timeInput) {
+        AlertTimeInput(
+            select = { hour, minute ->
+                vm.onEvent(OrderOptionsEvent.TimeSelect(hour, minute))
+                vm.onEvent(OrderOptionsEvent.TimeInputChange)
+            },
+            dismiss = {
+                vm.onEvent(OrderOptionsEvent.TimeInputChange)
+            }
+        )
     }
     Scaffold(
         modifier = Modifier
@@ -546,11 +560,24 @@ fun OrderOptionsScreen(
                                 .background(
                                     color = Theme.colors.dateBoxColor,
                                     shape = RoundedCornerShape(6.dp)
-                                ),
+                                )
+                                .clickable {
+                                    vm.onEvent(OrderOptionsEvent.TimeInputChange)
+                                },
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "18 : 10",
+                                text = if (state.hour >= 10) {
+                                    state.hour.toString()
+                                } else {
+                                    "0" + state.hour.toString()
+                                }
+                                        + " : " +
+                                        if (state.minute >= 10) {
+                                            state.minute.toString()
+                                        } else {
+                                            "0" + state.minute.toString()
+                                        },
                                 color = Theme.colors.oppositeColor,
                                 fontFamily = dmSans,
                                 fontWeight = FontWeight(400),
@@ -664,7 +691,7 @@ fun OrderOptionsScreen(
                     containerColor = Theme.colors.nextButton
                 )
             ) {
-                if(state.progressIndicator){
+                if (state.progressIndicator) {
                     CircularProgressIndicator(color = Color.White)
                 } else {
                     Text(

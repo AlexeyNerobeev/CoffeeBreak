@@ -75,7 +75,7 @@ dependencies {
 
     //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.ui.geometry)
 
     // Test dependencies
@@ -89,12 +89,12 @@ dependencies {
 //    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
 
     //coil
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+    implementation(libs.coil.compose)
     //implementation("io.coil-kt.coil3:coil-compose-core:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
+    implementation(libs.coil.network.okhttp)
 
     //qr
-    implementation("com.google.zxing:core:3.5.2")
+    implementation(libs.core)
 
     //koin
 //    implementation(libs.io.koin.compose)
@@ -107,40 +107,40 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
 
-    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.48")
-    androidTestImplementation ("androidx.test:core:1.5.0")
-    androidTestImplementation ("androidx.test:runner:1.5.2")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.0")
+    androidTestImplementation (libs.hilt.android.testing)
+    androidTestImplementation (libs.androidx.core)
+    androidTestImplementation (libs.androidx.runner)
+    androidTestImplementation (libs.androidx.junit)
+    androidTestImplementation (libs.androidx.ui.test.junit4)
 
 
     //ktor
-    implementation("io.ktor:ktor-client-core:3.2.3")
-    implementation("io.ktor:ktor-client-cio:3.2.3")
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
 
     //supabase
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.0"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.github.jan-tennert.supabase:auth-kt")
-    implementation("io.github.jan-tennert.supabase:realtime-kt")
-    implementation("io.github.jan-tennert.supabase:storage-kt:3.1.0")
-    implementation("io.github.jan-tennert.supabase:compose-auth:3.1.0")
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    implementation(libs.storage.kt)
+    implementation(libs.compose.auth)
 
     //navigation
-    implementation ("androidx.navigation:navigation-compose:2.9.4")
+    implementation (libs.androidx.navigation.compose)
 
     //карта
-    implementation("com.yandex.android:maps.mobile:4.26.0-lite")
+    implementation(libs.maps.mobile)
 
     //google
-    implementation("androidx.credentials:credentials:1.6.0-rc01")
-    implementation("androidx.credentials:credentials-play-services-auth:1.6.0-rc01")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.2.0")
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 
     //tensorflow lite
-    implementation("org.tensorflow:tensorflow-lite:1.9.0")
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.0")
-    implementation ("org.tensorflow:tensorflow-lite-support:0.4.0")
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation (libs.tensorflow.lite.support)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

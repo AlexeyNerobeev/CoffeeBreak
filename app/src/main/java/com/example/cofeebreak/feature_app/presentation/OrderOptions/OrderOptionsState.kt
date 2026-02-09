@@ -13,5 +13,8 @@ data class OrderOptionsState(
     val volume: Int = 250,
     val isComplete: Boolean = false,
     val progressIndicator: Boolean = false,
-    val orderId: Int = 0
+    val orderId: Int = 0,
+    val timeInput: Boolean = false,
+    val hour: Int = 0,
+    val minute: Int = 0
 )
