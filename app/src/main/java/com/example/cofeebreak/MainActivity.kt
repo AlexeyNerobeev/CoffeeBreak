@@ -5,12 +5,10 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.cofeebreak.feature_app.data.supabase.Connect.supabase
 import com.example.cofeebreak.feature_app.presentation.Additives.AdditivesScreen
 import com.example.cofeebreak.feature_app.presentation.Authorization.AuthorizationScreen
 import com.example.cofeebreak.feature_app.presentation.Barista.BaristaScreen
@@ -34,8 +32,6 @@ import com.example.cofeebreak.feature_app.presentation.TwoFactorVerification.Two
 import com.example.cofeebreak.feature_app.presentation.Welcome.WelcomeScreen
 import com.example.cofeebreak.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.jan.supabase.auth.auth
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity() : ComponentActivity() {
