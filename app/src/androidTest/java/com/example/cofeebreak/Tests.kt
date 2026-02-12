@@ -13,11 +13,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.cofeebreak.FakeRepository.FakeAuthRepository
+import com.example.cofeebreak.FakeRepository.FakeCurrentSessionRepository
 import com.example.cofeebreak.FakeRepository.FakeProfileRepository
 import com.example.cofeebreak.feature_app.domain.usecase.CreateProfileUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
+import com.example.cofeebreak.feature_app.domain.usecase.SaveCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.SignUpUseCase
+import com.example.cofeebreak.feature_app.presentation.Cafe.CafeScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpScreen
 import com.example.cofeebreak.feature_app.presentation.SignUp.SignUpVM
 import com.example.cofeebreak.feature_app.presentation.Startup.StartupScreen
@@ -36,6 +40,7 @@ class Tests {
 
     private val authRepository = FakeAuthRepository()
     private val profileRepository = FakeProfileRepository()
+    private val currentSessionRepository = FakeCurrentSessionRepository()
 
     @Before
     fun setup() {
@@ -43,7 +48,9 @@ class Tests {
             signUpUseCase = SignUpUseCase(authRepository),
             createProfileUseCase = CreateProfileUseCase(profileRepository),
             isPasswordStrongUseCase = IsPasswordStrongUseCase(),
-            isEmailValidUseCase = IsEmailValidUseCase()
+            isEmailValidUseCase = IsEmailValidUseCase(),
+            getCurrentUserIdUseCase = GetCurrentUserIdUseCase(authRepository),
+            saveCurrentUserIdUseCase = SaveCurrentUserIdUseCase(currentSessionRepository)
         )
     }
 
@@ -55,7 +62,7 @@ class Tests {
                 composable<Navigation.SignUpScreen> {
                     SignUpScreen(navController, vm)
                 }
-                composable<Navigation.StartupScreen> {
+                composable<Navigation.CafeScreen> {
                     StartupScreen(navController)
                 }
             }
@@ -148,7 +155,7 @@ class Tests {
                 composable<Navigation.SignUpScreen> {
                     SignUpScreen(navController, vm)
                 }
-                composable<Navigation.StartupScreen> {
+                composable<Navigation.CafeScreen> {
                     StartupScreen(navController)
                 }
             }
