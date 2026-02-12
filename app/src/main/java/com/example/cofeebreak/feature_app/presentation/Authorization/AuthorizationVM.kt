@@ -5,6 +5,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cofeebreak.feature_app.domain.model.Profile
+import com.example.cofeebreak.feature_app.domain.usecase.CheckAndCreateProfile
 import com.example.cofeebreak.feature_app.domain.usecase.GetCurrentUserIdUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsEmailValidUseCase
 import com.example.cofeebreak.feature_app.domain.usecase.IsPasswordStrongUseCase
@@ -21,7 +23,8 @@ class AuthorizationVM @Inject constructor(
     private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
     private val saveCurrentUserIdUseCase: SaveCurrentUserIdUseCase,
     private val isEmailValidUseCase: IsEmailValidUseCase,
-    private val isPasswordStrongUseCase: IsPasswordStrongUseCase
+    private val isPasswordStrongUseCase: IsPasswordStrongUseCase,
+    private val checkAndCreateProfile: CheckAndCreateProfile
 ) : ViewModel() {
     private val _state = mutableStateOf(AuthorizationState())
     val state: State<AuthorizationState> = _state
@@ -103,6 +106,24 @@ class AuthorizationVM @Inject constructor(
                 _state.value = state.value.copy(
                     validEmail = isEmailValidUseCase.invoke(state.value.email)
                 )
+            }
+            AuthorizationEvent.SignInWithGoogle -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val id = getCurrentUserIdUseCase.invoke()
+                        checkAndCreateProfile.invoke(Profile(user_id = id.id.toString()))
+                        saveCurrentUserIdUseCase.invoke(id)
+                        _state.value = state.value.copy(
+                            isComplete = true
+                        )
+                    } catch (ex: Exception) {
+                        _state.value = state.value.copy(
+                            error = true,
+                            progressIndicator = false
+                        )
+                        Log.e("supabase", ex.message.toString())
+                    }
+                }
             }
         }
     }

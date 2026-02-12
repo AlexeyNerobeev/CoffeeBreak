@@ -19,7 +19,9 @@ import com.example.cofeebreak.feature_app.presentation.Designer.DesignerScreen
 import com.example.cofeebreak.feature_app.presentation.ForgotPassword.ForgotPasswordScreen
 import com.example.cofeebreak.feature_app.presentation.Menu.MenuScreen
 import com.example.cofeebreak.feature_app.presentation.MyOrder.MyOrderScreen
+import com.example.cofeebreak.feature_app.presentation.MyOrderCurrent.MyOrderCurrentScreen
 import com.example.cofeebreak.feature_app.presentation.OrderOptions.OrderOptionsScreen
+import com.example.cofeebreak.feature_app.presentation.OrerIsConfirmed.OrderIsConfirmed
 import com.example.cofeebreak.feature_app.presentation.Profile.ProfileScreen
 import com.example.cofeebreak.feature_app.presentation.Redeem.RedeemScreen
 import com.example.cofeebreak.feature_app.presentation.ResetPassword.ResetPasswordScreen
@@ -35,11 +37,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)    
+                or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         setContent {
             AppTheme {
                 val navController = rememberNavController()
@@ -56,8 +59,9 @@ class MainActivity() : ComponentActivity() {
                     composable<Navigation.SignUpScreen> {
                         SignUpScreen(navController)
                     }
-                    composable<Navigation.MenuScreen> {
-                        MenuScreen(navController)
+                    composable<Navigation.MenuScreen> { backStackEntry ->
+                        val route = backStackEntry.toRoute<Navigation.MenuScreen>()
+                        MenuScreen(navController, route.value)
                     }
                     composable<Navigation.ForgotPasswordScreen> {
                         ForgotPasswordScreen(navController)
@@ -85,10 +89,11 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.OrderOptionsScreen> { backStackEntry ->
                         val route = backStackEntry.toRoute<Navigation.OrderOptionsScreen>()
-                        OrderOptionsScreen(navController, route.imageUrl)
+                        OrderOptionsScreen(navController, route.coffeeId)
                     }
-                    composable<Navigation.DesignerScreen> {
-                        DesignerScreen(navController)
+                    composable<Navigation.DesignerScreen> { backStackEntry ->
+                        val route = backStackEntry.toRoute<Navigation.DesignerScreen>()
+                        DesignerScreen(navController, route.orderId )
                     }
                     composable<Navigation.BaristaScreen> {
                         BaristaScreen(navController)
@@ -101,6 +106,12 @@ class MainActivity() : ComponentActivity() {
                     }
                     composable<Navigation.CoffeeTypeScreen> {
                         CoffeeTypeScreen(navController)
+                    }
+                    composable<Navigation.OrderIsConfirmedScreen> {
+                        OrderIsConfirmed(navController)
+                    }
+                    composable<Navigation.MyOrderCurrentScreen> {
+                        MyOrderCurrentScreen(navController)
                     }
                 }
             }

@@ -17,4 +17,14 @@ class CoffeeRepositoryImpl: CoffeeRepository {
             )
         ).decodeList<Coffee>()
     }
+
+    override suspend fun getCoffeeById(id: Coffee): Coffee {
+        return supabase.postgrest["coffee"].select {
+            filter{
+                and {
+                    eq("id", id.id)
+                }
+            }
+        }.decodeSingle<Coffee>()
+    }
 }

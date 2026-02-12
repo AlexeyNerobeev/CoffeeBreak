@@ -1,6 +1,7 @@
 package com.example.cofeebreak.feature_app.domain.repository
 
 import com.example.cofeebreak.feature_app.domain.model.Profile
+import com.example.cofeebreak.feature_app.domain.model.User
 
 interface ProfileRepository {
     suspend fun createProfile(name: String, phone: String)
@@ -16,4 +17,8 @@ interface ProfileRepository {
         userId: String,
         avatarUrl: String
     )
+
+    suspend fun getCoffeeShopAddress(id: Profile): Profile
+    suspend fun checkAndCreateProfile(profile: Profile)
+    suspend fun saveCoffeeShopAddress(profile: Profile)
 }

@@ -4,4 +4,5 @@ sealed class DesignerEvent {
     data class SliderChange(val value: Float): DesignerEvent()
     data object SelectMilk: DesignerEvent()
     data object SelectSyrup: DesignerEvent()
+    data object ShowDescription: DesignerEvent()
 }

@@ -42,6 +42,8 @@ import com.example.cofeebreak.ui.theme.Theme
 @Composable
 fun ForgotPasswordScreen(navController: NavController, vm: ForgotPasswordVM = hiltViewModel()) {
     val state = vm.state.value
+    if(state.isComplete)
+        navController.navigate(Navigation.TwoFactorVerificationScreen)
     if (state.error) {
         ErrorAlertDialog(stringResource(R.string.the_email_address_field_is_required)) {
             vm.onEvent(ForgotPasswordEvent.ChangeError)
@@ -160,7 +162,7 @@ fun ForgotPasswordScreen(navController: NavController, vm: ForgotPasswordVM = hi
                         if(state.email.isNotEmpty()){
                             if(state.validEmail == true){
                                 if (!state.error && !state.errorValidEmail) {
-                                    navController.navigate(Navigation.TwoFactorVerificationScreen)
+                                    vm.onEvent(ForgotPasswordEvent.ResetPassword)
                                 }
                             } else {
                                 vm.onEvent(ForgotPasswordEvent.ErrorValidEmail)

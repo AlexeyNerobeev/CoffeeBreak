@@ -1,5 +1,6 @@
 package com.example.cofeebreak.feature_app.presentation.Designer
 
+import android.R.attr.bottom
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,6 +36,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,6 +44,7 @@ import androidx.navigation.NavController
 import com.example.cofeebreak.Navigation
 import com.example.cofeebreak.R
 import com.example.cofeebreak.common.dmSans
+import com.example.cofeebreak.common.inter
 import com.example.cofeebreak.common.montserrat
 import com.example.cofeebreak.common.poppins
 import com.example.cofeebreak.common.roboto
@@ -52,7 +55,7 @@ import io.github.jan.supabase.realtime.Column
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel()) {
+fun DesignerScreen(navController: NavController, orderId: Int, vm: DesignerVM = hiltViewModel()) {
     val state = vm.state.value
     Scaffold(
         modifier = Modifier
@@ -516,7 +519,10 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                 }
                 Row(modifier = Modifier
                     .padding(top = 15.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable{
+                        vm.onEvent(DesignerEvent.ShowDescription)
+                    },
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically) {
                     Text(text = stringResource(R.string.coffee_lovers_encyclopedia),
@@ -802,6 +808,40 @@ fun DesignerScreen(navController: NavController, vm: DesignerVM = hiltViewModel(
                             fontFamily = montserrat,
                             fontSize = 20.sp
                         )
+                    }
+                }
+            }
+        }
+        if(state.showDescription){
+            Box(modifier = Modifier
+                .fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter){
+                Box(modifier = Modifier
+                    .background(color = colorResource(R.color.MainColor),
+                        shape = RoundedCornerShape(topStart = 25.dp,
+                            topEnd = 25.dp))){
+                    Column(modifier = Modifier
+                        .padding(top = 21.dp)
+                        .padding(start = 36.dp)
+                        .padding(end = 40.dp)
+                        .fillMaxWidth()){
+                        Text(text = stringResource(R.string.coffee_lovers_encyclopedia),
+                            color = Color.White,
+                            fontSize = 20.sp,
+                            fontFamily = inter,
+                            fontWeight = FontWeight(400),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                        )
+                        Text(text = state.description,
+                            color = Color.White,
+                            fontWeight = FontWeight(400),
+                            fontSize = 16.sp,
+                            fontFamily = montserrat,
+                            modifier = Modifier
+                                .padding(top = 30.dp)
+                                .padding(bottom = 43.dp))
                     }
                 }
             }

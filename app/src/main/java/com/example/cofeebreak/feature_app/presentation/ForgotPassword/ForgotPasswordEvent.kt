@@ -5,4 +5,5 @@ sealed class ForgotPasswordEvent {
     data object ValidEmail: ForgotPasswordEvent()
     data object ChangeError: ForgotPasswordEvent()
     data object ErrorValidEmail: ForgotPasswordEvent()
+    data object ResetPassword: ForgotPasswordEvent()
 }

@@ -61,6 +61,11 @@ class MenuScreenVM @Inject constructor(
                     serverError = false
                 )
             }
+            is MenuScreenEvent.ReviewRequest -> {
+                _state.value = state.value.copy(
+                    reviewRequest = event.value
+                )
+            }
         }
     }
 }

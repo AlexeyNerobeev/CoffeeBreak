@@ -22,11 +22,30 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner = "com.example.cofeebreak.HiltTestRunner"
 
-        buildConfigField("String", "MAPKIT_API_KEY", "\"${getMapkitApiKey()}\"")
-        resValue("string", "mapkit_api_key", getMapkitApiKey())
-        android.buildFeatures.buildConfig = true
+        buildConfigField(
+            "String",
+            "SUPABASE_URL",
+            "\"${getLocalProperty("SUPABASE_URL")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "SUPABASE_KEY",
+            "\"${getLocalProperty("SUPABASE_KEY")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "GOOGLE_SERVER_CLIENT_ID",
+            "\"${getLocalProperty("GOOGLE_SERVER_CLIENT_ID")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "MAPKIT_API_KEY",
+            "\"${getLocalProperty("MAPKIT_API_KEY")}\""
+        )
     }
 
     buildTypes {
@@ -48,6 +67,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -55,26 +75,26 @@ dependencies {
 
     //lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.compose.ui.geometry)
 
     // Test dependencies
-    testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+//    testImplementation ("junit:junit:4.13.2")
+//    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
     // Для Android тестов
-    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.4")
-    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
+//    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+//    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+//    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.5.4")
+//    debugImplementation ("androidx.compose.ui:ui-test-manifest:1.5.4")
 
     //coil
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+    implementation(libs.coil.compose)
     //implementation("io.coil-kt.coil3:coil-compose-core:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
+    implementation(libs.coil.network.okhttp)
 
     //qr
-    implementation("com.google.zxing:core:3.5.2")
+    implementation(libs.core)
 
     //koin
 //    implementation(libs.io.koin.compose)
@@ -83,26 +103,44 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.testing)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
 
+    androidTestImplementation (libs.hilt.android.testing)
+    androidTestImplementation (libs.androidx.core)
+    androidTestImplementation (libs.androidx.runner)
+    androidTestImplementation (libs.androidx.junit)
+    androidTestImplementation (libs.androidx.ui.test.junit4)
+
 
     //ktor
-    implementation("io.ktor:ktor-client-core:3.2.3")
-    implementation("io.ktor:ktor-client-cio:3.2.3")
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
 
     //supabase
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.0"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.github.jan-tennert.supabase:auth-kt")
-    implementation("io.github.jan-tennert.supabase:realtime-kt")
-    implementation("io.github.jan-tennert.supabase:storage-kt:3.1.0")
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.auth.kt)
+    implementation(libs.realtime.kt)
+    implementation(libs.storage.kt)
+    implementation(libs.compose.auth)
 
     //navigation
-    implementation ("androidx.navigation:navigation-compose:2.9.4")
+    implementation (libs.androidx.navigation.compose)
 
     //карта
-    implementation("com.yandex.android:maps.mobile:4.26.0-lite")
+    implementation(libs.maps.mobile)
+
+    //google
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    //tensorflow lite
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation (libs.tensorflow.lite.support)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -121,15 +159,28 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
-// Функция для безопасного чтения ключа из local.properties
-fun getMapkitApiKey(): String {
+fun getLocalProperty(key: String): String {
     val properties = Properties()
     val localPropertiesFile = project.rootProject.file("local.properties")
 
     return if (localPropertiesFile.exists()) {
         localPropertiesFile.inputStream().use { properties.load(it) }
-        properties.getProperty("MAPKIT_API_KEY", "").trim()
+        properties.getProperty(key, "").trim()
     } else {
-        "" // Или можно выбросить исключение: error("local.properties not found")
+        ""
     }
 }
+
+
+//// Функция для безопасного чтения ключа из local.properties
+//fun getMapkitApiKey(): String {
+//    val properties = Properties()
+//    val localPropertiesFile = project.rootProject.file("local.properties")
+//
+//    return if (localPropertiesFile.exists()) {
+//        localPropertiesFile.inputStream().use { properties.load(it) }
+//        properties.getProperty("MAPKIT_API_KEY", "").trim()
+//    } else {
+//        "" // Или можно выбросить исключение: error("local.properties not found")
+//    }
+//}

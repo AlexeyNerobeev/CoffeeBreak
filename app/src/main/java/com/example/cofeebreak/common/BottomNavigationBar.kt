@@ -45,13 +45,13 @@ fun BottomNavigationBar(navController: NavController, currentScreen: Navigation)
             horizontalArrangement = Arrangement.SpaceBetween) {
             IconButton(
                 onClick = {
-                    if(currentScreen != Navigation.MenuScreen)
-                        navController.navigate(Navigation.MenuScreen)
+                    if(currentScreen != Navigation.MenuScreen(false))
+                        navController.navigate(Navigation.MenuScreen(false))
                 }
             ) {
                 Icon(painter = painterResource(R.drawable.shop_icon),
                     contentDescription = null,
-                    tint = if (currentScreen == Navigation.MenuScreen)
+                    tint = if (currentScreen == Navigation.MenuScreen(false))
                     Theme.colors.activeBottomBarIcon
                     else
                     Theme.colors.defaultBottomBarIcon

@@ -37,7 +37,7 @@ fun PrevStartup(){
 fun StartupScreen(navController: NavController) {
     LaunchedEffect(key1 = null) {
         delay(1500)
-        navController.navigate(Navigation.MenuScreen)
+        navController.navigate(Navigation.MenuScreen(false))
     }
     Box(modifier = Modifier
         .fillMaxSize()

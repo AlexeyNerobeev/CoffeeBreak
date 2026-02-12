@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val RewardLine = Color(0xFFF4F5F7)
 val BorderDesigner = Color(0x3C3C435C).copy(alpha = 0.36f)
+val SeparatorColor = Color(0xFFCFCFCF)
