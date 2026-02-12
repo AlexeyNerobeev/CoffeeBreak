@@ -7,7 +7,7 @@ import com.example.cofeebreak.feature_app.domain.model.User
 import com.example.cofeebreak.feature_app.domain.repository.CurrentSessionRepository
 import javax.inject.Inject
 
-class CurrentSessionRepositoryImpl @Inject constructor(context: Context): CurrentSessionRepository {
+class CurrentSessionRepositoryImpl(context: Context): CurrentSessionRepository {
     val sharedPrefs = context.getSharedPreferences("CurrentUser", Context.MODE_PRIVATE)
 
     override suspend fun saveCurrentUserId(id: User) {

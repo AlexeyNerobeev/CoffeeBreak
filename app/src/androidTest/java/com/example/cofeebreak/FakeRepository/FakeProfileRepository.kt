@@ -12,4 +12,5 @@ class FakeProfileRepository : ProfileRepository {
     override suspend fun updateAvatarUrl(userId: String, avatarUrl: String) {}
     override suspend fun getCoffeeShopAddress(id: Profile): Profile = Profile()
     override suspend fun checkAndCreateProfile(profile: Profile) {}
+    override suspend fun saveCoffeeShopAddress(profile: Profile) {}
 }

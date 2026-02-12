@@ -7,4 +7,5 @@ class FakeAuthRepository : AuthRepository {
     override suspend fun signIn(inputEmail: String, inputPassword: String) {}
     override suspend fun signUp(inputEmail: String, inputPassword: String) {}
     override suspend fun getCurrentUserId(): User = User(id = "1")
+    override suspend fun resetPassword(user: User) {}
 }
